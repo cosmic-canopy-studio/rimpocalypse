@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://d33tct3q48djp"]
+
+[ext_resource type="Script" path="res://pawn.gd" id="1_iug8o"]
+[ext_resource type="Texture2D" uid="uid://brpcqqix3kl40" path="res://assets/tilemap_packed.png" id="2_5kheb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5lfx"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.32549, 0.933333, 0.572549, 0.870588)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awoqh"]
+atlas = ExtResource("2_5kheb")
+region = Rect2(384, 0, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d3q71"]
+size = Vector2(36, 42)
+
+[node name="Pawn" type="Area2D"]
+script = ExtResource("1_iug8o")
+metadata/_edit_group_ = true
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -21.0
+offset_right = 21.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_i5lfx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = SubResource("AtlasTexture_awoqh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_d3q71")
