@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://c14y1yy4tg5cs"]
+
+[ext_resource type="Script" path="res://tree.gd" id="1_kun72"]
+[ext_resource type="StyleBox" uid="uid://crqnj774jm6or" path="res://themes/highlighted.tres" id="1_wj1xk"]
+[ext_resource type="Texture2D" uid="uid://brpcqqix3kl40" path="res://assets/tilemap_packed.png" id="2_vc4ri"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcy8s"]
+atlas = ExtResource("2_vc4ri")
+region = Rect2(256, 128, 16, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ubpce"]
+size = Vector2(14, 30)
+
+[node name="Tree" type="Area2D"]
+script = ExtResource("1_kun72")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = -9.0
+offset_top = -17.0
+offset_right = 9.0
+offset_bottom = 17.0
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("1_wj1xk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_mcy8s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ubpce")
+
+[node name="HighlightTimeout" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="HighlightTimeout" to="." method="_on_highlight_timeout_timeout"]

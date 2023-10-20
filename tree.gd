@@ -1,7 +1,6 @@
 extends Area2D
 
 @export var selected: bool
-@export var activity: Area2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,10 +9,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
-
-
-func _on_work_interval_timeout():
 	$Panel.visible = selected
-	if activity:
-		print("Working at ", activity.name)
+	if $Panel.visible == true and $HighlightTimeout.is_stopped():
+		$HighlightTimeout.start()
+
+
+func _on_highlight_timeout_timeout():
+	selected = false
