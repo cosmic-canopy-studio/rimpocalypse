@@ -7,7 +7,7 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t4f4o"]
 atlas = ExtResource("3_pdw8w")
-region = Rect2(256, 128, 16, 32)
+region = Rect2(256, 129, 16, 30)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_1hjiu")
@@ -32,8 +32,10 @@ mouse_filter = 2
 
 [node name="ResourceGrid" type="GridContainer" parent="HUD"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 50.0
 columns = 2
 
 [node name="TreeIcon" type="TextureRect" parent="HUD/ResourceGrid"]
