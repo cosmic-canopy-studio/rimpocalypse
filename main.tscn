@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bn76rp7tymvj"]
+[gd_scene load_steps=6 format=3 uid="uid://bn76rp7tymvj"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_1hjiu"]
 [ext_resource type="PackedScene" uid="uid://d33tct3q48djp" path="res://pawn.tscn" id="2_ha15b"]
 [ext_resource type="PackedScene" uid="uid://c14y1yy4tg5cs" path="res://tree.tscn" id="3_1p128"]
+[ext_resource type="Texture2D" uid="uid://brpcqqix3kl40" path="res://assets/tilemap_packed.png" id="3_pdw8w"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4f4o"]
+atlas = ExtResource("3_pdw8w")
+region = Rect2(256, 128, 16, 32)
 
 [node name="Main" type="Node"]
 script = ExtResource("1_1hjiu")
@@ -16,5 +21,29 @@ metadata/_edit_group_ = true
 position = Vector2(79, 450)
 scale = Vector2(3, 3)
 
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ResourceGrid" type="GridContainer" parent="HUD"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 2
+
+[node name="TreeIcon" type="TextureRect" parent="HUD/ResourceGrid"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_t4f4o")
+
+[node name="TreeLabel" type="Label" parent="HUD/ResourceGrid"]
+layout_mode = 2
+text = "0"
+
 [connection signal="input_event" from="Tree" to="." method="_on_tree_input_event"]
+[connection signal="produced" from="Tree" to="." method="_on_tree_produced"]
 [connection signal="input_event" from="Pawn" to="." method="_on_pawn_input_event"]

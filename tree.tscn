@@ -15,6 +15,7 @@ size = Vector2(14, 30)
 script = ExtResource("1_kun72")
 
 [node name="Panel" type="Panel" parent="."]
+visible = false
 offset_left = -9.0
 offset_top = -17.0
 offset_right = 9.0

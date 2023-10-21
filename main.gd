@@ -1,6 +1,6 @@
 extends Node
 
-
+var wood = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,4 +30,10 @@ func _on_tree_input_event(viewport, event, shape_idx):
 			$Pawn.activity = $Tree
 			
 			
-			
+			# Replace with function body.
+
+
+func _on_tree_produced(type):
+	print("Resource produced: ", type)
+	wood += 10
+	$HUD/ResourceGrid/TreeLabel.text = str(wood)

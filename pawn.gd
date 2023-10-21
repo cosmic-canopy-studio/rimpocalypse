@@ -5,15 +5,14 @@ extends Area2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	$Panel.visible = selected
 
 
 func _on_work_interval_timeout():
-	$Panel.visible = selected
 	if activity:
-		print("Working at ", activity.name)
+		activity.produce()

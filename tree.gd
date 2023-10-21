@@ -1,6 +1,9 @@
 extends Area2D
 
+signal produced(type)
+
 @export var selected: bool
+var type = "wood"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,3 +19,6 @@ func _process(delta):
 
 func _on_highlight_timeout_timeout():
 	selected = false
+
+func produce():
+	emit_signal("produced", type)
