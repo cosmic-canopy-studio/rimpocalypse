@@ -5,7 +5,7 @@ on:
 env:
   GODOT_VERSION: 4.1.1
   APP_VERSION: ${{ github.ref_name }}
-  EXPORT_NAME: rimidle-${APP_VERSION}
+  EXPORT_NAME: rimidle-${{ github.ref_name }}
   ITCH_IO: false #set to true if you want to enable automatic itch.io deploy
 
 jobs:
@@ -24,13 +24,13 @@ jobs:
           mv -v /root/.local/share/godot/templates/* ~/.local/share/godot/export_templates/
       - name: Windows Build
         run: |
-          mkdir -v -p builds/windows-${APP_VERSION}
-          godot --headless --export-release "Windows Desktop" ./builds/windows-${APP_VERSION}/$EXPORT_NAME.exe
+          mkdir -v -p builds/windows-${{ github.ref_name }}
+          godot --headless --export-release "Windows Desktop" ./builds/windows-${{ github.ref_name }}/$EXPORT_NAME.exe
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: windows-${APP_VERSION}
-          path: builds/windows-${APP_VERSION}
+          name: windows-${{ github.ref_name }}
+          path: builds/windows-${{ github.ref_name }}
           retention-days: 1
       - name: Zip Folder
         run: zip -r itch.zip builds/windows
@@ -59,16 +59,16 @@ jobs:
           mv -v /root/.local/share/godot/templates/* ~/.local/share/godot/export_templates/
       - name: Linux Build
         run: |
-          mkdir -v -p builds/linux-${APP_VERSION}
-          godot -v --headless --export-release "Linux/X11" ./builds/linux-${APP_VERSION}/$EXPORT_NAME.x86_64
+          mkdir -v -p builds/linux-${{ github.ref_name }}
+          godot -v --headless --export-release "Linux/X11" ./builds/linux-${{ github.ref_name }}/$EXPORT_NAME.x86_64
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: linux-${APP_VERSION}
-          path: builds/linux-${APP_VERSION}
+          name: linux-${{ github.ref_name }}
+          path: builds/linux-${{ github.ref_name }}
           retention-days: 1
       - name: Zip Folder
-        run: zip -r itch.zip builds/linux-${APP_VERSION}
+        run: zip -r itch.zip builds/linux-${{ github.ref_name }}
       - name: Deploy to itch.io
         if: ${{ env.ITCH_IO=='true' }}
         uses: josephbmanley/butler-publish-itchio-action@master
@@ -94,13 +94,13 @@ jobs:
           mv -v /root/.local/share/godot/templates/* ~/.local/share/godot/export_templates/
       - name: Web Build
         run: |
-          mkdir -v -p builds/web-${APP_VERSION}
-          godot -v --headless --export-release "Web" ./builds/web-${APP_VERSION}/index.html
+          mkdir -v -p builds/web-${{ github.ref_name }}
+          godot -v --headless --export-release "Web" ./builds/web-${{ github.ref_name }}/index.html
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: web-${APP_VERSION}
-          path: builds/web-${APP_VERSION}
+          name: web-${{ github.ref_name }}
+          path: builds/web-${{ github.ref_name }}
           retention-days: 1
       # Installing rsync is needed in order to deploy to GitHub Pages. Without it, the build will fail.
       - name: Install rsync 📚
@@ -110,9 +110,9 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
           BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: builds/web-${APP_VERSION} # The folder the action should deploy.
+          FOLDER: builds/web-${{ github.ref_name }} # The folder the action should deploy.
       - name: Zip Folder
-        run: zip -r itch.zip builds/web-${APP_VERSION}
+        run: zip -r itch.zip builds/web-${{ github.ref_name }}
       - name: Deploy to itch.io
         if: ${{ env.ITCH_IO=='true' }}
         uses: josephbmanley/butler-publish-itchio-action@master
@@ -138,16 +138,16 @@ jobs:
           mv -v /root/.local/share/godot/templates/* ~/.local/share/godot/export_templates/
       - name: Mac Build
         run: |
-          mkdir -v -p builds/mac-${APP_VERSION}
-          godot --headless -v --export-release "macOS" ./builds/mac-${APP_VERSION}/$EXPORT_NAME.zip
+          mkdir -v -p builds/mac-${{ github.ref_name }}
+          godot --headless -v --export-release "macOS" ./builds/mac-${{ github.ref_name }}/$EXPORT_NAME.zip
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: mac-${APP_VERSION}
-          path: builds/mac-${APP_VERSION}
+          name: mac-${{ github.ref_name }}
+          path: builds/mac-${{ github.ref_name }}
           retention-days: 1
       - name: Zip Folder
-        run: zip -r itch.zip builds/mac-${APP_VERSION}
+        run: zip -r itch.zip builds/mac-${{ github.ref_name }}
       - name: Deploy to itch.io
         if: ${{ env.ITCH_IO=='true' }}
         uses: josephbmanley/butler-publish-itchio-action@master
