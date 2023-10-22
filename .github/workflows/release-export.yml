@@ -98,6 +98,10 @@ jobs:
         run: |
           mkdir -v -p builds/web-${{ github.ref_name }}
           godot -v --headless --export-release "Web" ./builds/web-${{ github.ref_name }}/index.html
+      - name: Add coi-service-worker
+        run: |
+          git clone https://github.com/gzuidhof/coi-serviceworker.git
+          mv coi-serviceworker/coi-serviceworker.js builds/web-${{ github.ref_name }}/coi-serviceworker.js
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
