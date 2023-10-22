@@ -33,7 +33,8 @@ jobs:
           path: builds/windows-${{ github.ref_name }}
           retention-days: 1
       - name: Zip Folder
-        run: zip -r itch.zip builds/windows
+        if: ${{ env.ITCH_IO=='true' }}
+        run: zip -r itch.zip builds/windows-${{ github.ref_name }}
       - name: Deploy to itch.io
         if: ${{ env.ITCH_IO=='true' }}
         uses: josephbmanley/butler-publish-itchio-action@master
@@ -68,6 +69,7 @@ jobs:
           path: builds/linux-${{ github.ref_name }}
           retention-days: 1
       - name: Zip Folder
+        if: ${{ env.ITCH_IO=='true' }}
         run: zip -r itch.zip builds/linux-${{ github.ref_name }}
       - name: Deploy to itch.io
         if: ${{ env.ITCH_IO=='true' }}
@@ -112,6 +114,7 @@ jobs:
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: builds/web-${{ github.ref_name }} # The folder the action should deploy.
       - name: Zip Folder
+        if: ${{ env.ITCH_IO=='true' }}
         run: zip -r itch.zip builds/web-${{ github.ref_name }}
       - name: Deploy to itch.io
         if: ${{ env.ITCH_IO=='true' }}
@@ -147,6 +150,7 @@ jobs:
           path: builds/mac-${{ github.ref_name }}
           retention-days: 1
       - name: Zip Folder
+        if: ${{ env.ITCH_IO=='true' }}
         run: zip -r itch.zip builds/mac-${{ github.ref_name }}
       - name: Deploy to itch.io
         if: ${{ env.ITCH_IO=='true' }}
