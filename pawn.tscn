@@ -1,11 +1,11 @@
 [gd_scene load_steps=6 format=3 uid="uid://d33tct3q48djp"]
 
 [ext_resource type="Script" path="res://pawn.gd" id="1_iug8o"]
-[ext_resource type="Texture2D" uid="uid://brpcqqix3kl40" path="res://assets/tilemap_packed.png" id="2_5kheb"]
 [ext_resource type="StyleBox" uid="uid://buj4au8liccux" path="res://themes/selected.tres" id="2_668cq"]
+[ext_resource type="Texture2D" uid="uid://brpcqqix3kl40" path="res://assets/urban_tilemap.png" id="3_ulqtn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_awoqh"]
-atlas = ExtResource("2_5kheb")
+atlas = ExtResource("3_ulqtn")
 region = Rect2(384, 0, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yr5j5"]

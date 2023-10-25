@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://tree.gd" id="1_kun72"]
 [ext_resource type="StyleBox" uid="uid://crqnj774jm6or" path="res://themes/highlighted.tres" id="1_wj1xk"]
-[ext_resource type="Texture2D" uid="uid://brpcqqix3kl40" path="res://assets/tilemap_packed.png" id="2_vc4ri"]
+[ext_resource type="Texture2D" uid="uid://brpcqqix3kl40" path="res://assets/urban_tilemap.png" id="3_ifrhg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mcy8s"]
-atlas = ExtResource("2_vc4ri")
+atlas = ExtResource("3_ifrhg")
 region = Rect2(256, 128, 16, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ubpce"]
