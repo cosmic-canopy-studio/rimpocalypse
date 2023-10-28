@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://c14y1yy4tg5cs"]
+
+[ext_resource type="Script" path="res://game_world/tree.gd" id="1_4iytw"]
+[ext_resource type="Texture2D" uid="uid://brpcqqix3kl40" path="res://assets/rpg_urban_tilemap_packed.png" id="2_req08"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ubpce"]
+size = Vector2(14, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcy8s"]
+atlas = ExtResource("2_req08")
+region = Rect2(256, 128, 16, 32)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j5mq1"]
+bg_color = Color(0.94902, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="Tree" type="Area2D"]
+script = ExtResource("1_4iytw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ubpce")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_mcy8s")
+
+[node name="ProgressBar" type="ProgressBar" parent="Sprite2D"]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = -8.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_styles/fill = SubResource("StyleBoxFlat_j5mq1")
+max_value = 10.0
+step = 2.08165e-12
+show_percentage = false

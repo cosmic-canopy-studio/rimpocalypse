@@ -1,45 +1,106 @@
-[gd_scene load_steps=15 format=3 uid="uid://bn76rp7tymvj"]
+[gd_scene load_steps=19 format=3 uid="uid://bn76rp7tymvj"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_1hjiu"]
-[ext_resource type="PackedScene" uid="uid://d33tct3q48djp" path="res://pawn.tscn" id="2_ha15b"]
-[ext_resource type="PackedScene" uid="uid://c14y1yy4tg5cs" path="res://tree.tscn" id="3_1p128"]
-[ext_resource type="PackedScene" uid="uid://dvjkxbnddh68r" path="res://crafting_spot.tscn" id="4_tyjbn"]
-[ext_resource type="Texture2D" uid="uid://yygkc4td0avb" path="res://assets/wood.atlastex" id="5_0uhxc"]
-[ext_resource type="Texture2D" uid="uid://brpcqqix3kl40" path="res://assets/urban_tilemap.png" id="5_8c4if"]
-[ext_resource type="Script" path="res://TreeLabel.gd" id="6_x5cok"]
+[ext_resource type="Script" path="res://game_world/game_world.gd" id="2_aakym"]
+[ext_resource type="Texture2D" uid="uid://0hqwvvfovhsc" path="res://assets/roguelikeSheet_transparent.png" id="2_e2geb"]
+[ext_resource type="PackedScene" uid="uid://d33tct3q48djp" path="res://game_world/pawn.tscn" id="2_ha15b"]
+[ext_resource type="PackedScene" uid="uid://c14y1yy4tg5cs" path="res://game_world/tree.tscn" id="3_1p128"]
+[ext_resource type="PackedScene" uid="uid://dvjkxbnddh68r" path="res://game_world/crafting_spot.tscn" id="4_tyjbn"]
+[ext_resource type="Script" path="res://gui/gui.gd" id="6_otkw6"]
 [ext_resource type="Texture2D" uid="uid://bbkw01x51w530" path="res://assets/bed.atlastex" id="7_4i5fh"]
-[ext_resource type="Script" path="res://crafting_spot_button.gd" id="7_rljv2"]
-[ext_resource type="Script" path="res://BedLabel.gd" id="8_tksi7"]
-[ext_resource type="Texture2D" uid="uid://bsvvcntblq3ku" path="res://assets/labor.atlastex" id="11_suupm"]
+[ext_resource type="Script" path="res://gui/crafting_spot_button.gd" id="7_rljv2"]
+[ext_resource type="Texture2D" path="res://assets/wood.tres" id="7_ru8l7"]
+[ext_resource type="Script" path="res://gui/tree_label.gd" id="8_dqc6t"]
+[ext_resource type="Script" path="res://gui/bed_label.gd" id="10_3cqjh"]
+[ext_resource type="Texture2D" uid="uid://crjc0ebtbjleh" path="res://assets/crafting_spot.atlastex" id="11_7vuyt"]
+[ext_resource type="Texture2D" path="res://assets/hammer.tres" id="13_253po"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cbwb7"]
+texture = ExtResource("2_e2geb")
+separation = Vector2i(1, 1)
+5:0/0 = 0
+5:0/0/terrain_set = 0
+5:0/0/terrain = 0
+5:0/0/terrains_peering_bit/right_side = 0
+5:0/0/terrains_peering_bit/bottom_right_corner = 0
+5:0/0/terrains_peering_bit/bottom_side = 0
+5:0/0/terrains_peering_bit/bottom_left_corner = 0
+5:0/0/terrains_peering_bit/left_side = 0
+5:0/0/terrains_peering_bit/top_left_corner = 0
+5:0/0/terrains_peering_bit/top_side = 0
+5:0/0/terrains_peering_bit/top_right_corner = 0
+5:1/0 = 0
+5:1/0/terrain_set = 0
+5:1/0/terrain = 0
+5:1/0/terrains_peering_bit/right_side = 0
+5:1/0/terrains_peering_bit/bottom_right_corner = 0
+5:1/0/terrains_peering_bit/bottom_side = 0
+5:1/0/terrains_peering_bit/bottom_left_corner = 0
+5:1/0/terrains_peering_bit/left_side = 0
+5:1/0/terrains_peering_bit/top_left_corner = 0
+5:1/0/terrains_peering_bit/top_side = 0
+5:1/0/terrains_peering_bit/top_right_corner = 0
+
+[sub_resource type="TileSet" id="TileSet_b10dq"]
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Terrain 0"
+terrain_set_0/terrain_0/color = Color(0.501961, 0.345098, 0.25098, 1)
+navigation_layer_0/layers = 1
+sources/0 = SubResource("TileSetAtlasSource_cbwb7")
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_6sib4"]
+vertices = PackedVector2Array(0, 0, 360, 0, 360, 592, 0, 592)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(0, 0, 360, 0, 360, 592, 0, 592)])
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q0rcr"]
 border_width_top = 2
 border_color = Color(1, 1, 1, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yaai4"]
-atlas = ExtResource("5_8c4if")
-region = Rect2(50, 182, 12, 10)
-margin = Rect2(2.08165e-12, 2.08165e-12, 2.08165e-12, 2.08165e-12)
-
 [sub_resource type="LabelSettings" id="LabelSettings_r7p7k"]
 font_size = 10
 
 [node name="Main" type="Node"]
-script = ExtResource("1_1hjiu")
 
-[node name="Tree" parent="." instance=ExtResource("3_1p128")]
-position = Vector2(274, 110)
+[node name="GameWorld" type="Node2D" parent="."]
+script = ExtResource("2_aakym")
+
+[node name="TileMap" type="TileMap" parent="GameWorld"]
+scale = Vector2(3, 3)
+tile_set = SubResource("TileSet_b10dq")
+format = 2
+layer_0/tile_data = PackedInt32Array(262148, 327680, 1, 262147, 327680, 0, 196612, 327680, 0, 196611, 327680, 1, 196610, 327680, 0, 262146, 327680, 1, 131076, 327680, 1, 131075, 327680, 1, 196609, 327680, 0, 196608, 327680, 0, 131072, 327680, 1, 131073, 327680, 0, 131074, 327680, 0, 262145, 327680, 0, 262144, 327680, 0, 327681, 327680, 0, 327682, 327680, 0, 327683, 327680, 0, 327684, 327680, 0, 327685, 327680, 1, 262149, 327680, 0, 262150, 327680, 0, 196614, 327680, 1, 196613, 327680, 0, 131077, 327680, 0, 131078, 327680, 0, 327686, 327680, 0, 262151, 327680, 0, 196615, 327680, 0, 131079, 327680, 0, 65542, 327680, 0, 65541, 327680, 0, 65540, 327680, 1, 65536, 327680, 1, 65537, 327680, 0, 1, 327680, 0, 2, 327680, 0, 65539, 327680, 0, 65543, 327680, 1, 65538, 327680, 0, 327680, 327680, 0, 0, 327680, 0, 3, 327680, 0, 4, 327680, 0, 5, 327680, 0, 6, 327680, 0, 7, 327680, 1, 327687, 327680, 1, 393216, 327680, 0, 458752, 327680, 0, 524288, 327680, 1, 589824, 327680, 1, 655360, 327680, 1, 720896, 327680, 0, 786432, 327680, 0, 458756, 327680, 1, 393220, 327680, 1, 393219, 327680, 1, 393218, 327680, 0, 393217, 327680, 1, 458753, 327680, 1, 524289, 327680, 1, 589825, 327680, 1, 655361, 327680, 0, 720897, 327680, 1, 786433, 327680, 0, 786434, 327680, 0, 720898, 327680, 0, 655362, 327680, 1, 589826, 327680, 1, 524290, 327680, 0, 458754, 327680, 0, 458755, 327680, 0, 524291, 327680, 1, 589827, 327680, 1, 655363, 327680, 1, 720899, 327680, 1, 786435, 327680, 1, 786436, 327680, 0, 720900, 327680, 1, 655364, 327680, 1, 589828, 327680, 1, 524292, 327680, 0, 524293, 327680, 1, 458757, 327680, 1, 393221, 327680, 1, 393222, 327680, 0, 458758, 327680, 0, 524294, 327680, 0, 589830, 327680, 0, 589829, 327680, 1, 655365, 327680, 0, 720901, 327680, 0, 786437, 327680, 0, 786438, 327680, 1, 720902, 327680, 1, 655366, 327680, 1, 655367, 327680, 0, 589831, 327680, 1, 524295, 327680, 0, 458759, 327680, 1, 393223, 327680, 1, 720903, 327680, 1, 786439, 327680, 0)
+
+[node name="Tree" parent="GameWorld" instance=ExtResource("3_1p128")]
+position = Vector2(264, 144)
 scale = Vector2(3, 3)
 metadata/_edit_group_ = true
 
-[node name="Pawn" parent="." instance=ExtResource("2_ha15b")]
-position = Vector2(79, 450)
+[node name="CraftingSpot" parent="GameWorld" instance=ExtResource("4_tyjbn")]
+visible = false
+position = Vector2(312, 312)
+metadata/_edit_group_ = true
+
+[node name="Pawn" parent="GameWorld" instance=ExtResource("2_ha15b")]
+position = Vector2(120, 456)
 scale = Vector2(3, 3)
+metadata/_edit_group_ = true
 
-[node name="CraftingSpot" parent="." instance=ExtResource("4_tyjbn")]
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="GameWorld"]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_6sib4")
 
-[node name="HUD" type="Control" parent="."]
+[node name="GUI" type="Control" parent="."]
 layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("6_otkw6")
+
+[node name="HUD" type="Control" parent="GUI"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -48,7 +109,7 @@ grow_vertical = 2
 mouse_filter = 2
 metadata/_edit_lock_ = true
 
-[node name="ResourceGrid" type="GridContainer" parent="HUD"]
+[node name="ResourceGrid" type="GridContainer" parent="GUI/HUD"]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
@@ -56,30 +117,30 @@ offset_right = 50.0
 offset_bottom = 50.0
 columns = 2
 
-[node name="WoodIcon" type="TextureRect" parent="HUD/ResourceGrid"]
+[node name="WoodIcon" type="TextureRect" parent="GUI/HUD/ResourceGrid"]
 texture_filter = 1
 layout_mode = 2
-texture = ExtResource("5_0uhxc")
+texture = ExtResource("7_ru8l7")
 expand_mode = 5
 
-[node name="WoodLabel" type="Label" parent="HUD/ResourceGrid"]
+[node name="WoodLabel" type="Label" parent="GUI/HUD/ResourceGrid"]
 layout_mode = 2
 text = "0"
-script = ExtResource("6_x5cok")
+script = ExtResource("8_dqc6t")
 
-[node name="BedIcon" type="TextureRect" parent="HUD/ResourceGrid"]
+[node name="BedIcon" type="TextureRect" parent="GUI/HUD/ResourceGrid"]
 texture_filter = 1
 layout_mode = 2
 texture = ExtResource("7_4i5fh")
 expand_mode = 3
 
-[node name="BedLabel" type="Label" parent="HUD/ResourceGrid"]
+[node name="BedLabel" type="Label" parent="GUI/HUD/ResourceGrid"]
 layout_mode = 2
 text = "0"
-script = ExtResource("8_tksi7")
+script = ExtResource("10_3cqjh")
 
-[node name="TopMenu" type="Control" parent="."]
-layout_mode = 3
+[node name="TopMenu" type="Control" parent="GUI"]
+layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -88,7 +149,7 @@ offset_top = -50.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Panel" type="Panel" parent="TopMenu"]
+[node name="Panel" type="Panel" parent="GUI/TopMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -97,7 +158,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_q0rcr")
 
-[node name="BuildButton" type="Button" parent="TopMenu"]
+[node name="BuildButton" type="Button" parent="GUI/TopMenu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -112,9 +173,9 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Build"
 
-[node name="BuildMenu" type="Control" parent="."]
+[node name="BuildMenu" type="Control" parent="GUI"]
 visible = false
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -123,7 +184,7 @@ offset_top = -120.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Panel" type="Panel" parent="BuildMenu"]
+[node name="Panel" type="Panel" parent="GUI/BuildMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -132,7 +193,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_q0rcr")
 
-[node name="BackButton" type="Button" parent="BuildMenu"]
+[node name="BackButton" type="Button" parent="GUI/BuildMenu"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -144,7 +205,7 @@ offset_bottom = -10.0
 grow_vertical = 0
 text = "Back"
 
-[node name="CraftingSpot" type="GridContainer" parent="BuildMenu"]
+[node name="CraftingSpot" type="GridContainer" parent="GUI/BuildMenu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -158,7 +219,7 @@ offset_bottom = 44.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="BuildMenu/CraftingSpot"]
+[node name="Button" type="Button" parent="GUI/BuildMenu/CraftingSpot"]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
@@ -170,17 +231,17 @@ Cost:
 theme_override_constants/icon_max_width = 20
 text = "Crafting 
 Spot"
-icon = SubResource("AtlasTexture_yaai4")
+icon = ExtResource("11_7vuyt")
 expand_icon = true
 script = ExtResource("7_rljv2")
 
-[node name="Cost" type="GridContainer" parent="BuildMenu/CraftingSpot"]
+[node name="Cost" type="GridContainer" parent="GUI/BuildMenu/CraftingSpot"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 8
 columns = 4
 
-[node name="WoodCost" type="Label" parent="BuildMenu/CraftingSpot/Cost"]
+[node name="WoodCost" type="Label" parent="GUI/BuildMenu/CraftingSpot/Cost"]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "100"
@@ -188,14 +249,14 @@ label_settings = SubResource("LabelSettings_r7p7k")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="WoodIcon" type="TextureRect" parent="BuildMenu/CraftingSpot/Cost"]
+[node name="WoodIcon" type="TextureRect" parent="GUI/BuildMenu/CraftingSpot/Cost"]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 8
-texture = ExtResource("5_0uhxc")
+texture = ExtResource("7_ru8l7")
 expand_mode = 3
 
-[node name="LaborCost" type="Label" parent="BuildMenu/CraftingSpot/Cost"]
+[node name="LaborCost" type="Label" parent="GUI/BuildMenu/CraftingSpot/Cost"]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "10"
@@ -203,18 +264,20 @@ label_settings = SubResource("LabelSettings_r7p7k")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LaborIcon" type="TextureRect" parent="BuildMenu/CraftingSpot/Cost"]
+[node name="LaborIcon" type="TextureRect" parent="GUI/BuildMenu/CraftingSpot/Cost"]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 8
-texture = ExtResource("11_suupm")
+texture = ExtResource("13_253po")
 expand_mode = 3
 
-[connection signal="input_event" from="Tree" to="." method="_on_tree_input_event"]
-[connection signal="produced" from="Tree" to="." method="_on_tree_produced"]
-[connection signal="input_event" from="Pawn" to="." method="_on_pawn_input_event"]
-[connection signal="input_event" from="CraftingSpot" to="." method="_on_crafting_spot_input_event"]
-[connection signal="produced" from="CraftingSpot" to="." method="_on_crafting_spot_produced"]
-[connection signal="pressed" from="TopMenu/BuildButton" to="." method="_on_build_button_pressed"]
-[connection signal="pressed" from="BuildMenu/BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="pressed" from="BuildMenu/CraftingSpot/Button" to="." method="_on_crafting_spot_button_pressed"]
+[connection signal="input_event" from="GameWorld/Tree" to="GameWorld" method="_on_tree_input_event"]
+[connection signal="produced" from="GameWorld/Tree" to="GameWorld" method="_on_tree_produced"]
+[connection signal="blocked" from="GameWorld/CraftingSpot" to="GameWorld" method="_on_crafting_spot_blocked"]
+[connection signal="input_event" from="GameWorld/CraftingSpot" to="GameWorld" method="_on_crafting_spot_input_event"]
+[connection signal="produced" from="GameWorld/CraftingSpot" to="GameWorld" method="_on_crafting_spot_produced"]
+[connection signal="input_event" from="GameWorld/Pawn" to="GameWorld" method="_on_pawn_input_event"]
+[connection signal="crafting_spot_completed" from="GUI" to="GameWorld" method="_on_gui_crafting_spot_completed"]
+[connection signal="pressed" from="GUI/TopMenu/BuildButton" to="GUI" method="_on_build_button_pressed"]
+[connection signal="pressed" from="GUI/BuildMenu/BackButton" to="GUI" method="_on_back_button_pressed"]
+[connection signal="pressed" from="GUI/BuildMenu/CraftingSpot/Button" to="GUI" method="_on_crafting_spot_button_pressed"]

@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-PlayerResources="*res://player_resources.gd"
+PlayerResources="*res://gui/player_resources.gd"
 
 [display]
 
@@ -27,6 +27,10 @@ window/size/window_width_override=720
 window/size/window_height_override=1280
 window/stretch/mode="viewport"
 window/handheld/orientation=1
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg", "res://addons/inventory-system/plugin.cfg")
 
 [input]
 

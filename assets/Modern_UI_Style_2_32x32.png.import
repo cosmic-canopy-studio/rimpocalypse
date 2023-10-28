@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brpcqqix3kl40"
-path="res://.godot/imported/urban_tilemap.png-0620d3191434c0e81a11d473f3740244.ctex"
+uid="uid://c5catlrssfovx"
+path="res://.godot/imported/Modern_UI_Style_2_32x32.png-d5add3a43a9c774a9c456e0a4e8c1c2f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/urban_tilemap.png"
-dest_files=["res://.godot/imported/urban_tilemap.png-0620d3191434c0e81a11d473f3740244.ctex"]
+source_file="res://assets/Modern_UI_Style_2_32x32.png"
+dest_files=["res://.godot/imported/Modern_UI_Style_2_32x32.png-d5add3a43a9c774a9c456e0a4e8c1c2f.ctex"]
 
 [params]
 

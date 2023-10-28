@@ -4,5 +4,5 @@ extends Node
 @export var bed: int
 
 func _ready():
-	wood = 0
+	wood = 100
 	bed = 0
