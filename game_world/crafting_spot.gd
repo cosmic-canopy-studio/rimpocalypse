@@ -8,7 +8,7 @@ var current_craft = {
 
 
 func produce(effort = 1):
-	if work_progress.value == 0 and super.is_constructed():
+	if progress_bar.value == 0 and super.is_constructed():
 		if not begin_craft():
 			return
 	super(effort)

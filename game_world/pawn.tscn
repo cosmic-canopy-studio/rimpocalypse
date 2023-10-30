@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d33tct3q48djp"]
+[gd_scene load_steps=18 format=3 uid="uid://d33tct3q48djp"]
 
 [ext_resource type="Script" path="res://game_world/pawn.gd" id="1_jyp7f"]
 [ext_resource type="StyleBox" uid="uid://buj4au8liccux" path="res://themes/selected.tres" id="2_laxfm"]
@@ -9,9 +9,18 @@
 [ext_resource type="Script" path="res://addons/inventory-system/craft/crafter.gd" id="7_miuxm"]
 [ext_resource type="Resource" uid="uid://c2bo3fwe4v30v" path="res://data/inventory_database.tres" id="8_clibg"]
 [ext_resource type="Script" path="res://addons/inventory-system/craft/craft_station.gd" id="9_5vq0h"]
+[ext_resource type="Script" path="res://addons/inventory-system/core/inventory_handler.gd" id="10_q0gpx"]
+[ext_resource type="Script" path="res://addons/inventory-system/core/inventory.gd" id="11_gihva"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0b6fq"]
 size = Vector2(12, 14)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3201l"]
+bg_color = Color(0.94902, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [sub_resource type="Animation" id="Animation_o1g1h"]
 length = 0.001
@@ -205,9 +214,15 @@ _data = {
 "idle": SubResource("Animation_8ev67")
 }
 
-[node name="Pawn" type="CharacterBody2D"]
+[node name="Pawn" type="CharacterBody2D" node_paths=PackedStringArray("inventory_handler", "inventory", "crafter", "craft_station", "progress_bar")]
 input_pickable = true
 script = ExtResource("1_jyp7f")
+inventory_database = ExtResource("8_clibg")
+inventory_handler = NodePath("InventoryHandler")
+inventory = NodePath("InventoryHandler/Inventory")
+crafter = NodePath("Crafter")
+craft_station = NodePath("Crafter/CraftStation")
+progress_bar = NodePath("Sprite2D/ProgressBar")
 
 [node name="Panel" type="Panel" parent="."]
 visible = false
@@ -232,6 +247,24 @@ one_way_collision_margin = 0.0
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("3_x86v2")
+
+[node name="ProgressBar" type="ProgressBar" parent="Sprite2D"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6.0
+offset_top = -11.0
+offset_right = -6.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/fill = SubResource("StyleBoxFlat_3201l")
+max_value = 10.0
+step = 2.08165e-12
+show_percentage = false
 
 [node name="WorkInterval" type="Timer" parent="."]
 autostart = true
@@ -259,9 +292,21 @@ script = ExtResource("7_miuxm")
 main_station = NodePath("CraftStation")
 database = ExtResource("8_clibg")
 
-[node name="CraftStation" type="Node" parent="Crafter"]
+[node name="CraftStation" type="Node" parent="Crafter" node_paths=PackedStringArray("input_inventory", "output_inventory")]
 script = ExtResource("9_5vq0h")
+input_inventory = NodePath("../../InventoryHandler/Inventory")
+output_inventory = NodePath("../../InventoryHandler/Inventory")
 processing_mode = 1
+database = ExtResource("8_clibg")
+
+[node name="InventoryHandler" type="Node" parent="."]
+script = ExtResource("10_q0gpx")
+database = ExtResource("8_clibg")
+
+[node name="Inventory" type="Node" parent="InventoryHandler"]
+script = ExtResource("11_gihva")
+create_slot_if_needed = true
+remove_slot_if_empty = true
 database = ExtResource("8_clibg")
 
 [connection signal="timeout" from="WorkInterval" to="." method="_on_work_interval_timeout"]

@@ -4,17 +4,39 @@ signal crafting_spot_completed
 
 @export var player: Pawn
 @export var craft_menu: CraftMenu
+@export var build_menu: Control
+@export var hud: BoxContainer
+@export var hud_item_scene: PackedScene
+
 
 func _ready():
 	craft_menu.initialize(player.crafting_table)
 
+func _process(_delta):
+	_update_hud()
+
+
+func _update_hud():
+	_clear_hud()
+	for slot in player.inventory_handler.inventory.slots:
+		if slot.item == null:
+			continue
+		var hud_item = hud_item_scene.instantiate()
+		hud_item.update_info_with_slot(slot)
+		hud.add_child(hud_item)
+
+
+func _clear_hud():
+	var children = hud.get_children()
+	for child in children:
+		child.queue_free()
 
 func _on_build_button_pressed():
-	$BuildMenu.visible = true
+	build_menu.visible = true
 
 
 func _on_back_button_pressed():
-	$BuildMenu.visible = false
+	build_menu.visible = false
 
 
 func _on_crafting_spot_button_pressed():

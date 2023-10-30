@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=9 format=3 uid="uid://bh0iqojojjijc"]
+
+[ext_resource type="Script" path="res://addons/inventory-system/craft/recipe.gd" id="1_q4xqn"]
+[ext_resource type="Resource" uid="uid://jbmflr8ll1ux" path="res://data/items/wood.tres" id="1_uj15x"]
+[ext_resource type="Script" path="res://addons/inventory-system/core/slot.gd" id="2_i31ta"]
+[ext_resource type="Resource" uid="uid://dxwtxmnwl11y2" path="res://data/items/stone.tres" id="3_d2dwy"]
+[ext_resource type="Resource" uid="uid://tx4j757xyuwk" path="res://data/items/axe.tres" id="4_slcwi"]
+
+[sub_resource type="Resource" id="Resource_v1h51"]
+script = ExtResource("2_i31ta")
+item = ExtResource("1_uj15x")
+amount = 1
+max_stack = -1
+
+[sub_resource type="Resource" id="Resource_i5plk"]
+script = ExtResource("2_i31ta")
+item = ExtResource("3_d2dwy")
+amount = 1
+max_stack = -1
+
+[sub_resource type="Resource" id="Resource_pdomr"]
+script = ExtResource("2_i31ta")
+item = ExtResource("4_slcwi")
+amount = 1
+max_stack = -1
+
+[resource]
+script = ExtResource("1_q4xqn")
+product = SubResource("Resource_pdomr")
+byproducts = Array[ExtResource("2_i31ta")]([])
+time_to_craft = 4.0
+ingredients = Array[ExtResource("2_i31ta")]([SubResource("Resource_v1h51"), SubResource("Resource_i5plk")])

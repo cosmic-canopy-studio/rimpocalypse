@@ -6,7 +6,6 @@ signal recipe_selected(selected_recipe: RecipeMenuItem)
 @export var ingredient_list_item: PackedScene
 
 @export var recipe_name: Label
-
 @export var icon: TextureRect
 @export var effort_amount: Label
 @export var ingredients_container: BoxContainer
@@ -16,11 +15,13 @@ signal recipe_selected(selected_recipe: RecipeMenuItem)
 @onready var green_highlight: StyleBoxFlat = load("res://gui/crafting/green_outline.tres")
 @onready var blank_highlight: StyleBoxEmpty = load("res://gui/crafting/empty_style.tres")
 
+var _recipe: Recipe
 var _recipe_index: int
 var _craft_station: CraftStation
 var _ingredients: Array[IngredientListItem]
 
 func set_recipe(craft_station: CraftStation, recipe: Recipe, recipe_index: int):
+	self._recipe = recipe
 	self._craft_station = craft_station
 	self._recipe_index = recipe_index
 	icon.texture = recipe.product.item.icon
@@ -54,5 +55,9 @@ func sync():
 	_check_if_has_ingredients()
 
 
+func execute():
+	_craft_station.craft(_recipe_index)
+	print("Craft initialized.")
+	
 func _on_button_pressed():
 	emit_signal("recipe_selected", self)

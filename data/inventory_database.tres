@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="InventoryDatabase" load_steps=12 format=3 uid="uid://c2bo3fwe4v30v"]
+[gd_resource type="Resource" script_class="InventoryDatabase" load_steps=16 format=3 uid="uid://c2bo3fwe4v30v"]
 
 [ext_resource type="Resource" uid="uid://ccfr5qe7lv5w0" path="res://data/items/bed.tres" id="1_5wpq8"]
 [ext_resource type="Script" path="res://addons/inventory-system/core/inventory_database.gd" id="1_be8q8"]
@@ -11,10 +11,14 @@
 [ext_resource type="Resource" uid="uid://comb2qth3446b" path="res://data/recipes/hammer.tres" id="5_hijo8"]
 [ext_resource type="Resource" uid="uid://djf57i261rt2o" path="res://data/recipes/bed.tres" id="6_k1pfe"]
 [ext_resource type="Resource" uid="uid://cean6eqvm5s0o" path="res://data/crafting_stations/crafting_spot.tres" id="8_a4guk"]
+[ext_resource type="Resource" uid="uid://dc3gc45jk2ax5" path="res://data/items/crafting_spot.tres" id="8_llugu"]
+[ext_resource type="Resource" uid="uid://tx4j757xyuwk" path="res://data/items/axe.tres" id="9_5ugwu"]
+[ext_resource type="Resource" uid="uid://3aopmvaomb16" path="res://data/recipes/crafting_spot.tres" id="10_sjvu2"]
+[ext_resource type="Resource" uid="uid://bh0iqojojjijc" path="res://data/recipes/axe.tres" id="13_r0or2"]
 
 [resource]
 script = ExtResource("1_be8q8")
-items = Array[Resource("res://addons/inventory-system/core/inventory_item.gd")]([ExtResource("1_5wpq8"), ExtResource("2_esixk"), ExtResource("3_fjuxc"), ExtResource("4_mm1n7")])
-recipes = Array[Resource("res://addons/inventory-system/craft/recipe.gd")]([ExtResource("5_hijo8"), ExtResource("6_k1pfe")])
+items = Array[Resource("res://addons/inventory-system/core/inventory_item.gd")]([ExtResource("2_esixk"), ExtResource("3_fjuxc"), ExtResource("4_mm1n7"), ExtResource("1_5wpq8"), ExtResource("8_llugu"), ExtResource("9_5ugwu")])
+recipes = Array[Resource("res://addons/inventory-system/craft/recipe.gd")]([ExtResource("5_hijo8"), ExtResource("13_r0or2"), ExtResource("10_sjvu2"), ExtResource("6_k1pfe")])
 stations_type = Array[Resource("res://addons/inventory-system/craft/craft_station_type.gd")]([ExtResource("8_a4guk")])
 item_categories = Array[Resource("res://addons/inventory-system/core/item_category.gd")]([ExtResource("1_ji121"), ExtResource("2_rueby"), ExtResource("3_jnxpr")])

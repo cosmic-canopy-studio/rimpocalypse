@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("2_hflli")
 id = 1
-max_stack = 0
+max_stack = 100
 name = "stone"
 icon = ExtResource("1_wod3o")
 weight = 0.0

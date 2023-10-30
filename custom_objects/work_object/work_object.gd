@@ -8,13 +8,14 @@ signal blocked(reason: String)
 signal object_input_event(event: InputEvent, object: WorkObject)
 
 @export var constructed := true
-
 @export var effort_to_construct := 0
 @export var effort_to_produce := 5
 @export var output_type := "wood"
+@export var red_fill: StyleBoxFlat
+@export var yellow_fill: StyleBoxFlat
 
 @onready var sprite = $Sprite2D
-@onready var work_progress = $Sprite2D/ProgressBar
+@onready var progress_bar = $Sprite2D/ProgressBar
 @onready var object_name = self.name
 
 func _ready():
@@ -22,27 +23,34 @@ func _ready():
 	
 	if effort_to_construct > 0:
 		constructed = false
-		work_progress.max_value = effort_to_construct
+		progress_bar.max_value = effort_to_construct
 		sprite.material = load("res://custom_objects/work_object/constructing.material")
 	else:
-		work_progress.max_value = effort_to_produce
-	
+		progress_bar.max_value = effort_to_produce
+
 
 
 func _process(_delta):
-	if work_progress.value == 0:
-		work_progress.visible = false
+	if progress_bar.value == 0:
+		progress_bar.visible = false
 	else:
-		work_progress.visible = true
+		progress_bar.visible = true
 
 
 func produce(effort = 1):
-	work_progress.value += effort
-	if work_progress.value >= work_progress.max_value:
-		work_progress.value = 0
+	
+	if effort > 1:
+		progress_bar.add_theme_stylebox_override("fill", yellow_fill)
+	else:
+		progress_bar.add_theme_stylebox_override("fill", red_fill)
+	progress_bar.value += effort
+	
+	if progress_bar.value >= progress_bar.max_value:
+		progress_bar.value = 0
+		
 		if not constructed:
 			constructed = true
-			work_progress.max_value = effort_to_produce
+			progress_bar.max_value = effort_to_produce
 			$Sprite2D.material = null
 			print(object_name," construction complete")
 		else:
