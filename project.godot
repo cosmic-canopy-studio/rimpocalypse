@@ -17,20 +17,20 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-PlayerResources="*res://gui/player_resources.gd"
+PlayerResources="*res://player_resources.gd"
 
 [display]
 
-window/size/viewport_width=360
-window/size/viewport_height=640
-window/size/window_width_override=720
-window/size/window_height_override=1280
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/window_width_override=2560
+window/size/window_height_override=1440
 window/stretch/mode="viewport"
-window/handheld/orientation=1
+window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg", "res://addons/inventory-system/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg", "res://addons/imrp/plugin.cfg", "res://addons/inventory-system/plugin.cfg")
 
 [input]
 

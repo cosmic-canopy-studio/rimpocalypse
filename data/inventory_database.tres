@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="InventoryDatabase" load_steps=12 format=3 uid="uid://c2bo3fwe4v30v"]
+
+[ext_resource type="Resource" uid="uid://ccfr5qe7lv5w0" path="res://data/items/bed.tres" id="1_5wpq8"]
+[ext_resource type="Script" path="res://addons/inventory-system/core/inventory_database.gd" id="1_be8q8"]
+[ext_resource type="Resource" uid="uid://wlphvnn8i4te" path="res://data/categories/furniture.tres" id="1_ji121"]
+[ext_resource type="Resource" uid="uid://jbmflr8ll1ux" path="res://data/items/wood.tres" id="2_esixk"]
+[ext_resource type="Resource" uid="uid://bcq6pmyuyjf0d" path="res://data/categories/resources.tres" id="2_rueby"]
+[ext_resource type="Resource" uid="uid://dxwtxmnwl11y2" path="res://data/items/stone.tres" id="3_fjuxc"]
+[ext_resource type="Resource" uid="uid://c3ro2ixae4mc4" path="res://data/categories/tools.tres" id="3_jnxpr"]
+[ext_resource type="Resource" uid="uid://db3ci2vtnxyst" path="res://data/items/hammer.tres" id="4_mm1n7"]
+[ext_resource type="Resource" uid="uid://comb2qth3446b" path="res://data/recipes/hammer.tres" id="5_hijo8"]
+[ext_resource type="Resource" uid="uid://djf57i261rt2o" path="res://data/recipes/bed.tres" id="6_k1pfe"]
+[ext_resource type="Resource" uid="uid://cean6eqvm5s0o" path="res://data/crafting_stations/crafting_spot.tres" id="8_a4guk"]
+
+[resource]
+script = ExtResource("1_be8q8")
+items = Array[Resource("res://addons/inventory-system/core/inventory_item.gd")]([ExtResource("1_5wpq8"), ExtResource("2_esixk"), ExtResource("3_fjuxc"), ExtResource("4_mm1n7")])
+recipes = Array[Resource("res://addons/inventory-system/craft/recipe.gd")]([ExtResource("5_hijo8"), ExtResource("6_k1pfe")])
+stations_type = Array[Resource("res://addons/inventory-system/craft/craft_station_type.gd")]([ExtResource("8_a4guk")])
+item_categories = Array[Resource("res://addons/inventory-system/core/item_category.gd")]([ExtResource("1_ji121"), ExtResource("2_rueby"), ExtResource("3_jnxpr")])

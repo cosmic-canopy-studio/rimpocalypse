@@ -1,14 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://c14y1yy4tg5cs"]
+[gd_scene load_steps=5 format=3 uid="uid://c14y1yy4tg5cs"]
 
-[ext_resource type="Script" path="res://game_world/tree.gd" id="1_4iytw"]
-[ext_resource type="Texture2D" uid="uid://brpcqqix3kl40" path="res://assets/rpg_urban_tilemap_packed.png" id="2_req08"]
+[ext_resource type="Script" path="res://custom_objects/work_object/work_object.tres.gd" id="1_0ffxc"]
+[ext_resource type="Texture2D" uid="uid://bwdogrcdawbfa" path="res://assets/textures/tree.tres" id="2_d118u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ubpce"]
 size = Vector2(14, 30)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mcy8s"]
-atlas = ExtResource("2_req08")
-region = Rect2(256, 128, 16, 32)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j5mq1"]
 bg_color = Color(0.94902, 0, 0, 1)
@@ -17,15 +13,16 @@ corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[node name="Tree" type="Area2D"]
-script = ExtResource("1_4iytw")
+[node name="Tree" type="Area2D" groups=["work_objects"]]
+scale = Vector2(3, 3)
+script = ExtResource("1_0ffxc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ubpce")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-texture = SubResource("AtlasTexture_mcy8s")
+texture = ExtResource("2_d118u")
 
 [node name="ProgressBar" type="ProgressBar" parent="Sprite2D"]
 anchors_preset = 14

@@ -1,38 +1,29 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvjkxbnddh68r"]
+[gd_scene load_steps=5 format=3 uid="uid://dvjkxbnddh68r"]
 
-[ext_resource type="Script" path="res://game_world/crafting_spot.gd" id="1_bdjpb"]
-[ext_resource type="Texture2D" uid="uid://d2rhn0js3qyuc" path="res://assets/roguelikeIndoor_transparent.png" id="2_u2p4g"]
+[ext_resource type="Script" path="res://custom_objects/work_object/work_object.tres.gd" id="1_nk7qn"]
+[ext_resource type="Texture2D" uid="uid://b3ivybkn8s7fv" path="res://assets/textures/crafting_spot.tres" id="2_j637b"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a7i4r"]
-size = Vector2(16, 12)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ubpce"]
+size = Vector2(15.3333, 12)
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_aogxe"]
-blend_mode = 3
-light_mode = 2
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_244l8"]
-atlas = ExtResource("2_u2p4g")
-region = Rect2(68, 51, 16, 12)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q3p2i"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j5mq1"]
 bg_color = Color(0.94902, 0, 0, 1)
 corner_radius_top_left = 2
 corner_radius_top_right = 2
 corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
-[node name="CraftingSpot" type="Area2D"]
-position = Vector2(272, 287)
+[node name="CraftingSpot" type="Area2D" groups=["work_objects"]]
 scale = Vector2(3, 3)
-script = ExtResource("1_bdjpb")
+script = ExtResource("1_nk7qn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_a7i4r")
+position = Vector2(2.38419e-07, 3.17891e-07)
+shape = SubResource("RectangleShape2D_ubpce")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-material = SubResource("CanvasItemMaterial_aogxe")
-texture = SubResource("AtlasTexture_244l8")
+texture = ExtResource("2_j637b")
 
 [node name="ProgressBar" type="ProgressBar" parent="Sprite2D"]
 anchors_preset = 14
@@ -46,9 +37,7 @@ offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
-theme_override_styles/fill = SubResource("StyleBoxFlat_q3p2i")
+theme_override_styles/fill = SubResource("StyleBoxFlat_j5mq1")
 max_value = 10.0
 step = 2.08165e-12
 show_percentage = false
-
-[node name="Warning" type="Sprite2D" parent="Sprite2D"]

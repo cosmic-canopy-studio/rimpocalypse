@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=4 format=3 uid="uid://dxwtxmnwl11y2"]
+
+[ext_resource type="Resource" uid="uid://bcq6pmyuyjf0d" path="res://data/categories/resources.tres" id="1_cv01v"]
+[ext_resource type="Texture2D" uid="uid://r0up71so3psx" path="res://assets/textures/stone.tres" id="1_wod3o"]
+[ext_resource type="Script" path="res://addons/inventory-system/core/inventory_item.gd" id="2_hflli"]
+
+[resource]
+script = ExtResource("2_hflli")
+id = 1
+max_stack = 0
+name = "stone"
+icon = ExtResource("1_wod3o")
+weight = 0.0
+properties = {}
+categories = Array[Resource("res://addons/inventory-system/core/item_category.gd")]([ExtResource("1_cv01v")])

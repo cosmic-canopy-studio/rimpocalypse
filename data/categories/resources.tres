@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemCategory" load_steps=3 format=3 uid="uid://bcq6pmyuyjf0d"]
+
+[ext_resource type="Script" path="res://addons/inventory-system/core/item_category.gd" id="1_g70wb"]
+[ext_resource type="Texture2D" uid="uid://beqys7c3wapio" path="res://assets/textures/wood.tres" id="1_mdcdu"]
+
+[resource]
+script = ExtResource("1_g70wb")
+name = "resources"
+color = Color(0.352941, 0.819608, 0.294118, 1)
+icon = ExtResource("1_mdcdu")

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=4 format=3 uid="uid://jbmflr8ll1ux"]
+
+[ext_resource type="Texture2D" uid="uid://beqys7c3wapio" path="res://assets/textures/wood.tres" id="1_4db7f"]
+[ext_resource type="Resource" uid="uid://bcq6pmyuyjf0d" path="res://data/categories/resources.tres" id="1_durcq"]
+[ext_resource type="Script" path="res://addons/inventory-system/core/inventory_item.gd" id="2_dbcir"]
+
+[resource]
+script = ExtResource("2_dbcir")
+id = 0
+max_stack = 16
+name = "wood"
+icon = ExtResource("1_4db7f")
+weight = 0.0
+properties = {}
+categories = Array[Resource("res://addons/inventory-system/core/item_category.gd")]([ExtResource("1_durcq")])

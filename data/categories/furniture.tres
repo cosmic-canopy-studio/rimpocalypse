@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemCategory" load_steps=3 format=3 uid="uid://wlphvnn8i4te"]
+
+[ext_resource type="Script" path="res://addons/inventory-system/core/item_category.gd" id="1_f2wkk"]
+[ext_resource type="Texture2D" uid="uid://bbkw01x51w530" path="res://assets/textures/bed.atlastex" id="1_i725l"]
+
+[resource]
+script = ExtResource("1_f2wkk")
+name = "furniture"
+color = Color(0.403922, 0.0941176, 0.72549, 1)
+icon = ExtResource("1_i725l")

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=7 format=3 uid="uid://djf57i261rt2o"]
+
+[ext_resource type="Script" path="res://addons/inventory-system/craft/recipe.gd" id="1_0mbv7"]
+[ext_resource type="Resource" uid="uid://jbmflr8ll1ux" path="res://data/items/wood.tres" id="1_h5atn"]
+[ext_resource type="Script" path="res://addons/inventory-system/core/slot.gd" id="2_33fuk"]
+[ext_resource type="Resource" uid="uid://ccfr5qe7lv5w0" path="res://data/items/bed.tres" id="3_jggbh"]
+
+[sub_resource type="Resource" id="Resource_xv7cp"]
+script = ExtResource("2_33fuk")
+item = ExtResource("1_h5atn")
+amount = 10
+max_stack = -1
+
+[sub_resource type="Resource" id="Resource_eoe5p"]
+script = ExtResource("2_33fuk")
+item = ExtResource("3_jggbh")
+amount = 1
+max_stack = -1
+
+[resource]
+script = ExtResource("1_0mbv7")
+product = SubResource("Resource_eoe5p")
+byproducts = Array[ExtResource("2_33fuk")]([])
+time_to_craft = 10.0
+ingredients = Array[ExtResource("2_33fuk")]([SubResource("Resource_xv7cp")])

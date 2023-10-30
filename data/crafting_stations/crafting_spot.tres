@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CraftStationType" load_steps=3 format=3 uid="uid://cean6eqvm5s0o"]
+
+[ext_resource type="Texture2D" uid="uid://b3ivybkn8s7fv" path="res://assets/textures/crafting_spot.tres" id="1_l538k"]
+[ext_resource type="Script" path="res://addons/inventory-system/craft/craft_station_type.gd" id="1_rsxdm"]
+
+[resource]
+script = ExtResource("1_rsxdm")
+icon = ExtResource("1_l538k")
+name = "crafting_spot"

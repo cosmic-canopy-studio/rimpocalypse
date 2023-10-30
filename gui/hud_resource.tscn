@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://6agk0gf7xvae"]
+
+[ext_resource type="Script" path="res://gui/hud_resource.gd" id="1_rert1"]
+[ext_resource type="Texture2D" uid="uid://beqys7c3wapio" path="res://assets/textures/wood.tres" id="2_7o4wk"]
+
+[node name="HudResource" type="HBoxContainer"]
+custom_minimum_size = Vector2(32, 16)
+offset_right = 96.0
+offset_bottom = 48.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+script = ExtResource("1_rert1")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 2
+texture = ExtResource("2_7o4wk")
+expand_mode = 3
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "0"

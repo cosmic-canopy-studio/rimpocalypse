@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://brhw23npm5fbn"]
+
+[ext_resource type="Script" path="res://gui/crafting/ingredient_list_item.gd" id="1_1p0hh"]
+[ext_resource type="Texture2D" uid="uid://beqys7c3wapio" path="res://assets/textures/wood.tres" id="1_lfbv5"]
+
+[node name="IngredientListItem" type="Control" node_paths=PackedStringArray("icon", "amount")]
+custom_minimum_size = Vector2(52, 26)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1p0hh")
+icon = NodePath("MarginContainer/HBoxContainer/Icon")
+amount = NodePath("MarginContainer/HBoxContainer/Amount")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 26.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+texture = ExtResource("1_lfbv5")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="Amount" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 0
+text = "x 1"
+vertical_alignment = 1
