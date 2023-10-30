@@ -1,6 +1,11 @@
 # Common ignores
 .DS_Store
 build/
+.idea/
+.vscode/
+*.sln
+*.csproj
+*.csproj.user
 
 # Godot-specific ignores
 .import/
