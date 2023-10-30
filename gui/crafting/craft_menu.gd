@@ -77,4 +77,5 @@ func _disconnect_signals():
 
 
 func _on_craft_button_pressed():
-	pass # Replace with function body.
+	_selected_recipe.execute()
+	self.visible = false

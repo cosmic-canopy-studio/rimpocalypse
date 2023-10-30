@@ -7,7 +7,7 @@
 [resource]
 script = ExtResource("2_dbcir")
 id = 0
-max_stack = 16
+max_stack = 100
 name = "wood"
 icon = ExtResource("1_4db7f")
 weight = 0.0

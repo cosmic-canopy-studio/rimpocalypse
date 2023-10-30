@@ -1,1 +1,2 @@
 extends WorkObject
+class_name TreeWorkObject

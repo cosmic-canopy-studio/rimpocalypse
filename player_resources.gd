@@ -6,7 +6,6 @@ var items = inventory_database.items
 
 var resources: Dictionary
 
-
 func _ready():
 	initialize_resources()
 

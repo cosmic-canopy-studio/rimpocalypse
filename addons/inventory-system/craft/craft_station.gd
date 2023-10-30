@@ -97,6 +97,7 @@ func _process(delta: float):
 		return
 	if not is_crafting():
 		return
+	print("processing")
 	_process_crafts(delta)
 	
 	for i in range(craftings.size() - 1, -1, -1):
@@ -129,10 +130,9 @@ func can_craft(recipe: Recipe) -> bool:
 
 ## Returns true if the input [Inventory] of this station contains the 
 ## ingredients of the [Recipe] sent by parameter.
-func contains_ingredients(recipe: Recipe) -> bool:
+func contains_ingredients(recipe : Recipe) -> bool:
 	for slot in recipe.ingredients:
-		if PlayerResources.resources[slot.item.name] < slot.amount:
-			print("Insuficient ", slot.item.name, ", ", PlayerResources.resources[slot.item.name] )
+		if not input_inventory.contains(slot.item, slot.amount):
 			return false
 	return true
 
@@ -191,6 +191,7 @@ func _process_crafts(delta: float):
 		var c = craftings[i]
 		# TODO set start time in crafting only (Problem with load game ?)
 		if not c.is_finished():
+			print(c.time)
 			c.time -= delta
 
 
