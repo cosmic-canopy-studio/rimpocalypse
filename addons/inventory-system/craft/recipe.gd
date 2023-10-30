@@ -11,8 +11,11 @@ class_name Recipe
 ## Time to complete this craft
 @export var time_to_craft := 4.0
 
-## What type of season can make this craft
+## What type of station can make this craft
 @export var station: CraftStationType
 
 ## Ingredient List For crafting this recipe, the ingredients contain a [Slot] data structure, which stores an [InventoryItem] type and its quantity.
 @export var ingredients: Array[Slot]
+
+## What tools are required to craft this item
+@export var tools_required: Array[InventoryItem]

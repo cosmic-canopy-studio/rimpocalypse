@@ -9,7 +9,7 @@
 atlas = ExtResource("2_y2o5t")
 region = Rect2(110, 170, 100, 100)
 
-[node name="CraftMenu" type="Control" node_paths=PackedStringArray("recipe_slots", "craft_button")]
+[node name="CraftMenu" type="Control" node_paths=PackedStringArray("menu_title", "recipe_slots", "craft_button", "close_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,11 +20,12 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-mouse_filter = 2
 script = ExtResource("1_q0d1m")
+menu_title = NodePath("GridContainer/MarginContainer/InnerArea/MarginContainer/MenuTitle")
 recipe_scene = ExtResource("2_pq33w")
 recipe_slots = NodePath("GridContainer/MarginContainer/InnerArea/UseableArea/ScrollContainer/RecipeSlots")
 craft_button = NodePath("GridContainer/MarginContainer/InnerArea/CraftButton")
+close_button = NodePath("GridContainer/MarginContainer/InnerArea/CloseButton")
 
 [node name="GridContainer" type="GridContainer" parent="."]
 layout_mode = 2
@@ -59,6 +60,12 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
+[node name="CloseButton" type="Button" parent="GridContainer/MarginContainer/InnerArea"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "Close"
+
 [node name="CraftButton" type="Button" parent="GridContainer/MarginContainer/InnerArea"]
 layout_mode = 2
 size_flags_horizontal = 8
@@ -90,7 +97,6 @@ theme_override_constants/margin_bottom = 40
 [node name="ScrollContainer" type="ScrollContainer" parent="GridContainer/MarginContainer/InnerArea/UseableArea"]
 custom_minimum_size = Vector2(2.08165e-12, 300)
 layout_mode = 2
-mouse_filter = 2
 theme = ExtResource("4_sg1mb")
 follow_focus = true
 horizontal_scroll_mode = 0
@@ -104,4 +110,5 @@ size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/separation = 6
 
+[connection signal="pressed" from="GridContainer/MarginContainer/InnerArea/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="GridContainer/MarginContainer/InnerArea/CraftButton" to="." method="_on_craft_button_pressed"]

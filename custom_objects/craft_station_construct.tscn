@@ -1,0 +1,61 @@
+[gd_scene load_steps=10 format=3 uid="uid://dh8n0jfn8ldae"]
+
+[ext_resource type="Script" path="res://custom_objects/craft_station_construct.gd" id="1_lhkx6"]
+[ext_resource type="Resource" uid="uid://cean6eqvm5s0o" path="res://data/crafting_stations/crafting_spot.tres" id="2_7nfg4"]
+[ext_resource type="Texture2D" uid="uid://b3ivybkn8s7fv" path="res://assets/textures/crafting_spot.tres" id="2_axldt"]
+[ext_resource type="StyleBox" uid="uid://h3cpv57l1mut" path="res://assets/styles/red_fill.stylebox" id="3_hxq3i"]
+[ext_resource type="Script" path="res://addons/inventory-system/craft/craft_station.gd" id="4_6de8y"]
+[ext_resource type="StyleBox" uid="uid://lpua4phxw251" path="res://assets/styles/yellow_fill.stylebox" id="4_xjr2h"]
+[ext_resource type="Texture2D" uid="uid://bbkw01x51w530" path="res://assets/textures/bed.atlastex" id="6_l2ihl"]
+[ext_resource type="Resource" uid="uid://c2bo3fwe4v30v" path="res://data/inventory_database.tres" id="7_n33va"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v8n42"]
+size = Vector2(16, 12)
+
+[node name="CraftStationConstructable" type="Area2D" node_paths=PackedStringArray("craft_station", "current_craft_icon")]
+script = ExtResource("1_lhkx6")
+craft_station = NodePath("CraftStation")
+station_type = ExtResource("2_7nfg4")
+current_craft_icon = NodePath("Sprite2D/CurrentCraft")
+red_fill = ExtResource("3_hxq3i")
+yellow_fill = ExtResource("4_xjr2h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_v8n42")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_axldt")
+
+[node name="CurrentCraft" type="Sprite2D" parent="Sprite2D"]
+visible = false
+position = Vector2(0, -2)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_l2ihl")
+
+[node name="ProgressBar" type="ProgressBar" parent="Sprite2D"]
+visible = false
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -10.0
+offset_right = -8.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 3
+theme_override_styles/fill = ExtResource("3_hxq3i")
+max_value = 10.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="CraftStation" type="Node" parent="."]
+script = ExtResource("4_6de8y")
+type = ExtResource("2_7nfg4")
+processing_mode = 1
+database = ExtResource("7_n33va")
+
+[connection signal="crafting_added" from="CraftStation" to="." method="_on_craft_station_crafting_added"]
+[connection signal="on_crafted" from="CraftStation" to="." method="_on_craft_station_on_crafted"]

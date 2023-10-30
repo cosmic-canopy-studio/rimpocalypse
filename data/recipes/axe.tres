@@ -30,3 +30,4 @@ product = SubResource("Resource_pdomr")
 byproducts = Array[ExtResource("2_i31ta")]([])
 time_to_craft = 4.0
 ingredients = Array[ExtResource("2_i31ta")]([SubResource("Resource_v1h51"), SubResource("Resource_i5plk")])
+tools_required = Array[Resource("res://addons/inventory-system/core/inventory_item.gd")]([])

@@ -26,17 +26,14 @@ func _ready():
 func handle_input(event, object: Node2D):
 	if event is InputEventMouseButton and event.is_pressed():
 		object.find_child("Sprite2D").add_child(highlight.instantiate())		
-		if object == $Pawn:
-			$Pawn/Sprite2D.add_child(highlight.instantiate())
-			$Pawn.selected = not $Pawn.selected
-			print("Pawn selection state: ", $Pawn.selected)
+		if object == player:
+			player.find_child("Sprite2D").add_child(highlight.instantiate())
+			player.selected = not player.selected
 			return
 			
-		if $Pawn.selected:
-			print("Assigning Pawn to work at ", object.name)
-			$Pawn/NavigationAgent2D.target_position = object.position
-			$Pawn.selected = false
-			$Pawn.activity = object
+		if player.selected:
+			player.find_child("NavigationAgent2D").target_position = object.position
+			player.set_activity(object)
 
 
 func _on_pawn_input_event(_viewport, event, _shape_idx):
@@ -78,3 +75,7 @@ func _on_object_input_event(event: InputEvent, object: WorkObject):
 
 func _on_gui_crafting_spot_completed():
 	$CraftingSpot.visible = true
+
+
+func _on_craft_station_constructable_input_event(event, constructable):
+	handle_input(event, constructable)

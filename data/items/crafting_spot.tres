@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=4 format=3 uid="uid://dc3gc45jk2ax5"]
+
+[ext_resource type="Resource" uid="uid://wlphvnn8i4te" path="res://data/categories/furniture.tres" id="1_bat7w"]
+[ext_resource type="Script" path="res://addons/inventory-system/core/inventory_item.gd" id="1_jyn41"]
+[ext_resource type="Texture2D" uid="uid://b3ivybkn8s7fv" path="res://assets/textures/crafting_spot.tres" id="2_dqcli"]
+
+[resource]
+script = ExtResource("1_jyn41")
+id = 4
+max_stack = 1
+name = "crafting_spot"
+icon = ExtResource("2_dqcli")
+weight = 0.0
+properties = {}
+categories = [ExtResource("1_bat7w")]
