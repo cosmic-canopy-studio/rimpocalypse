@@ -12,4 +12,4 @@ name = "axe"
 icon = ExtResource("2_mt57m")
 weight = 0.0
 properties = {}
-categories = [ExtResource("1_d5bht")]
+categories = Array[Resource("res://addons/inventory-system/core/item_category.gd")]([ExtResource("1_d5bht")])

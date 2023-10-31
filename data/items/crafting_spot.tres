@@ -12,4 +12,4 @@ name = "crafting_spot"
 icon = ExtResource("2_dqcli")
 weight = 0.0
 properties = {}
-categories = [ExtResource("1_bat7w")]
+categories = Array[Resource("res://addons/inventory-system/core/item_category.gd")]([ExtResource("1_bat7w")])

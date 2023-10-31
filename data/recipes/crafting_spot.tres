@@ -23,4 +23,4 @@ product = SubResource("Resource_gay3b")
 byproducts = Array[ExtResource("2_xkp4s")]([])
 time_to_craft = 4.0
 ingredients = Array[ExtResource("2_xkp4s")]([SubResource("Resource_r6lxp")])
-tools_required = Array[Resource("res://addons/inventory-system/core/inventory_item.gd")]([])
+tools_required = Array[ExtResource("2_xkp4s")]([])

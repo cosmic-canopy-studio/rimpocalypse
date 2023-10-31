@@ -30,3 +30,4 @@ product = SubResource("Resource_5g2oq")
 byproducts = Array[ExtResource("2_cd6u6")]([])
 time_to_craft = 4.0
 ingredients = Array[ExtResource("2_cd6u6")]([SubResource("Resource_l8n44"), SubResource("Resource_dimvf")])
+tools_required = Array[ExtResource("2_cd6u6")]([])

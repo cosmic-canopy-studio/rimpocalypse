@@ -7,6 +7,7 @@ class_name CraftMenu
 @export var craft_button: Button
 @export var close_button: Button
 
+var _current_station: CraftStation
 var _recipe_scene_nodes: Array[RecipeMenuItem]
 var _selected_recipe: RecipeMenuItem
 
@@ -31,17 +32,23 @@ func initialize(craft_station: CraftStation):
 
 func open(craft_station: CraftStation):
 	initialize(craft_station)
+	_current_station = craft_station
 	visible = true
 
 
 func close():
-	_clear()
+	_clear_recipes()
+	_current_station = null
 	visible = false
 
 
 func toggle_player_crafting(pawn: Pawn):
 	if visible:
-		close()
+		if _current_station != pawn.crafting_table:
+			close()
+			open(pawn.crafting_table)
+		else:
+			close()
 	else:
 		open(pawn.crafting_table)
 
@@ -51,7 +58,7 @@ func open_craft_menu(craft_station: CraftStation, inventory: Inventory):
 	open(craft_station)
 	
 
-func _clear():
+func _clear_recipes():
 	_selected_recipe = null
 	_clear_signals()
 	for recipe_scene_node in _recipe_scene_nodes:
@@ -88,9 +95,10 @@ func _on_craft_button_pressed():
 	_selected_recipe.execute()
 	close()
 
+
 func _on_close_button_pressed():
 	close()
 
 
-func _on_craft_station_constructable_crafting_menu_requested(craft_station, inventory):
+func _on_crafting_menu_requested(craft_station, inventory):
 	open_craft_menu(craft_station, inventory)

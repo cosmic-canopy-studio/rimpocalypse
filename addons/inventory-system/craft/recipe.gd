@@ -18,4 +18,4 @@ class_name Recipe
 @export var ingredients: Array[Slot]
 
 ## What tools are required to craft this item
-@export var tools_required: Array[InventoryItem]
+@export var tools_required: Array[Slot]

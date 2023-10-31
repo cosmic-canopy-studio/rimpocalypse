@@ -132,8 +132,8 @@ func can_craft(recipe: Recipe) -> bool:
 ## Returns true if the input [Inventory] of this station contains the 
 ## required tools of the [Recipe] sent by parameter.
 func has_required_tools(recipe : Recipe) -> bool:
-	for item in recipe.tools_required:
-		if not input_inventory.contains(item):
+	for slot in recipe.tools_required:
+		if not input_inventory.contains(slot.item):
 			return false
 	return true
 

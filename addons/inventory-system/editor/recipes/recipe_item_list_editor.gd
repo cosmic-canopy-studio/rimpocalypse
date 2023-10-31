@@ -9,6 +9,7 @@ signal request_remove(recipe: Recipe, request_code: int)
 @onready var time_label: Label = $Panel/MarginContainer/VBoxContainer/MoreInfos/TimeLabel
 @onready var craftstation_icon: TextureRect = $Panel/MarginContainer/VBoxContainer/MoreInfos/CraftstationIcon
 @onready var ingredients_list = $Panel/MarginContainer/VBoxContainer/Ingredients/IngredientsList
+@onready var tools_required_list = $Panel/MarginContainer/VBoxContainer/Byproducts/ByproductsList
 @onready var byproducts_list = $Panel/MarginContainer/VBoxContainer/Byproducts/ByproductsList
 @onready var panel: Panel = $Panel
 @onready var delete_button: MenuButton = $Panel/MarginContainer/VBoxContainer/MoreInfos/DeleteButton
@@ -62,7 +63,16 @@ func update_recipe():
 		var i_editor = ingredient_item_scene.instantiate()
 		i_editor.setup(i)
 		ingredients_list.add_child(i_editor)
-		
+	
+	
+	for i in tools_required_list.get_children():
+		i.queue_free()
+	for i in recipe.tools_required:
+		var i_editor = ingredient_item_scene.instantiate()
+		i_editor.setup(i)
+		tools_required_list.add_child(i_editor)
+	
+	
 	for i in byproducts_list.get_children():
 		i.queue_free()	
 	for i in recipe.byproducts:

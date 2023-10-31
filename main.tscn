@@ -329,7 +329,7 @@ layout_mode = 2
 
 [connection signal="activity_completed" from="GameWorld/CraftStationConstructable" to="GameWorld/Pawn" method="_on_activity_completed"]
 [connection signal="constructable_input_event" from="GameWorld/CraftStationConstructable" to="GameWorld" method="_on_craft_station_constructable_input_event"]
-[connection signal="crafting_menu_requested" from="GameWorld/CraftStationConstructable" to="GUI/MarginContainer/GridContainer/CraftMenu" method="_on_craft_station_constructable_crafting_menu_requested"]
+[connection signal="crafting_menu_requested" from="GameWorld/CraftStationConstructable" to="GUI/MarginContainer/GridContainer/CraftMenu" method="_on_crafting_menu_requested"]
 [connection signal="input_event" from="GameWorld/Pawn" to="GameWorld" method="_on_pawn_input_event"]
 [connection signal="crafting_spot_completed" from="GUI" to="GameWorld" method="_on_gui_crafting_spot_completed"]
 [connection signal="pressed" from="GUI/TopMenu/HBoxContainer/BuildButton" to="GUI" method="_on_build_button_pressed"]

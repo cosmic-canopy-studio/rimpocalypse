@@ -37,8 +37,8 @@ func set_recipe(craft_station: CraftStation, recipe: Recipe, recipe_index: int):
 	_clear_tools()
 	for tool in recipe.tools_required:
 		var tool_obj = Sprite2D.new()
-		tool_obj.texture = tool.icon
-		if not craft_station.input_inventory.contains(tool):
+		tool_obj.texture = tool.item.icon
+		if not craft_station.input_inventory.contains(tool.item):
 			tool_obj.self_modulate = Color(1,1,1,0.5)
 		tools_container.add_child(tool_obj)
 		_tools.append(tool_obj)
