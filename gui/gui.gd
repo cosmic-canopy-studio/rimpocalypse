@@ -9,9 +9,6 @@ signal crafting_spot_completed
 @export var hud_item_scene: PackedScene
 
 
-func _ready():
-	craft_menu.initialize(player.crafting_table)
-
 func _process(_delta):
 	_update_hud()
 
@@ -50,4 +47,4 @@ func _on_crafting_spot_button_pressed():
 
 
 func _on_craft_button_pressed():
-	craft_menu.toggle(player)
+	craft_menu.toggle_player_crafting(player)

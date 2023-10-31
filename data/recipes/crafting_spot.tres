@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="Recipe" load_steps=7 format=3 uid="uid://3aopmvaomb16"]
+
+[ext_resource type="Resource" uid="uid://jbmflr8ll1ux" path="res://data/items/wood.tres" id="1_kw77w"]
+[ext_resource type="Script" path="res://addons/inventory-system/craft/recipe.gd" id="1_r1xsm"]
+[ext_resource type="Script" path="res://addons/inventory-system/core/slot.gd" id="2_xkp4s"]
+[ext_resource type="Resource" uid="uid://dc3gc45jk2ax5" path="res://data/items/crafting_spot.tres" id="3_ofbor"]
+
+[sub_resource type="Resource" id="Resource_r6lxp"]
+script = ExtResource("2_xkp4s")
+item = ExtResource("1_kw77w")
+amount = 10
+max_stack = -1
+
+[sub_resource type="Resource" id="Resource_gay3b"]
+script = ExtResource("2_xkp4s")
+item = ExtResource("3_ofbor")
+amount = 1
+max_stack = -1
+
+[resource]
+script = ExtResource("1_r1xsm")
+product = SubResource("Resource_gay3b")
+byproducts = Array[ExtResource("2_xkp4s")]([])
+time_to_craft = 4.0
+ingredients = Array[ExtResource("2_xkp4s")]([SubResource("Resource_r6lxp")])
+tools_required = Array[ExtResource("2_xkp4s")]([])

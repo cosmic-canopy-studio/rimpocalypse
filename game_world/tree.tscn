@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c14y1yy4tg5cs"]
 
-[ext_resource type="Script" path="res://custom_objects/work_object/work_object.tres.gd" id="1_0ffxc"]
+[ext_resource type="Script" path="res://game_world/tree.gd" id="1_3wpv7"]
 [ext_resource type="Texture2D" uid="uid://bwdogrcdawbfa" path="res://assets/textures/tree.tres" id="2_d118u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ubpce"]
@@ -15,7 +15,7 @@ corner_radius_bottom_left = 2
 
 [node name="Tree" type="Area2D" groups=["work_objects"]]
 scale = Vector2(3, 3)
-script = ExtResource("1_0ffxc")
+script = ExtResource("1_3wpv7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ubpce")

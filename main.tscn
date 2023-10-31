@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://bn76rp7tymvj"]
+[gd_scene load_steps=23 format=3 uid="uid://bn76rp7tymvj"]
 
 [ext_resource type="Script" path="res://game_world/game_world.gd" id="2_aakym"]
 [ext_resource type="PackedScene" uid="uid://d33tct3q48djp" path="res://game_world/pawn.tscn" id="2_ha15b"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://bymugkdytj6q3" path="res://game_world/highlight.tscn" id="3_cisff"]
 [ext_resource type="Texture2D" uid="uid://0hqwvvfovhsc" path="res://assets/sheets/roguelikeSheet_transparent.png" id="3_hpab8"]
 [ext_resource type="PackedScene" uid="uid://ducnvncuqpo11" path="res://custom_objects/work_object/work_object.tscn" id="3_m4xxk"]
-[ext_resource type="Script" path="res://game_world/crafting_spot.gd" id="4_bdnl3"]
 [ext_resource type="Script" path="res://game_world/tree.gd" id="4_ldh0n"]
 [ext_resource type="Script" path="res://gui/gui.gd" id="6_otkw6"]
 [ext_resource type="Texture2D" uid="uid://b3ivybkn8s7fv" path="res://assets/textures/crafting_spot.tres" id="7_43t65"]
@@ -14,6 +13,7 @@
 [ext_resource type="Script" path="res://gui/crafting_spot_button.gd" id="7_rljv2"]
 [ext_resource type="Texture2D" uid="uid://beqys7c3wapio" path="res://assets/textures/wood.tres" id="7_ru8l7"]
 [ext_resource type="PackedScene" uid="uid://bwlhms587lkes" path="res://game_world/dropped_item.tscn" id="9_wf127"]
+[ext_resource type="PackedScene" uid="uid://dh8n0jfn8ldae" path="res://custom_objects/craft_station_construct.tscn" id="10_p0acm"]
 [ext_resource type="PackedScene" uid="uid://d2fq6y7pje6u6" path="res://gui/item_line_ui.tscn" id="16_1th23"]
 [ext_resource type="Texture2D" uid="uid://cjn5dtt8u6wfi" path="res://assets/textures/hammer.tres" id="17_mtbkk"]
 [ext_resource type="PackedScene" uid="uid://c5mthav4tctwg" path="res://gui/crafting/craft_menu.tscn" id="20_kqol4"]
@@ -56,9 +56,6 @@ terrain_set_0/terrain_0/color = Color(0.501961, 0.345098, 0.25098, 1)
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_cbwb7")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2my5w"]
-size = Vector2(15.3333, 12)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q0rcr"]
 border_width_top = 2
 border_color = Color(1, 1, 1, 1)
@@ -89,22 +86,6 @@ position = Vector2(696, 240)
 script = ExtResource("4_ldh0n")
 effort_to_produce = 11
 
-[node name="CraftingSpot" parent="GameWorld" instance=ExtResource("3_m4xxk")]
-visible = false
-position = Vector2(311, 216)
-script = ExtResource("4_bdnl3")
-constructed = false
-effort_to_construct = 10
-output_type = "bed"
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" parent="GameWorld/CraftingSpot" index="0"]
-position = Vector2(-0.333333, 0)
-shape = SubResource("RectangleShape2D_2my5w")
-
-[node name="Sprite2D" parent="GameWorld/CraftingSpot" index="1"]
-texture = ExtResource("7_43t65")
-
 [node name="Dropped Items" type="Node2D" parent="GameWorld"]
 
 [node name="Wood" parent="GameWorld/Dropped Items" instance=ExtResource("9_wf127")]
@@ -118,7 +99,7 @@ position = Vector2(0, 0)
 texture = ExtResource("7_ru8l7")
 
 [node name="Wood2" parent="GameWorld/Dropped Items" instance=ExtResource("9_wf127")]
-position = Vector2(642, 312)
+position = Vector2(696, 312)
 item = ExtResource("7_b8glk")
 
 [node name="CollisionShape2D" parent="GameWorld/Dropped Items/Wood2/Area2D" index="0"]
@@ -128,7 +109,7 @@ position = Vector2(0, 0)
 texture = ExtResource("7_ru8l7")
 
 [node name="Wood3" parent="GameWorld/Dropped Items" instance=ExtResource("9_wf127")]
-position = Vector2(720, 374)
+position = Vector2(744, 288)
 item = ExtResource("7_b8glk")
 
 [node name="CollisionShape2D" parent="GameWorld/Dropped Items/Wood3/Area2D" index="0"]
@@ -145,6 +126,11 @@ position = Vector2(393, 533)
 
 [node name="Stone3" parent="GameWorld/Dropped Items" instance=ExtResource("9_wf127")]
 position = Vector2(468, 561)
+
+[node name="CraftStationConstructable" parent="GameWorld" instance=ExtResource("10_p0acm")]
+position = Vector2(696, 504)
+scale = Vector2(3, 3)
+constructed = true
 
 [node name="Pawn" parent="GameWorld" instance=ExtResource("2_ha15b")]
 position = Vector2(590, 435)
@@ -341,6 +327,9 @@ metadata/_edit_lock_ = true
 visible = false
 layout_mode = 2
 
+[connection signal="activity_completed" from="GameWorld/CraftStationConstructable" to="GameWorld/Pawn" method="_on_activity_completed"]
+[connection signal="constructable_input_event" from="GameWorld/CraftStationConstructable" to="GameWorld" method="_on_craft_station_constructable_input_event"]
+[connection signal="crafting_menu_requested" from="GameWorld/CraftStationConstructable" to="GUI/MarginContainer/GridContainer/CraftMenu" method="_on_crafting_menu_requested"]
 [connection signal="input_event" from="GameWorld/Pawn" to="GameWorld" method="_on_pawn_input_event"]
 [connection signal="crafting_spot_completed" from="GUI" to="GameWorld" method="_on_gui_crafting_spot_completed"]
 [connection signal="pressed" from="GUI/TopMenu/HBoxContainer/BuildButton" to="GUI" method="_on_build_button_pressed"]
@@ -348,7 +337,6 @@ layout_mode = 2
 [connection signal="pressed" from="GUI/BuildMenu/BackButton" to="GUI" method="_on_back_button_pressed"]
 [connection signal="pressed" from="GUI/BuildMenu/CraftingSpot/Button" to="GUI" method="_on_crafting_spot_button_pressed"]
 
-[editable path="GameWorld/CraftingSpot"]
 [editable path="GameWorld/Dropped Items/Wood"]
 [editable path="GameWorld/Dropped Items/Wood2"]
 [editable path="GameWorld/Dropped Items/Wood3"]

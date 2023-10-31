@@ -24,21 +24,13 @@ func _ready():
 	if effort_to_construct > 0:
 		constructed = false
 		progress_bar.max_value = effort_to_construct
-		sprite.material = load("res://custom_objects/work_object/constructing.material")
+		sprite.self_modulate = Color(1, 1, 1, 0.5)
 	else:
 		progress_bar.max_value = effort_to_produce
 
 
-
-func _process(_delta):
-	if progress_bar.value == 0:
-		progress_bar.visible = false
-	else:
-		progress_bar.visible = true
-
-
 func produce(effort = 1):
-	
+	progress_bar.visible = true
 	if effort > 1:
 		progress_bar.add_theme_stylebox_override("fill", yellow_fill)
 	else:
@@ -47,12 +39,12 @@ func produce(effort = 1):
 	
 	if progress_bar.value >= progress_bar.max_value:
 		progress_bar.value = 0
+		progress_bar.visible = false
 		
 		if not constructed:
 			constructed = true
 			progress_bar.max_value = effort_to_produce
-			$Sprite2D.material = null
-			print(object_name," construction complete")
+			sprite.self_modulate = Color(1, 1, 1, 1)
 		else:
 			emit_signal("produced", output_type)
 

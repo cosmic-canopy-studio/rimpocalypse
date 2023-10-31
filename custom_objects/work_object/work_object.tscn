@@ -6,7 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://lpua4phxw251" path="res://assets/styles/yellow_fill.stylebox" id="3_nm05p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ubpce"]
-size = Vector2(14, 30)
+size = Vector2(16, 12)
 
 [node name="WorkObject" type="Area2D" groups=["work_objects"]]
 scale = Vector2(3, 3)
@@ -22,6 +22,7 @@ texture_filter = 1
 texture = ExtResource("2_lbpi2")
 
 [node name="ProgressBar" type="ProgressBar" parent="Sprite2D"]
+visible = false
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
@@ -35,6 +36,4 @@ grow_vertical = 2
 size_flags_vertical = 3
 theme_override_styles/fill = ExtResource("2_pk5c4")
 max_value = 10.0
-step = 2.08165e-12
-rounded = true
 show_percentage = false

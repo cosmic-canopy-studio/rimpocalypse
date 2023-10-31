@@ -19,6 +19,7 @@ var _recipe: Recipe
 var _recipe_index: int
 var _craft_station: CraftStation
 var _ingredients: Array[IngredientListItem]
+var _tools: Array[Sprite2D]
 
 func set_recipe(craft_station: CraftStation, recipe: Recipe, recipe_index: int):
 	self._recipe = recipe
@@ -33,13 +34,28 @@ func set_recipe(craft_station: CraftStation, recipe: Recipe, recipe_index: int):
 		ingredients_container.add_child(ingredient_obj)
 		ingredient_obj.setup(ingredient)
 		_ingredients.append(ingredient_obj)
+	_clear_tools()
+	for tool in recipe.tools_required:
+		var tool_obj = Sprite2D.new()
+		tool_obj.texture = tool.item.icon
+		if not craft_station.input_inventory.contains(tool.item):
+			tool_obj.self_modulate = Color(1,1,1,0.5)
+		tools_container.add_child(tool_obj)
+		_tools.append(tool_obj)
 	_check_if_has_ingredients()
+	
 
 
 func _clear_ingredients():
 	for ingredient_ui in _ingredients:
 		ingredient_ui.queue_free()
 		_ingredients.clear()	
+
+
+func _clear_tools():
+	for toolobj in _tools:
+		toolobj.queue_free()
+		_tools.clear()	
 
 
 func _check_if_has_ingredients():
@@ -57,7 +73,7 @@ func sync():
 
 func execute():
 	_craft_station.craft(_recipe_index)
-	print("Craft initialized.")
-	
+
+
 func _on_button_pressed():
 	emit_signal("recipe_selected", self)

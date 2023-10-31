@@ -12,6 +12,7 @@ signal changed
 
 @export var ingredient_scene: PackedScene = preload("res://addons/inventory-system/editor/recipes/ingredient_editor.tscn")
 @onready var ingredients_v_box_container = %IngredientsVBoxContainer
+@onready var tools_v_box_container = %ToolsVBoxContainer
 @onready var byproducts_v_box_container = %ByproductsVBoxContainer
 
 
@@ -20,6 +21,7 @@ var database: InventoryDatabase
 var ids_list: Array[int]
 var stations_list: Array[CraftStationType]
 var ingredients: Array[IngredientEditor]
+var tools_required: Array[IngredientEditor]
 var byproducts: Array[IngredientEditor]
 
 var connected: bool
@@ -76,6 +78,21 @@ func setup_ingredients(recipe: Recipe, database: InventoryDatabase):
 		ingredients.append(ingredient_editor)
 
 
+func setup_required_tools(recipe: Recipe, database: InventoryDatabase):
+	for tool_editor in tools_required:
+		tool_editor.queue_free()
+	tools_required.clear()
+	for index in recipe.tools_required.size():
+		var tool = recipe.tools_required[index]
+		var tool_node = ingredient_scene.instantiate()
+		tools_v_box_container.add_child(tool_node)
+		var tool_editor: IngredientEditor = tool_node as IngredientEditor
+		tool_editor.setup(tool, database, "Remove Required Tool")
+		tool_editor.changed_slot.connect(_on_changed_slot_in_ingredient.bind())
+		tool_editor.request_remove.connect(_request_remove_tool_requirement.bind(index))
+		tools_required.append(tool_editor)
+
+
 func setup_byproducts(recipe: Recipe, database: InventoryDatabase):
 	for byproduct_editor in byproducts:
 		byproduct_editor.queue_free()
@@ -103,6 +120,7 @@ func load_recipe(recipe: Recipe, database: InventoryDatabase):
 	setup_product()	
 	setup_station()
 	setup_ingredients(recipe, database)
+	setup_required_tools(recipe, database)
 	setup_byproducts(recipe, database)
 	connect_signals()
 
@@ -136,6 +154,12 @@ func _request_remove_ingredient(index):
 	emit_signal("changed")
 
 
+func _request_remove_tool_requirement(index):
+	recipe.tools_required.remove_at(index)
+	setup_required_tools(recipe, database)
+	emit_signal("changed")
+
+
 func _request_remove_byproduct(index):
 	recipe.byproducts.remove_at(index)
 	setup_byproducts(recipe, database)
@@ -148,6 +172,15 @@ func _on_new_ingredient_button_pressed():
 	slot.item = database.get_item(0)
 	recipe.ingredients.append(slot)
 	setup_ingredients(recipe, database)
+	emit_signal("changed")
+
+
+func _on_new_tool_requirement_button_pressed():
+	var slot = Slot.new()
+	slot.amount = 1
+	slot.item = database.get_item(0)
+	recipe.tools_required.append(slot)
+	setup_required_tools(recipe, database)
 	emit_signal("changed")
 
 
