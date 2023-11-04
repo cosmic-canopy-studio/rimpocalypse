@@ -8,6 +8,9 @@ signal crafting_spot_completed
 @export var hud: BoxContainer
 @export var hud_item_scene: PackedScene
 
+func _ready():
+	build_menu.player_inventory = player.inventory
+
 
 func _process(_delta):
 	_update_hud()
@@ -48,3 +51,6 @@ func _on_crafting_spot_button_pressed():
 
 func _on_craft_button_pressed():
 	craft_menu.toggle_player_crafting(player)
+
+func _on_crafting_menu_requested(craft_station, inventory):
+	craft_menu.open_craft_menu(craft_station, inventory)

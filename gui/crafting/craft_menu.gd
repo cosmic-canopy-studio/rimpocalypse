@@ -98,7 +98,3 @@ func _on_craft_button_pressed():
 
 func _on_close_button_pressed():
 	close()
-
-
-func _on_crafting_menu_requested(craft_station, inventory):
-	open_craft_menu(craft_station, inventory)

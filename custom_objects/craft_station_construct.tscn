@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=3 uid="uid://dh8n0jfn8ldae"]
 
-[ext_resource type="Script" path="res://custom_objects/craft_station_construct.gd" id="1_lhkx6"]
+[ext_resource type="Script" path="res://custom_objects/craft_station_construct.gd" id="1_3drf8"]
 [ext_resource type="Resource" uid="uid://cean6eqvm5s0o" path="res://data/crafting_stations/crafting_spot.tres" id="2_7nfg4"]
 [ext_resource type="Texture2D" uid="uid://b3ivybkn8s7fv" path="res://assets/textures/crafting_spot.tres" id="2_axldt"]
 [ext_resource type="StyleBox" uid="uid://h3cpv57l1mut" path="res://assets/styles/red_fill.stylebox" id="3_hxq3i"]
 [ext_resource type="Script" path="res://addons/inventory-system/craft/craft_station.gd" id="4_6de8y"]
-[ext_resource type="StyleBox" uid="uid://lpua4phxw251" path="res://assets/styles/yellow_fill.stylebox" id="4_xjr2h"]
+[ext_resource type="StyleBox" uid="uid://lpua4phxw251" path="res://assets/styles/yellow_fill.stylebox" id="4_nonj2"]
 [ext_resource type="Texture2D" uid="uid://bbkw01x51w530" path="res://assets/textures/bed.atlastex" id="6_l2ihl"]
 [ext_resource type="Resource" uid="uid://c2bo3fwe4v30v" path="res://data/inventory_database.tres" id="7_n33va"]
 
@@ -13,12 +13,12 @@
 size = Vector2(16, 12)
 
 [node name="CraftStationConstructable" type="Area2D" node_paths=PackedStringArray("craft_station", "current_craft_icon")]
-script = ExtResource("1_lhkx6")
+script = ExtResource("1_3drf8")
 craft_station = NodePath("CraftStation")
 station_type = ExtResource("2_7nfg4")
 current_craft_icon = NodePath("Sprite2D/CurrentCraft")
 red_fill = ExtResource("3_hxq3i")
-yellow_fill = ExtResource("4_xjr2h")
+yellow_fill = ExtResource("4_nonj2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_v8n42")

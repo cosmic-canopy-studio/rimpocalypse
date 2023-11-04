@@ -3,14 +3,21 @@ extends Node2D
 @export var highlight: PackedScene
 @export var player: CharacterBody2D
 @export var inventory_database: InventoryDatabase
+@export var craft_station_scene: PackedScene
+@export var tile_map: TileMap
+@export var gui: Control
+
+var game_grid := Grid.new()
+var grid_coords: Vector2
 
 @onready var wood: InventoryItem = inventory_database.get_item(0)
 @onready var stone: InventoryItem = inventory_database.get_item(1)
+@onready var crafting_spot: InventoryItem = inventory_database.get_item(4)
 @onready var inventory: Inventory = player.inventory_handler.inventory
-
 
 func _ready():
 	player.inventory_handler.add_to_inventory(inventory, wood, 10)
+	player.inventory_handler.add_to_inventory(inventory, crafting_spot, 1)
 
 	var work_objects = get_tree().get_nodes_in_group("work_objects")  
 	for work_object in work_objects:  
@@ -77,5 +84,25 @@ func _on_gui_crafting_spot_completed():
 	$CraftingSpot.visible = true
 
 
-func _on_craft_station_constructable_input_event(event, constructable):
+func _on_constructable_input_event(event, constructable):
+	print("Input!")
 	handle_input(event, constructable)
+
+
+func _on_grid_cursor_grid_clicked(_grid_position, map_position, _grid_center):
+	if player.selected:
+		player.find_child("NavigationAgent2D").target_position = map_position
+		player.set_activity(null)	
+
+
+func _on_grid_cursor_item_placed(item: InventoryItem, grid_position: Vector2, _map_position: Vector2, grid_center: Vector2):
+	if item == crafting_spot:
+		var crafting_spot_instance = craft_station_scene.instantiate() as CraftStationContructable
+		$Construtions.add_child(crafting_spot_instance)
+		crafting_spot_instance.position = grid_center
+		crafting_spot_instance.activity_completed.connect(player._on_activity_completed)
+		crafting_spot_instance.constructable_input_event.connect(_on_constructable_input_event)
+		crafting_spot_instance.crafting_menu_requested.connect(gui._on_crafting_menu_requested)
+	if item.properties.has("impassable") == true:
+		tile_map.set_cell(0, grid_position,0,Vector2(6,0),0)
+	player.inventory.remove(item)

@@ -6,16 +6,15 @@
 [ext_resource type="StyleBox" uid="uid://lpua4phxw251" path="res://assets/styles/yellow_fill.stylebox" id="3_nm05p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ubpce"]
-size = Vector2(16, 12)
+size = Vector2(16, 32)
 
 [node name="WorkObject" type="Area2D" groups=["work_objects"]]
 scale = Vector2(3, 3)
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("1_w3ywo")
 red_fill = ExtResource("2_pk5c4")
 yellow_fill = ExtResource("3_nm05p")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_ubpce")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -37,3 +36,6 @@ size_flags_vertical = 3
 theme_override_styles/fill = ExtResource("2_pk5c4")
 max_value = 10.0
 show_percentage = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ubpce")

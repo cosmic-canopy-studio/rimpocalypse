@@ -23,10 +23,14 @@ PlayerResources="*res://player_resources.gd"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/size/window_width_override=2560
-window/size/window_height_override=1440
+window/size/window_width_override=1920
+window/size/window_height_override=1080
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
+window/layer_3="enemy"
+window/layer_2="player"
+window/layer_1="world"
+window/canvas_textures/default_texture_filter=0
 
 [editor_plugins]
 
@@ -40,8 +44,15 @@ primary_select={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="world"
+2d_physics/layer_2="player"
+2d_physics/layer_3="enemy"
+
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true

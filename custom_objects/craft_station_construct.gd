@@ -1,3 +1,4 @@
+@icon("res://custom_objects/constructable.svg")
 extends Constructable
 class_name CraftStationContructable
 

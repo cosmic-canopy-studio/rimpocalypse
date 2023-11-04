@@ -9,13 +9,14 @@ class_name Pawn
 @export var craft_station: CraftStation
 @export var progress_bar: ProgressBar
 
-var speed = 150
+var speed = 100
 var activity: Node2D
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var crafting_table: CraftStation = $Crafter/CraftStation
 @onready var axe: InventoryItem = inventory_database.get_item(5)
 @onready var hammer: InventoryItem = inventory_database.get_item(2)
+
 
 
 func _process(_delta):
