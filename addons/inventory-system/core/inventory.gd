@@ -164,6 +164,20 @@ func get_slot_index_with_an_item_of_category(category: ItemCategory) -> int:
 	return -1
 
 
+## Returns the index of the slot that contains the item of the category, returns -1 if there is no item of that category
+func get_slots_with_an_item_of_category(category: ItemCategory) -> Array[Slot]:
+	var category_slots: Array[Slot] = []
+	if category == null:
+		printerr("Slot category is null!")
+		return category_slots
+	for i in slots.size():
+		var slot = slots[i]
+		if slot.item.contains_category(category):
+			print("Slot found! ", slot)
+			category_slots.append(slot)
+	return category_slots
+
+
 ## Returns amount of the specified item in inventory
 func get_amount_of(item: InventoryItem) -> int:
 	if item == null:

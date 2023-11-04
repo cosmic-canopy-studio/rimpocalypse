@@ -11,5 +11,8 @@ max_stack = 1
 name = "bed"
 icon = ExtResource("1_b4frf")
 weight = 0.0
-properties = {}
+properties = {
+"impassable": false,
+"labor_cost": 0
+}
 categories = Array[Resource("res://addons/inventory-system/core/item_category.gd")]([ExtResource("1_8opfp")])
