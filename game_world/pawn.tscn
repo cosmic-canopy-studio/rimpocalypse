@@ -265,6 +265,7 @@ max_value = 10.0
 show_percentage = false
 
 [node name="WorkInterval" type="Timer" parent="."]
+wait_time = 0.5
 autostart = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

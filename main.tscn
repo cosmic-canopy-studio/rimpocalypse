@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bn76rp7tymvj"]
+[gd_scene load_steps=28 format=3 uid="uid://bn76rp7tymvj"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_5xvki"]
 [ext_resource type="Script" path="res://game_world/game_world.gd" id="2_aakym"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://ducnvncuqpo11" path="res://custom_objects/work_object/work_object.tscn" id="3_m4xxk"]
 [ext_resource type="Script" path="res://game_world/tree.gd" id="4_ldh0n"]
 [ext_resource type="Script" path="res://gui/gui.gd" id="6_otkw6"]
+[ext_resource type="PackedScene" uid="uid://do1swex6rljjl" path="res://custom_objects/constructable.tscn" id="6_qfxb7"]
 [ext_resource type="Script" path="res://movement/grid_cursor.gd" id="6_tg1du"]
 [ext_resource type="Resource" uid="uid://jbmflr8ll1ux" path="res://data/items/wood.tres" id="7_b8glk"]
 [ext_resource type="Texture2D" uid="uid://beqys7c3wapio" path="res://assets/textures/wood.tres" id="7_ru8l7"]
@@ -130,6 +131,7 @@ highlight = ExtResource("3_cisff")
 player = NodePath("Pawn")
 inventory_database = ExtResource("3_2taum")
 craft_station_scene = ExtResource("10_p0acm")
+constructable_scene = ExtResource("6_qfxb7")
 tile_map = NodePath("TileMap")
 gui = NodePath("../CanvasLayer/GUI")
 

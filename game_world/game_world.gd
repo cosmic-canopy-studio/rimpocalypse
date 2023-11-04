@@ -4,6 +4,7 @@ extends Node2D
 @export var player: CharacterBody2D
 @export var inventory_database: InventoryDatabase
 @export var craft_station_scene: PackedScene
+@export var constructable_scene: PackedScene
 @export var tile_map: TileMap
 @export var gui: Control
 
@@ -96,13 +97,18 @@ func _on_grid_cursor_grid_clicked(_grid_position, map_position, _grid_center):
 
 
 func _on_grid_cursor_item_placed(item: InventoryItem, grid_position: Vector2, _map_position: Vector2, grid_center: Vector2):
+	var constructable_instance
 	if item == crafting_spot:
-		var crafting_spot_instance = craft_station_scene.instantiate() as CraftStationContructable
-		$Construtions.add_child(crafting_spot_instance)
-		crafting_spot_instance.position = grid_center
-		crafting_spot_instance.activity_completed.connect(player._on_activity_completed)
-		crafting_spot_instance.constructable_input_event.connect(_on_constructable_input_event)
-		crafting_spot_instance.crafting_menu_requested.connect(gui._on_crafting_menu_requested)
-	if item.properties.has("impassable") == true:
+		constructable_instance = craft_station_scene.instantiate()
+		constructable_instance.crafting_menu_requested.connect(gui._on_crafting_menu_requested)
+	else:
+		constructable_instance =  constructable_scene.instantiate()
+	constructable_instance.current_item = item
+	constructable_instance.activity_completed.connect(player._on_activity_completed)
+	constructable_instance.constructable_input_event.connect(_on_constructable_input_event)	
+	constructable_instance.position = grid_center
+	$Construtions.add_child(constructable_instance)
+	
+	if item.properties.get("impassable") == true:
 		tile_map.set_cell(0, grid_position,0,Vector2(6,0),0)
 	player.inventory.remove(item)
