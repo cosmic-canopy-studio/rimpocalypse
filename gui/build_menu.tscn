@@ -1,0 +1,139 @@
+[gd_scene load_steps=6 format=3 uid="uid://dm0nskiyh705e"]
+
+[ext_resource type="Script" path="res://gui/build_menu.gd" id="1_1jcpk"]
+[ext_resource type="Texture2D" uid="uid://b3ivybkn8s7fv" path="res://assets/textures/crafting_spot.tres" id="1_xx6ak"]
+[ext_resource type="Texture2D" uid="uid://clevqxaga12y6" path="res://assets/textures/effort.tres" id="4_rd4db"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3hen3"]
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_r7p7k"]
+font_size = 10
+
+[node name="BuildMenu" type="Control"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 200.0
+offset_bottom = 200.0
+mouse_filter = 2
+script = ExtResource("1_1jcpk")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3hen3")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="BuildMenuItem" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 40)
+layout_mode = 2
+size_flags_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/BuildMenuItem"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/BuildMenuItem/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tooltip_text = "Build: Crafting Spot
+Cost: 
+100 Wood
+10 Labor"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/BuildMenuItem/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/BuildMenuItem/MarginContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/BuildMenuItem/MarginContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+texture = ExtResource("1_xx6ak")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/BuildMenuItem/MarginContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 14
+text = "Crafting Spot"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/BuildMenuItem/MarginContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="LaborCost" type="Label" parent="MarginContainer/VBoxContainer/BuildMenuItem/MarginContainer/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "10"
+label_settings = SubResource("LabelSettings_r7p7k")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LaborIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/BuildMenuItem/MarginContainer/MarginContainer/HBoxContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+texture = ExtResource("4_rd4db")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="CloseButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -41.0
+offset_right = 58.0
+offset_bottom = -10.0
+grow_vertical = 0
+text = "Close"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/BuildMenuItem/MarginContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]
