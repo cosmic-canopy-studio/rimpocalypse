@@ -1,0 +1,157 @@
+[gd_scene load_steps=10 format=3 uid="uid://cdtdvko0x84dv"]
+
+[ext_resource type="Script" path="res://gui/crafting/recipe_menu_item.gd" id="1_1w5ji"]
+[ext_resource type="PackedScene" uid="uid://brhw23npm5fbn" path="res://gui/crafting/ingredient_list_item.tscn" id="2_j6j5i"]
+[ext_resource type="Texture2D" uid="uid://b3ivybkn8s7fv" path="res://assets/textures/crafting_spot.tres" id="3_yemyk"]
+[ext_resource type="Texture2D" uid="uid://clevqxaga12y6" path="res://assets/textures/effort.tres" id="4_cshok"]
+[ext_resource type="Material" uid="uid://o67lkgdfnofb" path="res://custom_objects/work_object/constructing.material" id="5_ksr8g"]
+[ext_resource type="StyleBox" uid="uid://d0aujtuh1a8ku" path="res://gui/crafting/empty_style.tres" id="6_ms75y"]
+[ext_resource type="StyleBox" uid="uid://eegvi3yqo7be" path="res://gui/crafting/red_outline.tres" id="7_hsn80"]
+[ext_resource type="Texture2D" uid="uid://b053652do2be1" path="res://assets/sheets/uipack_rpg_vector.svg" id="8_8kbj8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vh2s3"]
+atlas = ExtResource("8_8kbj8")
+region = Rect2(4, 394, 92, 92)
+
+[node name="RecipeMenuItem" type="Control" node_paths=PackedStringArray("recipe_name", "icon", "effort_amount", "ingredients_container", "tools_container", "button") groups=["craft_recipes"]]
+custom_minimum_size = Vector2(240, 120)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 215.0
+offset_bottom = 105.0
+size_flags_horizontal = 6
+size_flags_vertical = 0
+script = ExtResource("1_1w5ji")
+ingredient_list_item = ExtResource("2_j6j5i")
+recipe_name = NodePath("MarginContainer/UseableArea/HBoxContainer/VBoxRecipe/Title/RecipeName")
+icon = NodePath("MarginContainer/UseableArea/HBoxContainer/VBoxRecipe/Title/Icon")
+effort_amount = NodePath("MarginContainer/UseableArea/HBoxContainer/VBoxRecipe/Effort/EffortAmount")
+ingredients_container = NodePath("MarginContainer/UseableArea/HBoxContainer/VBoxIngredients/Ingredients")
+tools_container = NodePath("MarginContainer/UseableArea/HBoxContainer/VBoxRecipe/Tools")
+button = NodePath("MarginContainer/Button")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(215, 2.08165e-12)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UseableArea" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/UseableArea"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="VBoxRecipe" type="VBoxContainer" parent="MarginContainer/UseableArea/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="Title" type="BoxContainer" parent="MarginContainer/UseableArea/HBoxContainer/VBoxRecipe"]
+layout_mode = 2
+size_flags_vertical = 0
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/UseableArea/HBoxContainer/VBoxRecipe/Title"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("3_yemyk")
+
+[node name="RecipeName" type="Label" parent="MarginContainer/UseableArea/HBoxContainer/VBoxRecipe/Title"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Crafting Spot"
+
+[node name="Effort" type="BoxContainer" parent="MarginContainer/UseableArea/HBoxContainer/VBoxRecipe"]
+layout_mode = 2
+size_flags_vertical = 0
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/UseableArea/HBoxContainer/VBoxRecipe/Effort"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "   Effort: "
+
+[node name="EffortAmount" type="Label" parent="MarginContainer/UseableArea/HBoxContainer/VBoxRecipe/Effort"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "10"
+horizontal_alignment = 2
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/UseableArea/HBoxContainer/VBoxRecipe/Effort"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+texture = ExtResource("4_cshok")
+expand_mode = 4
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="MarginContainer/UseableArea/HBoxContainer/VBoxRecipe"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "   Tools Needed:"
+
+[node name="Tools" type="BoxContainer" parent="MarginContainer/UseableArea/HBoxContainer/VBoxRecipe"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="VBoxIngredients" type="VBoxContainer" parent="MarginContainer/UseableArea/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="MarginContainer/UseableArea/HBoxContainer/VBoxIngredients"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "Ingredients:"
+vertical_alignment = 2
+
+[node name="Ingredients" type="BoxContainer" parent="MarginContainer/UseableArea/HBoxContainer/VBoxIngredients"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+vertical = true
+
+[node name="Button" type="Button" parent="MarginContainer"]
+material = ExtResource("5_ksr8g")
+layout_mode = 2
+theme_override_styles/normal = ExtResource("6_ms75y")
+theme_override_styles/hover = ExtResource("6_ms75y")
+theme_override_styles/disabled = ExtResource("7_hsn80")
+theme_override_styles/focus = ExtResource("6_ms75y")
+disabled = true
+
+[node name="Background" type="NinePatchRect" parent="MarginContainer"]
+show_behind_parent = true
+layout_mode = 2
+texture = SubResource("AtlasTexture_vh2s3")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[connection signal="pressed" from="MarginContainer/Button" to="." method="_on_button_pressed"]

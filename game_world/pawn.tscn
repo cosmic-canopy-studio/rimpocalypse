@@ -225,16 +225,15 @@ craft_station = NodePath("Crafter/CraftStation")
 progress_bar = NodePath("Sprite2D/ProgressBar")
 
 [node name="Panel" type="Panel" parent="."]
-visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -9.0
-offset_top = -10.0
+offset_top = -9.0
 offset_right = 9.0
-offset_bottom = 10.0
+offset_bottom = 9.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -270,9 +269,11 @@ wait_time = 0.5
 autostart = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 50.0
-target_desired_distance = 30.0
-path_max_distance = 500.0
+path_desired_distance = 2.0
+target_desired_distance = 2.0
+path_postprocessing = 1
+avoidance_enabled = true
+neighbor_distance = 1000.0
 
 [node name="Emote" type="Sprite2D" parent="."]
 visible = false

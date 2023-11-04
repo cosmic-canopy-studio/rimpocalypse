@@ -46,10 +46,12 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = SubResource("AtlasTexture_1sbsr")
-patch_margin_left = 13
-patch_margin_top = 23
-patch_margin_right = 76
-patch_margin_bottom = 64
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
 
 [node name="InnerArea" type="MarginContainer" parent="GridContainer/MarginContainer"]
 custom_minimum_size = Vector2(200, 200)

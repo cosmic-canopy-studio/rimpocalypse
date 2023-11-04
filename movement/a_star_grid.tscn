@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://l6qvir531xi5"]
+
+[ext_resource type="Script" path="res://movement/a_star_grid.gd" id="1_mm0fg"]
+[ext_resource type="Script" path="res://movement/point_path.gd" id="2_84afp"]
+
+[node name="AStarGrid" type="Node2D"]
+script = ExtResource("1_mm0fg")
+
+[node name="PointPath" type="Node2D" parent="."]
+script = ExtResource("2_84afp")

@@ -1,0 +1,88 @@
+[gd_scene load_steps=5 format=3 uid="uid://c4u26mmj1vmqe"]
+
+[ext_resource type="Script" path="res://gui/build_menu_item.gd" id="1_1dv8s"]
+[ext_resource type="Texture2D" uid="uid://b3ivybkn8s7fv" path="res://assets/textures/crafting_spot.tres" id="1_f7kvy"]
+[ext_resource type="Texture2D" uid="uid://clevqxaga12y6" path="res://assets/textures/effort.tres" id="2_rcw3v"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_r7p7k"]
+font_size = 10
+
+[node name="BuildMenuItem" type="Control" node_paths=PackedStringArray("item_icon", "item_name", "labor_cost")]
+custom_minimum_size = Vector2(2.08165e-12, 40)
+layout_mode = 3
+anchors_preset = 0
+size_flags_vertical = 2
+script = ExtResource("1_1dv8s")
+item_icon = NodePath("MarginContainer/MarginContainer/HBoxContainer/ItemIcon")
+item_name = NodePath("MarginContainer/MarginContainer/HBoxContainer/ItemName")
+labor_cost = NodePath("MarginContainer/MarginContainer/HBoxContainer/HBoxContainer/LaborCost")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tooltip_text = "Build: Crafting Spot
+Cost: 
+100 Wood
+10 Labor"
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ItemIcon" type="TextureRect" parent="MarginContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+texture = ExtResource("1_f7kvy")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="ItemName" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 14
+text = "Crafting Spot"
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="LaborCost" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "10"
+label_settings = SubResource("LabelSettings_r7p7k")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LaborIcon" type="TextureRect" parent="MarginContainer/MarginContainer/HBoxContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+texture = ExtResource("2_rcw3v")
+expand_mode = 3
+stretch_mode = 5
+
+[connection signal="pressed" from="MarginContainer/Button" to="." method="_on_button_pressed"]
