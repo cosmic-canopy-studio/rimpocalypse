@@ -4,8 +4,8 @@ extends TileMap
 
 @export var grid: Resource
 
-var _pathfinder: PathFinder
 var current_path := PackedVector2Array()
+var _pathfinder: PathFinder
 
 
 ## Creates a new PathFinder that uses the AStar algorithm to find a path between two cells among

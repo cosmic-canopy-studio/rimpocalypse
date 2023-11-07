@@ -24,7 +24,7 @@ func calculate_top_left_position(grid_position: Vector2) -> Vector2:
 
 
 ## Returns the map position of the top left corner of the nearest grid
-func round_to_top_left_position(map_position:Vector2) -> Vector2:
+func round_to_top_left_position(map_position: Vector2) -> Vector2:
 	var grid_coords = calculate_grid_coordinates(map_position)
 	return calculate_top_left_position(grid_coords)
 
@@ -33,7 +33,6 @@ func round_to_top_left_position(map_position:Vector2) -> Vector2:
 func calculate_grid_center(map_position: Vector2) -> Vector2:
 	var grid_position = calculate_grid_coordinates(map_position)
 	return grid_position * cell_size + _half_cell_size
-
 
 
 ## Returns the coordinates of the cell on the grid given a position on the map.
@@ -53,4 +52,3 @@ func grid_clamp(grid_position: Vector2) -> Vector2:
 	out.x = clamp(out.x, 0, size.x - 1.0)
 	out.y = clamp(out.y, 0, size.y - 1.0)
 	return out
-

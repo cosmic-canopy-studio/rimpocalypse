@@ -1,7 +1,7 @@
-extends CharacterBody2D
 class_name Pawn
+extends CharacterBody2D
 
-signal clicked(node:Node2D)
+signal clicked(node: Node2D)
 
 @export var selected: bool
 @export var inventory_database: InventoryDatabase
@@ -15,7 +15,7 @@ var speed = 100
 var activity: Node2D
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
-@onready var state_chart:StateChart = $StateChart
+@onready var state_chart: StateChart = $StateChart
 @onready var crafting_table: CraftStation = $Crafter/CraftStation
 @onready var axe: InventoryItem = inventory_database.get_item(5)
 @onready var hammer: InventoryItem = inventory_database.get_item(2)
@@ -28,18 +28,18 @@ func _ready():
 
 func set_activity(object: Node2D):
 	craft_station.cancel_craft(0)
-	
+
 	# Stop crafting at table if currently doing so
 	if activity is CraftStationContructable:
 		activity.stop_crafting()
 	# Set new activity
 	activity = object
 	state_chart.set_expression_property("current_activity", object)
-	
+
 	if not object:
 		state_chart.send_event("activity_cleared")
 		return
-		
+
 	state_chart.send_event("activity_set")
 	set_destination(object.position)
 
@@ -48,6 +48,7 @@ func set_destination(map_coords: Vector2):
 	navigation_agent.set_target_position(map_coords)
 	state_chart.set_expression_property("target_position", map_coords)
 	state_chart.send_event("destination_set")
+
 
 func choose_task():
 	pass
@@ -63,7 +64,11 @@ func choose_task():
 
 
 func _on_input_event(_viewport, event, _shape_idx):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed() == false:
+	if (
+		event is InputEventMouseButton
+		and event.button_index == MOUSE_BUTTON_LEFT
+		and event.is_pressed() == false
+	):
 		clicked.emit(self)
 		selected = not selected
 		$Panel.visible = selected
@@ -75,7 +80,7 @@ func _on_activity_completed():
 
 
 func _on_idle_state_entered():
-	print('idle state entered')	
+	print("idle state entered")
 	choose_task()
 
 
@@ -95,17 +100,18 @@ func _on_moving_state_physics_processing(_delta):
 
 func _on_acting_state_processing(delta):
 	var effort_multiplier = 1
-	
+
 	## TODO: Make crafting station assignment assignable as activity
 	if craft_station.is_crafting():
 		activity = null
 		progress_bar.visible = true
 		var current_crafting = craft_station.craftings[0]
-		progress_bar.max_value = craft_station.database.recipes[current_crafting.recipe_index].time_to_craft
+		progress_bar.max_value = (
+			craft_station.database.recipes[current_crafting.recipe_index].time_to_craft
+		)
 		progress_bar.value = progress_bar.max_value - current_crafting.time
 	else:
 		progress_bar.visible = false
-
 
 	if activity is WorkObject:
 		var have_axe = inventory.contains(axe)
@@ -126,7 +132,6 @@ func _on_acting_state_processing(delta):
 	else:
 		printerr("Unrecognized activity!")
 		state_chart.send_event("activity_invalid")
-			
 
 
 func _on_idle_state_processing(_delta):

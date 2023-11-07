@@ -88,7 +88,8 @@ func _flood_fill(cell: Vector2, max_distance: int) -> Array:
 	return array
 
 
-## Updates the _units dictionary with the target position for the unit and asks the _active_unit to walk to it.
+## Updates the _units dictionary with the target position
+## for the unit and asks the _active_unit to walk to it.
 func _move_active_unit(new_cell: Vector2) -> void:
 	if is_occupied(new_cell) or not new_cell in _walkable_cells:
 		return
@@ -102,7 +103,7 @@ func _move_active_unit(new_cell: Vector2) -> void:
 
 
 ## Selects the unit in the `cell` if there's one there.
-## Sets it as the `_active_unit` and draws its walkable cells and interactive move path. 
+## Sets it as the `_active_unit` and draws its walkable cells and interactive move path.
 func _select_unit(cell: Vector2) -> void:
 	if not _units.has(cell):
 		return
