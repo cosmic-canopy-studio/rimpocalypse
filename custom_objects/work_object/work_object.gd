@@ -1,7 +1,6 @@
 @icon("res://custom_objects/work_object/work_object.svg")
-extends Area2D
 class_name WorkObject
-
+extends Area2D
 
 signal produced(output_type: String)
 signal blocked(reason: String)
@@ -18,9 +17,10 @@ signal object_input_event(event: InputEvent, object: WorkObject)
 @onready var progress_bar = $Sprite2D/ProgressBar
 @onready var object_name = self.name
 
+
 func _ready():
 	input_event.connect(_on_input_event)
-	
+
 	if effort_to_construct > 0:
 		constructed = false
 		progress_bar.max_value = effort_to_construct
@@ -36,11 +36,11 @@ func produce(effort = 1):
 	else:
 		progress_bar.add_theme_stylebox_override("fill", red_fill)
 	progress_bar.value += effort
-	
+
 	if progress_bar.value >= progress_bar.max_value:
 		progress_bar.value = 0
 		progress_bar.visible = false
-		
+
 		if not constructed:
 			constructed = true
 			progress_bar.max_value = effort_to_produce

@@ -1,5 +1,5 @@
-extends Control
 class_name CraftMenu
+extends Control
 
 @export var menu_title: Label
 @export var recipe_scene: PackedScene
