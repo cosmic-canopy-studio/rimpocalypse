@@ -30,12 +30,11 @@ func _on_close_button_pressed():
 	visible = false
 
 
-func _on_build_menu_item_selected(build_menu_item: BuildMenuItem):
-	var item := build_menu_item.current_item
+func _on_build_menu_item_selected(selected_menu_item: BuildMenuItem):
+	var item := selected_menu_item.current_item
 	if player_inventory.contains(item):
 		visible=false
 		grid_cursor.handle_construction_placement(item)
-	
 
 
 func _on_timer_timeout():

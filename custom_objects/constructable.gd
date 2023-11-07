@@ -24,16 +24,16 @@ func _ready():
 	if not constructed:
 		sprite.self_modulate = Color(1, 1, 1, 0.5)
 
-func do_work(effort := 1):
+func do_work(effort: float):
 	if constructed:
 		return
 	progress_bar.visible = true
+	# TODO: Rework color to work with multipliier & delta
 	if effort > 1:
 		progress_bar.add_theme_stylebox_override("fill", yellow_fill)
 	else:
 		progress_bar.add_theme_stylebox_override("fill", red_fill)
 	progress_bar.value += effort
-	
 	if progress_bar.value >= progress_bar.max_value:
 		progress_bar.value = 0
 		progress_bar.visible = false

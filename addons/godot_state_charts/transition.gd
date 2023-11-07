@@ -78,3 +78,7 @@ func _get_configuration_warnings():
 	
 	return warnings
 
+
+
+func _on_navigation_agent_2d_navigation_finished():
+	pass # Replace with function body.

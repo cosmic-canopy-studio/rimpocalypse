@@ -48,6 +48,7 @@ grow_vertical = 0
 size_flags_vertical = 3
 theme_override_styles/fill = ExtResource("3_hxq3i")
 max_value = 10.0
+step = 0.001
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 

@@ -23,7 +23,7 @@ func _process(_delta):
 		progress_bar.value = progress_bar.max_value - craft_station.craftings[0].time
 
 
-func do_work(effort = 1, inventory: Inventory = null):
+func do_work(effort: float, inventory: Inventory = null):
 	if not constructed:
 		super(effort)
 		return

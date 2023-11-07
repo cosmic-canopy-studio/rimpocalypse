@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bn76rp7tymvj"]
+[gd_scene load_steps=29 format=3 uid="uid://bn76rp7tymvj"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_5xvki"]
 [ext_resource type="Script" path="res://game_world/game_world.gd" id="2_aakym"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dh8n0jfn8ldae" path="res://custom_objects/craft_station_construct.tscn" id="10_p0acm"]
 [ext_resource type="PackedScene" uid="uid://d2fq6y7pje6u6" path="res://gui/item_line_ui.tscn" id="16_1th23"]
 [ext_resource type="PackedScene" uid="uid://dm0nskiyh705e" path="res://gui/build_menu.tscn" id="18_71msn"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="20_kj8wh"]
 [ext_resource type="PackedScene" uid="uid://c5mthav4tctwg" path="res://gui/crafting/craft_menu.tscn" id="20_kqol4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jgglj"]
@@ -160,7 +161,6 @@ theme_override_styles/panel = ExtResource("7_v1gyb")
 position = Vector2(152, 64)
 scale = Vector2(1, 1)
 script = ExtResource("4_ldh0n")
-effort_to_produce = 11
 
 [node name="Dropped Items" type="Node2D" parent="GameWorld"]
 
@@ -294,6 +294,7 @@ layout_mode = 2
 text = "Craft"
 
 [node name="BuildMenu" parent="CanvasLayer/GUI" node_paths=PackedStringArray("player", "grid_cursor") instance=ExtResource("18_71msn")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -336,9 +337,20 @@ metadata/_edit_lock_ = true
 visible = false
 layout_mode = 2
 
+[node name="StateChartDebugger" parent="CanvasLayer/GUI" instance=ExtResource("20_kj8wh")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 800.0
+offset_right = 1281.0
+offset_bottom = 312.0
+grow_horizontal = 1
+grow_vertical = 1
+initial_node_to_watch = NodePath("../../../GameWorld/Pawn")
+
 [connection signal="grid_clicked" from="GameWorld/TileMap/GridCursor" to="GameWorld" method="_on_grid_cursor_grid_clicked"]
 [connection signal="item_placed" from="GameWorld/TileMap/GridCursor" to="GameWorld" method="_on_grid_cursor_item_placed" flags=3]
-[connection signal="input_event" from="GameWorld/Pawn" to="GameWorld" method="_on_pawn_input_event"]
 [connection signal="crafting_spot_completed" from="CanvasLayer/GUI" to="GameWorld" method="_on_gui_crafting_spot_completed"]
 [connection signal="pressed" from="CanvasLayer/GUI/TopMenu/HBoxContainer/BuildButton" to="CanvasLayer/GUI" method="_on_build_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/TopMenu/HBoxContainer/CraftButton" to="CanvasLayer/GUI" method="_on_craft_button_pressed"]

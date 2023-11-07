@@ -21,11 +21,11 @@ func _unhandled_input(event):
 		
 		if not placing_item:
 			$AnimationPlayer.play("on_click")
-			emit_signal("grid_clicked", grid_position, local_coords, center_position)
+			grid_clicked.emit(grid_position, local_coords, center_position)
 			
 		else: 
 			print("crafting spot placed!")
-			emit_signal("item_placed", item_being_placed, grid_position, local_coords, center_position)
+			item_placed.emit(item_being_placed, grid_position, local_coords, center_position)
 			placing_item = false
 			item_being_placed = null
 			$Panel.add_theme_stylebox_override("panel",grid_cursor)

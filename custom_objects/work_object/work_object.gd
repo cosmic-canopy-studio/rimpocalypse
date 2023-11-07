@@ -9,7 +9,7 @@ signal object_input_event(event: InputEvent, object: WorkObject)
 
 @export var constructed := true
 @export var effort_to_construct := 0
-@export var effort_to_produce := 5
+@export var effort_to_produce := 4
 @export var output_type := "wood"
 @export var red_fill: StyleBoxFlat
 @export var yellow_fill: StyleBoxFlat
@@ -19,7 +19,7 @@ signal object_input_event(event: InputEvent, object: WorkObject)
 @onready var object_name = self.name
 
 func _ready():
-	self.connect("input_event", _on_input_event)
+	input_event.connect(_on_input_event)
 	
 	if effort_to_construct > 0:
 		constructed = false
@@ -46,7 +46,7 @@ func produce(effort = 1):
 			progress_bar.max_value = effort_to_produce
 			sprite.self_modulate = Color(1, 1, 1, 1)
 		else:
-			emit_signal("produced", output_type)
+			produced.emit(output_type)
 
 
 func is_constructed() -> bool:
@@ -54,4 +54,4 @@ func is_constructed() -> bool:
 
 
 func _on_input_event(_viewport, event, _shape_idx):
-	emit_signal("object_input_event", event, self)
+	object_input_event.emit(event, self)
