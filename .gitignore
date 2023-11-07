@@ -6,6 +6,7 @@ build/
 *.sln
 *.csproj
 *.csproj.user
+*.code-workspace
 
 # Godot-specific ignores
 .import/
