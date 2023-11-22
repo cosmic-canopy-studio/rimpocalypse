@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c5catlrssfovx"
-path="res://.godot/imported/Modern_UI_Style_2_32x32.png-4b75774944cfe1107943b01805cd02ab.ctex"
+path="res://.godot/imported/Modern_UI_Style_2_32x32.png-a72817a12aad8a0ca3604792dccec071.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sheets/Modern_UI_Style_2_32x32.png"
-dest_files=["res://.godot/imported/Modern_UI_Style_2_32x32.png-4b75774944cfe1107943b01805cd02ab.ctex"]
+source_file="res://assets/sprite_sheets/Modern_UI_Style_2_32x32.png"
+dest_files=["res://.godot/imported/Modern_UI_Style_2_32x32.png-a72817a12aad8a0ca3604792dccec071.ctex"]
 
 [params]
 

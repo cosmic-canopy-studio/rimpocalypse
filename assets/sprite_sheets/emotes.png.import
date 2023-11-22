@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0hqwvvfovhsc"
-path="res://.godot/imported/roguelikeSheet_transparent.png-75b156125921a3875638d46e5a1a8f19.ctex"
+uid="uid://de5tmxwcbledc"
+path="res://.godot/imported/emotes.png-297c44b5302d6b24d7a8c88d936f8969.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sheets/roguelikeSheet_transparent.png"
-dest_files=["res://.godot/imported/roguelikeSheet_transparent.png-75b156125921a3875638d46e5a1a8f19.ctex"]
+source_file="res://assets/sprite_sheets/emotes.png"
+dest_files=["res://.godot/imported/emotes.png-297c44b5302d6b24d7a8c88d936f8969.ctex"]
 
 [params]
 

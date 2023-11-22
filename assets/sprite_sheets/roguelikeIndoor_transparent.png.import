@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b053652do2be1"
-path="res://.godot/imported/uipack_rpg_vector.svg-b462f521cda36896971b5b8f9810ee4b.ctex"
+uid="uid://d2rhn0js3qyuc"
+path="res://.godot/imported/roguelikeIndoor_transparent.png-1e3cb3832efa810402900c557dea5e27.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sheets/uipack_rpg_vector.svg"
-dest_files=["res://.godot/imported/uipack_rpg_vector.svg-b462f521cda36896971b5b8f9810ee4b.ctex"]
+source_file="res://assets/sprite_sheets/roguelikeIndoor_transparent.png"
+dest_files=["res://.godot/imported/roguelikeIndoor_transparent.png-1e3cb3832efa810402900c557dea5e27.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
