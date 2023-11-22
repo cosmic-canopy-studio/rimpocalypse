@@ -1,7 +1,7 @@
 [gd_scene load_steps=26 format=3 uid="uid://d33tct3q48djp"]
 
 [ext_resource type="Script" path="res://game_world/pawn.gd" id="1_jyp7f"]
-[ext_resource type="StyleBox" uid="uid://buj4au8liccux" path="res://themes/selected.tres" id="2_laxfm"]
+[ext_resource type="StyleBox" uid="uid://buj4au8liccux" path="res://assets/styles/selected.tres" id="2_laxfm"]
 [ext_resource type="Texture2D" uid="uid://do5fvxmbn4jwa" path="res://assets/textures/pawn.tres" id="3_x86v2"]
 [ext_resource type="Texture2D" uid="uid://420mtukdggmw" path="res://assets/textures/warn.tres" id="4_ilx84"]
 [ext_resource type="Texture2D" uid="uid://dbg7v86f2esdy" path="res://assets/textures/blocked.tres" id="5_jaovm"]
@@ -282,8 +282,10 @@ show_percentage = false
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 4.0
 target_desired_distance = 4.0
+path_postprocessing = 1
 avoidance_enabled = true
 neighbor_distance = 1000.0
+debug_enabled = true
 
 [node name="Emote" type="Sprite2D" parent="."]
 visible = false

@@ -5,13 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://d33tct3q48djp" path="res://game_world/pawn.tscn" id="2_ha15b"]
 [ext_resource type="Resource" uid="uid://c2bo3fwe4v30v" path="res://data/inventory_database.tres" id="3_2taum"]
 [ext_resource type="PackedScene" uid="uid://bymugkdytj6q3" path="res://game_world/highlight.tscn" id="3_cisff"]
-[ext_resource type="Texture2D" uid="uid://0hqwvvfovhsc" path="res://assets/sheets/roguelikeSheet_transparent.png" id="3_hpab8"]
 [ext_resource type="PackedScene" uid="uid://ducnvncuqpo11" path="res://custom_objects/work_object/work_object.tscn" id="3_m4xxk"]
 [ext_resource type="Script" path="res://game_world/tree.gd" id="4_ldh0n"]
 [ext_resource type="Script" path="res://gui/gui.gd" id="6_otkw6"]
 [ext_resource type="PackedScene" uid="uid://do1swex6rljjl" path="res://custom_objects/constructable.tscn" id="6_qfxb7"]
 [ext_resource type="Script" path="res://movement/grid_cursor.gd" id="6_tg1du"]
 [ext_resource type="Resource" uid="uid://jbmflr8ll1ux" path="res://data/items/wood.tres" id="7_b8glk"]
+[ext_resource type="Texture2D" uid="uid://0hqwvvfovhsc" path="res://assets/sprite_sheets/roguelikeSheet_transparent.png" id="7_byjnf"]
 [ext_resource type="Texture2D" uid="uid://beqys7c3wapio" path="res://assets/textures/wood.tres" id="7_ru8l7"]
 [ext_resource type="StyleBox" uid="uid://dfex6i3dckuji" path="res://assets/styles/grid_cursor.tres" id="7_v1gyb"]
 [ext_resource type="PackedScene" uid="uid://bwlhms587lkes" path="res://game_world/dropped_item.tscn" id="9_wf127"]
@@ -32,7 +32,7 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cbwb7"]
-texture = ExtResource("3_hpab8")
+texture = ExtResource("7_byjnf")
 separation = Vector2i(1, 1)
 5:0/0 = 0
 5:0/0/terrain_set = 0
@@ -238,7 +238,7 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("6_otkw6")
 player = NodePath("../../GameWorld/Pawn")
-craft_menu = NodePath("MarginContainer/GridContainer/CraftMenu")
+craft_menu = NodePath("CraftMenu")
 build_menu = NodePath("BuildMenu")
 hud = NodePath("HUD")
 hud_item_scene = ExtResource("16_1th23")
@@ -253,7 +253,7 @@ offset_bottom = 157.0
 mouse_filter = 2
 metadata/_edit_lock_ = true
 
-[node name="TopMenu" type="Control" parent="CanvasLayer/GUI"]
+[node name="PrimaryMenu" type="Control" parent="CanvasLayer/GUI"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -264,7 +264,7 @@ grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
 
-[node name="Panel" type="Panel" parent="CanvasLayer/GUI/TopMenu"]
+[node name="Panel" type="Panel" parent="CanvasLayer/GUI/PrimaryMenu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -273,7 +273,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_q0rcr")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/TopMenu"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/PrimaryMenu"]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -285,11 +285,11 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="BuildButton" type="Button" parent="CanvasLayer/GUI/TopMenu/HBoxContainer"]
+[node name="BuildButton" type="Button" parent="CanvasLayer/GUI/PrimaryMenu/HBoxContainer"]
 layout_mode = 2
 text = "Build"
 
-[node name="CraftButton" type="Button" parent="CanvasLayer/GUI/TopMenu/HBoxContainer"]
+[node name="CraftButton" type="Button" parent="CanvasLayer/GUI/PrimaryMenu/HBoxContainer"]
 layout_mode = 2
 text = "Craft"
 
@@ -310,34 +310,19 @@ grow_vertical = 2
 player = NodePath("../../../GameWorld/Pawn")
 grid_cursor = NodePath("../../../GameWorld/TileMap/GridCursor")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GUI"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 72.0
-offset_top = 5.0
-offset_right = 72.0
-offset_bottom = 5.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-metadata/_edit_lock_ = true
-
-[node name="GridContainer" type="GridContainer" parent="CanvasLayer/GUI/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-metadata/_edit_lock_ = true
-
-[node name="CraftMenu" parent="CanvasLayer/GUI/MarginContainer/GridContainer" instance=ExtResource("20_kqol4")]
+[node name="CraftMenu" parent="CanvasLayer/GUI" instance=ExtResource("20_kqol4")]
 visible = false
 layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 712.0
+offset_top = 365.0
+offset_right = 712.0
+offset_bottom = 365.0
 
 [node name="StateChartDebugger" parent="CanvasLayer/GUI" instance=ExtResource("20_kj8wh")]
+visible = false
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
@@ -347,13 +332,14 @@ offset_right = 1281.0
 offset_bottom = 312.0
 grow_horizontal = 1
 grow_vertical = 1
+enabled = false
 initial_node_to_watch = NodePath("../../../GameWorld/Pawn")
 
 [connection signal="grid_clicked" from="GameWorld/TileMap/GridCursor" to="GameWorld" method="_on_grid_cursor_grid_clicked"]
 [connection signal="item_placed" from="GameWorld/TileMap/GridCursor" to="GameWorld" method="_on_grid_cursor_item_placed" flags=3]
 [connection signal="crafting_spot_completed" from="CanvasLayer/GUI" to="GameWorld" method="_on_gui_crafting_spot_completed"]
-[connection signal="pressed" from="CanvasLayer/GUI/TopMenu/HBoxContainer/BuildButton" to="CanvasLayer/GUI" method="_on_build_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/GUI/TopMenu/HBoxContainer/CraftButton" to="CanvasLayer/GUI" method="_on_craft_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/PrimaryMenu/HBoxContainer/BuildButton" to="CanvasLayer/GUI" method="_on_build_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/PrimaryMenu/HBoxContainer/CraftButton" to="CanvasLayer/GUI" method="_on_craft_button_pressed"]
 
 [editable path="GameWorld/Dropped Items/Wood"]
 [editable path="GameWorld/Dropped Items/Wood2"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bymugkdytj6q3"]
 
-[ext_resource type="StyleBox" uid="uid://crqnj774jm6or" path="res://themes/highlighted.tres" id="1_7hl8f"]
+[ext_resource type="StyleBox" uid="uid://crqnj774jm6or" path="res://assets/styles/highlighted.tres" id="1_7hl8f"]
 
 [sub_resource type="Animation" id="Animation_irkev"]
 length = 0.001

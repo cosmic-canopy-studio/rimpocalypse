@@ -1,60 +1,71 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5mthav4tctwg"]
+[gd_scene load_steps=7 format=3 uid="uid://c5mthav4tctwg"]
 
 [ext_resource type="Script" path="res://gui/crafting/craft_menu.gd" id="1_q0d1m"]
 [ext_resource type="PackedScene" uid="uid://cvauuyktt4sn5" path="res://gui/crafting/recipe_menu_item.tscn" id="2_pq33w"]
-[ext_resource type="Texture2D" uid="uid://b053652do2be1" path="res://assets/sheets/uipack_rpg_vector.svg" id="2_y2o5t"]
-[ext_resource type="Theme" uid="uid://cskdkovaxmwfq" path="res://gui/theme.tres" id="4_sg1mb"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_0nuvc"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_0t4c1"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_n336l"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_tq13h"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1sbsr"]
-atlas = ExtResource("2_y2o5t")
-region = Rect2(110, 170, 100, 100)
-
-[node name="CraftMenu" type="Control" node_paths=PackedStringArray("menu_title", "recipe_slots", "craft_button", "close_button")]
+[node name="CraftMenu" type="Control" node_paths=PackedStringArray("menu_title", "recipe_slots", "cancel_button", "close_button", "craft_button")]
+custom_minimum_size = Vector2(600, 400)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -880.0
-offset_bottom = -320.0
+offset_right = -680.0
+offset_bottom = -370.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 script = ExtResource("1_q0d1m")
-menu_title = NodePath("GridContainer/MarginContainer/InnerArea/MarginContainer/MenuTitle")
+menu_title = NodePath("MarginContainer/GridContainer/MenuTitle")
 recipe_scene = ExtResource("2_pq33w")
-recipe_slots = NodePath("GridContainer/MarginContainer/InnerArea/UseableArea/ScrollContainer/RecipeSlots")
-craft_button = NodePath("GridContainer/MarginContainer/InnerArea/CraftButton")
-close_button = NodePath("GridContainer/MarginContainer/InnerArea/CloseButton")
+recipe_slots = NodePath("MarginContainer/GridContainer/CraftSelectionArea/UseableArea/ScrollContainer/RecipeSlots")
+cancel_button = NodePath("MarginContainer/GridContainer/CraftQueueArea/CancelButton")
+close_button = NodePath("MarginContainer/GridContainer/CloseButton")
+craft_button = NodePath("MarginContainer/GridContainer/CraftSelectionArea/CraftButton")
 
-[node name="GridContainer" type="GridContainer" parent="."]
-layout_mode = 2
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="GridContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 2
 mouse_filter = 2
+columns = 2
 
-[node name="Background" type="NinePatchRect" parent="GridContainer/MarginContainer"]
+[node name="MenuTitle" type="Label" parent="MarginContainer/GridContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = SubResource("AtlasTexture_1sbsr")
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Crafting"
+vertical_alignment = 1
 
-[node name="InnerArea" type="MarginContainer" parent="GridContainer/MarginContainer"]
-custom_minimum_size = Vector2(200, 200)
+[node name="CloseButton" type="Button" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Close"
+
+[node name="CraftSelectionArea" type="MarginContainer" parent="MarginContainer/GridContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 8
@@ -62,55 +73,113 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="CloseButton" type="Button" parent="GridContainer/MarginContainer/InnerArea"]
+[node name="Label" type="Label" parent="MarginContainer/GridContainer/CraftSelectionArea"]
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 8
-text = "Close"
+size_flags_vertical = 0
+text = "Available Recipes"
+vertical_alignment = 1
 
-[node name="CraftButton" type="Button" parent="GridContainer/MarginContainer/InnerArea"]
+[node name="CraftButton" type="Button" parent="MarginContainer/GridContainer/CraftSelectionArea"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 disabled = true
 text = "Craft"
 
-[node name="MarginContainer" type="MarginContainer" parent="GridContainer/MarginContainer/InnerArea"]
-layout_mode = 2
-size_flags_vertical = 0
-mouse_filter = 2
-theme_override_constants/margin_right = 9
-
-[node name="MenuTitle" type="Label" parent="GridContainer/MarginContainer/InnerArea/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 1
-text = "Crafting"
-vertical_alignment = 1
-
-[node name="UseableArea" type="MarginContainer" parent="GridContainer/MarginContainer/InnerArea"]
+[node name="UseableArea" type="MarginContainer" parent="MarginContainer/GridContainer/CraftSelectionArea"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/margin_top = 34
 theme_override_constants/margin_bottom = 40
 
-[node name="ScrollContainer" type="ScrollContainer" parent="GridContainer/MarginContainer/InnerArea/UseableArea"]
-custom_minimum_size = Vector2(2.08165e-12, 300)
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/GridContainer/CraftSelectionArea/UseableArea"]
+custom_minimum_size = Vector2(2.08165e-12, 250)
 layout_mode = 2
-theme = ExtResource("4_sg1mb")
 follow_focus = true
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="RecipeSlots" type="VBoxContainer" parent="GridContainer/MarginContainer/InnerArea/UseableArea/ScrollContainer"]
+[node name="RecipeSlots" type="VBoxContainer" parent="MarginContainer/GridContainer/CraftSelectionArea/UseableArea/ScrollContainer"]
 custom_minimum_size = Vector2(250, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 6
-size_flags_vertical = 3
+size_flags_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 6
 
-[connection signal="pressed" from="GridContainer/MarginContainer/InnerArea/CloseButton" to="." method="_on_close_button_pressed"]
-[connection signal="pressed" from="GridContainer/MarginContainer/InnerArea/CraftButton" to="." method="_on_craft_button_pressed"]
+[node name="CraftQueueArea" type="MarginContainer" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="MarginContainer/GridContainer/CraftQueueArea"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Craft Queue"
+vertical_alignment = 1
+
+[node name="CancelButton" type="Button" parent="MarginContainer/GridContainer/CraftQueueArea"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+disabled = true
+text = "Cancel
+"
+
+[node name="UseableArea" type="MarginContainer" parent="MarginContainer/GridContainer/CraftQueueArea"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/margin_top = 34
+theme_override_constants/margin_bottom = 40
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/GridContainer/CraftQueueArea/UseableArea"]
+custom_minimum_size = Vector2(2.08165e-12, 200)
+layout_mode = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="RecipeSlots" type="VBoxContainer" parent="MarginContainer/GridContainer/CraftQueueArea/UseableArea/ScrollContainer"]
+custom_minimum_size = Vector2(250, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 6
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("3_0nuvc")
+
+[node name="WindowState" type="Node" parent="StateChart"]
+script = ExtResource("4_0t4c1")
+initial_state = NodePath("Hidden")
+
+[node name="Visible" type="Node" parent="StateChart/WindowState"]
+script = ExtResource("5_n336l")
+
+[node name="Hide" type="Node" parent="StateChart/WindowState/Visible"]
+script = ExtResource("6_tq13h")
+to = NodePath("../../Hidden")
+event = &"hide_window"
+
+[node name="Hidden" type="Node" parent="StateChart/WindowState"]
+script = ExtResource("5_n336l")
+
+[node name="Show" type="Node" parent="StateChart/WindowState/Hidden"]
+script = ExtResource("6_tq13h")
+to = NodePath("../../Visible")
+event = &"show_window"
+
+[connection signal="pressed" from="MarginContainer/GridContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/CraftSelectionArea/CraftButton" to="." method="_on_craft_button_pressed"]
+[connection signal="pressed" from="MarginContainer/GridContainer/CraftQueueArea/CancelButton" to="." method="_on_cancel_button_pressed"]
+[connection signal="state_entered" from="StateChart/WindowState/Visible" to="." method="_on_visible_state_entered"]
+[connection signal="state_processing" from="StateChart/WindowState/Visible" to="." method="_on_visible_state_processing"]
+[connection signal="state_entered" from="StateChart/WindowState/Hidden" to="." method="_on_hidden_state_entered"]

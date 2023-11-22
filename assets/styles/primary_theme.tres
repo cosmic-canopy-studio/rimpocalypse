@@ -1,0 +1,88 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://cdf77ghxoctfu"]
+
+[ext_resource type="StyleBox" uid="uid://ctijpukv1xd7i" path="res://assets/styles/menu_panel.tres" id="1_iw4tp"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_rrv2k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f874o"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.823529)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p3uc6"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.901961)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_66ask"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lebyn"]
+content_margin_left = 4.0
+content_margin_top = 0.0
+content_margin_right = 4.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fpwdk"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[resource]
+Panel/styles/panel = ExtResource("1_iw4tp")
+VScrollBar/icons/decrement = SubResource("ImageTexture_rrv2k")
+VScrollBar/icons/decrement_highlight = SubResource("ImageTexture_rrv2k")
+VScrollBar/icons/decrement_pressed = SubResource("ImageTexture_rrv2k")
+VScrollBar/icons/increment = SubResource("ImageTexture_rrv2k")
+VScrollBar/icons/increment_highlight = SubResource("ImageTexture_rrv2k")
+VScrollBar/icons/increment_pressed = SubResource("ImageTexture_rrv2k")
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_f874o")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_p3uc6")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_66ask")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_lebyn")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_fpwdk")
