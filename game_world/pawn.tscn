@@ -1,7 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://d33tct3q48djp"]
+[gd_scene load_steps=26 format=3 uid="uid://d33tct3q48djp"]
 
 [ext_resource type="Script" path="res://game_world/pawn.gd" id="1_jyp7f"]
-[ext_resource type="StyleBox" uid="uid://buj4au8liccux" path="res://themes/selected.tres" id="2_laxfm"]
+[ext_resource type="StyleBox" uid="uid://buj4au8liccux" path="res://assets/styles/selected.tres" id="2_laxfm"]
 [ext_resource type="Texture2D" uid="uid://do5fvxmbn4jwa" path="res://assets/textures/pawn.tres" id="3_x86v2"]
 [ext_resource type="Texture2D" uid="uid://420mtukdggmw" path="res://assets/textures/warn.tres" id="4_ilx84"]
 [ext_resource type="Texture2D" uid="uid://dbg7v86f2esdy" path="res://assets/textures/blocked.tres" id="5_jaovm"]
@@ -11,6 +11,12 @@
 [ext_resource type="Script" path="res://addons/inventory-system/craft/craft_station.gd" id="9_5vq0h"]
 [ext_resource type="Script" path="res://addons/inventory-system/core/inventory_handler.gd" id="10_q0gpx"]
 [ext_resource type="Script" path="res://addons/inventory-system/core/inventory.gd" id="11_gihva"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="12_0ghbd"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="13_4oarq"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="13_h3wuf"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="13_soye2"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="15_xfidq"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_is_active_guard.gd" id="17_pom0m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0b6fq"]
 size = Vector2(12, 14)
@@ -214,6 +220,14 @@ _data = {
 "idle": SubResource("Animation_8ev67")
 }
 
+[sub_resource type="Resource" id="Resource_btvgj"]
+script = ExtResource("17_pom0m")
+state = NodePath("../../../ActivityState/NoActivity")
+
+[sub_resource type="Resource" id="Resource_4opxj"]
+script = ExtResource("17_pom0m")
+state = NodePath("../../../ActivityState/HasActivity")
+
 [node name="Pawn" type="CharacterBody2D" node_paths=PackedStringArray("inventory_handler", "inventory", "crafter", "craft_station", "progress_bar")]
 input_pickable = true
 script = ExtResource("1_jyp7f")
@@ -225,6 +239,7 @@ craft_station = NodePath("Crafter/CraftStation")
 progress_bar = NodePath("Sprite2D/ProgressBar")
 
 [node name="Panel" type="Panel" parent="."]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -264,13 +279,9 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_3201l")
 max_value = 10.0
 show_percentage = false
 
-[node name="WorkInterval" type="Timer" parent="."]
-wait_time = 0.5
-autostart = true
-
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 2.0
-target_desired_distance = 2.0
+path_desired_distance = 4.0
+target_desired_distance = 4.0
 path_postprocessing = 1
 avoidance_enabled = true
 neighbor_distance = 1000.0
@@ -310,4 +321,96 @@ create_slot_if_needed = true
 remove_slot_if_empty = true
 database = ExtResource("8_clibg")
 
-[connection signal="timeout" from="WorkInterval" to="." method="_on_work_interval_timeout"]
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("12_0ghbd")
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("13_soye2")
+
+[node name="CurrentAction" type="Node" parent="StateChart/Root"]
+script = ExtResource("13_4oarq")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/Root/CurrentAction"]
+editor_description = "The default state during which a pawn will review their priorities and goals and decide on the next action to take."
+script = ExtResource("13_h3wuf")
+
+[node name="Move to location" type="Node" parent="StateChart/Root/CurrentAction/Idle"]
+editor_description = "When the pawn initiates a move command."
+script = ExtResource("15_xfidq")
+to = NodePath("../../Moving")
+event = &"destination_set"
+
+[node name="Moving" type="Node" parent="StateChart/Root/CurrentAction"]
+editor_description = "This state is active while the pawn is moving toward a destination."
+script = ExtResource("13_h3wuf")
+
+[node name="Navigation finished" type="Node" parent="StateChart/Root/CurrentAction/Moving"]
+script = ExtResource("15_xfidq")
+to = NodePath("../../Idle")
+event = &"navigation_finished"
+guard = SubResource("Resource_btvgj")
+
+[node name="Activity reached" type="Node" parent="StateChart/Root/CurrentAction/Moving"]
+script = ExtResource("15_xfidq")
+to = NodePath("../../Acting")
+event = &"navigation_finished"
+guard = SubResource("Resource_4opxj")
+
+[node name="Acting" type="Node" parent="StateChart/Root/CurrentAction"]
+editor_description = "This state is active while the pawn is performing an activity."
+script = ExtResource("13_h3wuf")
+
+[node name="Activity completed" type="Node" parent="StateChart/Root/CurrentAction/Acting"]
+editor_description = "When the pawn has completed the activity it will return to being idle."
+script = ExtResource("15_xfidq")
+to = NodePath("../../Idle")
+event = &"activity_completed"
+
+[node name="Activity invalid" type="Node" parent="StateChart/Root/CurrentAction/Acting"]
+editor_description = "When the activity is no longer valid or available to the pawn it will return to idle"
+script = ExtResource("15_xfidq")
+to = NodePath("../../Idle")
+event = &"activity_invalid"
+
+[node name="Activity cleared" type="Node" parent="StateChart/Root/CurrentAction/Acting"]
+script = ExtResource("15_xfidq")
+to = NodePath("../../Idle")
+event = &"activity_cleared"
+
+[node name="Activity changed" type="Node" parent="StateChart/Root/CurrentAction/Acting"]
+script = ExtResource("15_xfidq")
+to = NodePath("..")
+event = &"activity_set"
+
+[node name="ActivityState" type="Node" parent="StateChart/Root"]
+script = ExtResource("13_4oarq")
+initial_state = NodePath("NoActivity")
+
+[node name="NoActivity" type="Node" parent="StateChart/Root/ActivityState"]
+script = ExtResource("13_h3wuf")
+
+[node name="Activity assigned" type="Node" parent="StateChart/Root/ActivityState/NoActivity"]
+script = ExtResource("15_xfidq")
+to = NodePath("../../HasActivity")
+event = &"activity_set"
+
+[node name="HasActivity" type="Node" parent="StateChart/Root/ActivityState"]
+script = ExtResource("13_h3wuf")
+
+[node name="Activity cleared" type="Node" parent="StateChart/Root/ActivityState/HasActivity"]
+script = ExtResource("15_xfidq")
+to = NodePath("../../NoActivity")
+event = &"activity_cleared"
+
+[node name="Activity completed" type="Node" parent="StateChart/Root/ActivityState/HasActivity"]
+script = ExtResource("15_xfidq")
+to = NodePath("../../NoActivity")
+event = &"activity_completed"
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="navigation_finished" from="NavigationAgent2D" to="StateChart" method="send_event" binds= [&"navigation_finished"]]
+[connection signal="on_crafted" from="Crafter/CraftStation" to="." method="_on_crafted"]
+[connection signal="state_processing" from="StateChart/Root/CurrentAction/Idle" to="." method="_on_idle_state_processing"]
+[connection signal="state_physics_processing" from="StateChart/Root/CurrentAction/Moving" to="." method="_on_moving_state_physics_processing"]
+[connection signal="state_processing" from="StateChart/Root/CurrentAction/Acting" to="." method="_on_acting_state_processing"]

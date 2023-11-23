@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnxwbufx1xje0"
-path="res://.godot/imported/rpg_urban_tilemap.png-469feacb047655a173e9bd6670175168.ctex"
+uid="uid://0hqwvvfovhsc"
+path="res://.godot/imported/roguelikeSheet_transparent.png-174be6df35b59fd3c807fb54c9e68b9e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sheets/rpg_urban_tilemap.png"
-dest_files=["res://.godot/imported/rpg_urban_tilemap.png-469feacb047655a173e9bd6670175168.ctex"]
+source_file="res://assets/sprite_sheets/roguelikeSheet_transparent.png"
+dest_files=["res://.godot/imported/roguelikeSheet_transparent.png-174be6df35b59fd3c807fb54c9e68b9e.ctex"]
 
 [params]
 

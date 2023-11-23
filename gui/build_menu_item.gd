@@ -1,5 +1,5 @@
-extends Control
 class_name BuildMenuItem
+extends Control
 
 signal build_menu_item_selected(build_menu_item: BuildMenuItem)
 
@@ -8,6 +8,7 @@ signal build_menu_item_selected(build_menu_item: BuildMenuItem)
 @export var labor_cost: Label
 
 var current_item: InventoryItem
+
 
 func _ready():
 	initialize(current_item)

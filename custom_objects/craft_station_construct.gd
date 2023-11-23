@@ -1,6 +1,6 @@
 @icon("res://custom_objects/constructable.svg")
-extends Constructable
 class_name CraftStationContructable
+extends Constructable
 
 signal crafting_menu_requested(craft_station: CraftStation, inventory: Inventory)
 
@@ -23,21 +23,21 @@ func _process(_delta):
 		progress_bar.value = progress_bar.max_value - craft_station.craftings[0].time
 
 
-func do_work(effort = 1, inventory: Inventory = null):
+func do_work(effort: float, inventory: Inventory = null):
 	if not constructed:
 		super(effort)
 		return
-	
+
 	if opened:
 		return
-	
+
 	if craft_station.is_crafting():
 		craft_station.can_processing_craftings = true
 		return
 
 	if inventory:
 		emit_signal("crafting_menu_requested", craft_station, inventory)
-		craft_station.can_processing_craftings = true		
+		craft_station.can_processing_craftings = true
 		opened = true
 	else:
 		printerr("No inventory provided for crafting!")

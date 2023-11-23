@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2rhn0js3qyuc"
-path="res://.godot/imported/roguelikeIndoor_transparent.png-6358bd187dc97f22bb7ba1f0e44590e7.ctex"
+uid="uid://br7t3q6ny0j28"
+path="res://.godot/imported/inventory_chopped.png-09b6053a25c92cc893bfaf078b207fc3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sheets/roguelikeIndoor_transparent.png"
-dest_files=["res://.godot/imported/roguelikeIndoor_transparent.png-6358bd187dc97f22bb7ba1f0e44590e7.ctex"]
+source_file="res://assets/sprite_sheets/inventory_chopped.png"
+dest_files=["res://.godot/imported/inventory_chopped.png-09b6053a25c92cc893bfaf078b207fc3.ctex"]
 
 [params]
 

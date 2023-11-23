@@ -1,5 +1,5 @@
-extends Control
 class_name ItemLineUI
+extends Control
 
 @export var item_icon: TextureRect
 @export var name_label: Label
@@ -11,12 +11,13 @@ class_name ItemLineUI
 ## Color when mouse enter
 @export var highlight_color = Color.WHITE
 
+
 func _ready():
 	name_label.visible = show_name
 	separator.visible = show_name
-		
 
-func update_info_with_slot(slot : Slot):
+
+func update_info_with_slot(slot: Slot):
 	if slot != null and slot.item != null:
 		# TODO Slow call, use cache from node inv base
 		if slot.item != null:
@@ -35,8 +36,7 @@ func update_info_with_item_instance(item_instance: ItemInstance):
 	amount_label.visible = false
 
 
-
-func update_info_with_item(item : InventoryItem, amount := 1):
+func update_info_with_item(item: InventoryItem, amount := 1):
 	if item != null:
 		item_icon.texture = item.icon
 		name_label.text = item.name

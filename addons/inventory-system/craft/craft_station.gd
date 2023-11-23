@@ -241,8 +241,8 @@ func _add_crafting(recipe_index: int, recipe: Recipe):
 func _remove_crafting(crafting_index: int):
 	if crafting_index >= craftings.size():
 		return
+	craftings.remove_at(crafting_index)		
 	emit_signal("crafting_removed", crafting_index)
-	craftings.remove_at(crafting_index)
 
 
 func _on_input_inventory_item_added(item: InventoryItem, amount: int):

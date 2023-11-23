@@ -16,31 +16,27 @@ var grid_coords: Vector2
 @onready var crafting_spot: InventoryItem = inventory_database.get_item(4)
 @onready var inventory: Inventory = player.inventory_handler.inventory
 
+
 func _ready():
 	player.inventory_handler.add_to_inventory(inventory, wood, 10)
 	player.inventory_handler.add_to_inventory(inventory, crafting_spot, 1)
 
-	var work_objects = get_tree().get_nodes_in_group("work_objects")  
-	for work_object in work_objects:  
+	var work_objects = get_tree().get_nodes_in_group("work_objects")
+	for work_object in work_objects:
 		work_object.connect("produced", _on_produced)
 		work_object.connect("blocked", _on_blocked)
 		work_object.connect("object_input_event", _on_object_input_event)
-	
-	var dropped_items = get_tree().get_nodes_in_group("dropped_items")  
-	for dropped_item in dropped_items:  
+
+	var dropped_items = get_tree().get_nodes_in_group("dropped_items")
+	for dropped_item in dropped_items:
 		dropped_item.connect("pick_up_dropped_item", _on_pick_up_dropped_item)
 
 
 func handle_input(event, object: Node2D):
 	if event is InputEventMouseButton and event.is_pressed():
-		object.find_child("Sprite2D").add_child(highlight.instantiate())		
-		if object == player:
-			player.find_child("Sprite2D").add_child(highlight.instantiate())
-			player.selected = not player.selected
-			return
-			
+		object.find_child("Sprite2D").add_child(highlight.instantiate())
+
 		if player.selected:
-			player.find_child("NavigationAgent2D").target_position = object.position
 			player.set_activity(object)
 
 
@@ -92,23 +88,25 @@ func _on_constructable_input_event(event, constructable):
 
 func _on_grid_cursor_grid_clicked(_grid_position, map_position, _grid_center):
 	if player.selected:
-		player.find_child("NavigationAgent2D").target_position = map_position
-		player.set_activity(null)	
+		player.set_activity(null)
+		player.set_destination(map_position)
 
 
-func _on_grid_cursor_item_placed(item: InventoryItem, grid_position: Vector2, _map_position: Vector2, grid_center: Vector2):
+func _on_grid_cursor_item_placed(
+	item: InventoryItem, grid_position: Vector2, _map_position: Vector2, grid_center: Vector2
+):
 	var constructable_instance
 	if item == crafting_spot:
 		constructable_instance = craft_station_scene.instantiate()
 		constructable_instance.crafting_menu_requested.connect(gui._on_crafting_menu_requested)
 	else:
-		constructable_instance =  constructable_scene.instantiate()
+		constructable_instance = constructable_scene.instantiate()
 	constructable_instance.current_item = item
 	constructable_instance.activity_completed.connect(player._on_activity_completed)
-	constructable_instance.constructable_input_event.connect(_on_constructable_input_event)	
+	constructable_instance.constructable_input_event.connect(_on_constructable_input_event)
 	constructable_instance.position = grid_center
 	$Construtions.add_child(constructable_instance)
-	
+
 	if item.properties.get("impassable") == true:
-		tile_map.set_cell(0, grid_position,0,Vector2(6,0),0)
+		tile_map.set_cell(0, grid_position, 0, Vector2(6, 0), 0)
 	player.inventory.remove(item)

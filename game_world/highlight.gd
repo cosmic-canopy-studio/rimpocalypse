@@ -9,4 +9,3 @@ func _ready():
 	self.visible = true
 	print(self.size)
 	print(self.position)
-	

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c05o5jm1c5ipj"
-path="res://.godot/imported/iconsDouble.png-a1d1017ae2b9262e4183af3f77c9d3f9.ctex"
+uid="uid://w7f416v2aw4x"
+path="res://.godot/imported/UIpackSheet_transparent.png-bce18933cf65666b7cbdcbb3efc142a4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sheets/iconsDouble.png"
-dest_files=["res://.godot/imported/iconsDouble.png-a1d1017ae2b9262e4183af3f77c9d3f9.ctex"]
+source_file="res://assets/sprite_sheets/UIpackSheet_transparent.png"
+dest_files=["res://.godot/imported/UIpackSheet_transparent.png-bce18933cf65666b7cbdcbb3efc142a4.ctex"]
 
 [params]
 
