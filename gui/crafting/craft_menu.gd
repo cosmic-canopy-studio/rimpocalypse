@@ -29,30 +29,10 @@ func initialize(craft_station: CraftStation):
 	_add_recipes(craft_station)
 
 
-func _add_recipes(craft_station: CraftStation):
-	for i in craft_station.valid_recipes.size():
-		var recipe_index = craft_station.valid_recipes[i]
-		var recipe = craft_station.database.recipes[recipe_index]
-		var recipe_scene_instance: RecipeMenuItem = recipe_scene.instantiate()
-		_recipe_scene_nodes.append(recipe_scene_instance)
-		recipe_scene_instance.set_recipe(craft_station, recipe, recipe_index)
-		recipe_slots.add_child(recipe_scene_instance)
-		recipe_scene_instance.recipe_selected.connect(_on_recipe_selected)
-
-
-func _open(craft_station: CraftStation):
-	_current_station = craft_station
-	_current_station.crafting_added.connect(_on_crafting_changed)
-	_current_station.crafting_removed.connect(_on_crafting_changed)
-
-	state_chart.send_event("show_window")
-
-
-func _close():
-	_current_station.crafting_added.disconnect(_on_crafting_changed)
-	_current_station.crafting_removed.disconnect(_on_crafting_changed)
-
-	state_chart.send_event("hide_window")
+func open_craft_menu(craft_station: CraftStation, inventory: Inventory):
+	craft_station.input_inventory = inventory
+	craft_station.output_inventory = inventory
+	_open(craft_station)
 
 
 func toggle_player_crafting(pawn: Pawn):
@@ -66,10 +46,22 @@ func toggle_player_crafting(pawn: Pawn):
 		_open(pawn.crafting_table)
 
 
-func open_craft_menu(craft_station: CraftStation, inventory: Inventory):
-	craft_station.input_inventory = inventory
-	craft_station.output_inventory = inventory
-	_open(craft_station)
+func _add_recipes(craft_station: CraftStation):
+	for i in craft_station.valid_recipes.size():
+		var recipe_index = craft_station.valid_recipes[i]
+		var recipe = craft_station.database.recipes[recipe_index]
+		var recipe_scene_instance: RecipeMenuItem = recipe_scene.instantiate()
+		_recipe_scene_nodes.append(recipe_scene_instance)
+		recipe_scene_instance.set_recipe(craft_station, recipe, recipe_index)
+		recipe_slots.add_child(recipe_scene_instance)
+		recipe_scene_instance.recipe_selected.connect(_on_recipe_selected)
+
+
+func _close():
+	_current_station.crafting_added.disconnect(_on_crafting_changed)
+	_current_station.crafting_removed.disconnect(_on_crafting_changed)
+
+	state_chart.send_event("hide_window")
 
 
 func _clear_recipes():
@@ -88,17 +80,68 @@ func _clear_queue():
 	_queue_scene_nodes.clear()
 
 
-func _on_recipe_selected(selected_recipe: RecipeMenuItem):
-	if craft_button.disabled:
-		craft_button.disabled = false
+func _open(craft_station: CraftStation):
+	_current_station = craft_station
+	_current_station.crafting_added.connect(_on_crafting_changed)
+	_current_station.crafting_removed.connect(_on_crafting_changed)
 
-	if _selected_recipe:
-		_selected_recipe.button.add_theme_stylebox_override("normal", empty_outline)
-		_selected_recipe.button.add_theme_stylebox_override("focus", empty_outline)
+	state_chart.send_event("show_window")
 
-	_selected_recipe = selected_recipe
-	_selected_recipe.button.add_theme_stylebox_override("normal", green_outline)
-	_selected_recipe.button.add_theme_stylebox_override("focus", green_outline)
+
+func _refresh_queue_pane():
+	_clear_queue()
+	var queue = _current_station.craftings
+	for queue_item in queue:
+		var recipe_index = queue_item.recipe_index
+		var recipe = _current_station.database.recipes[recipe_index]
+		var queue_scene_instance: QueueMenuItem = queue_scene.instantiate()
+		_queue_scene_nodes.append(queue_scene_instance)
+		queue_scene_instance.set_recipe(_current_station, recipe)
+		queue_scene_instance.update_progress(queue_item.time)
+		queue_slots.add_child(queue_scene_instance)
+		queue_scene_instance.item_selected.connect(_on_queue_item_selected)
+
+
+func _sync_craftable_recipes():
+	for recipe in _recipe_scene_nodes:
+		recipe.sync()
+
+
+func _update_queue_pane():
+	if _queue_scene_nodes.size() == 0:
+		printerr("Queue is empty!")
+		return
+	var current_item = _current_station.craftings[0]
+	_queue_scene_nodes[0].update_progress(current_item.time)
+
+
+func _on_cancel_button_pressed():
+	var i = 0
+	while i < _queue_scene_nodes.size():
+		if _queue_scene_nodes[i] == _selected_queue_item:
+			_current_station.cancel_craft(i)
+			break
+		i += 1
+
+
+func _on_close_button_pressed():
+	_close()
+
+
+func _on_craft_button_pressed():
+	_selected_recipe.execute()
+
+
+func _on_crafting_changed(_position):
+	_refresh_queue_pane()
+	_sync_craftable_recipes()
+
+
+func _on_hidden_state_entered():
+	_clear_recipes()
+	_clear_queue()
+	_current_station = null
+	visible = false
 
 
 func _on_queue_item_selected(queue_item: QueueMenuItem):
@@ -114,28 +157,17 @@ func _on_queue_item_selected(queue_item: QueueMenuItem):
 	_selected_queue_item.button.add_theme_stylebox_override("focus", green_outline)
 
 
-func _on_craft_button_pressed():
-	_selected_recipe.execute()
+func _on_recipe_selected(selected_recipe: RecipeMenuItem):
+	if craft_button.disabled:
+		craft_button.disabled = false
 
+	if _selected_recipe:
+		_selected_recipe.button.add_theme_stylebox_override("normal", empty_outline)
+		_selected_recipe.button.add_theme_stylebox_override("focus", empty_outline)
 
-func _on_close_button_pressed():
-	_close()
-
-
-func _on_cancel_button_pressed():
-	var i = 0
-	while i < _queue_scene_nodes.size():
-		if _queue_scene_nodes[i] == _selected_queue_item:
-			_current_station.cancel_craft(i)
-			break
-		i += 1
-
-
-func _on_hidden_state_entered():
-	_clear_recipes()
-	_clear_queue()
-	_current_station = null
-	visible = false
+	_selected_recipe = selected_recipe
+	_selected_recipe.button.add_theme_stylebox_override("normal", green_outline)
+	_selected_recipe.button.add_theme_stylebox_override("focus", green_outline)
 
 
 func _on_visible_state_entered():
@@ -147,35 +179,3 @@ func _on_visible_state_processing(_delta):
 	if _current_station.is_crafting():
 		_update_queue_pane()
 	_sync_craftable_recipes()
-
-
-func _sync_craftable_recipes():
-	for recipe in _recipe_scene_nodes:
-		recipe.sync()
-
-
-func _on_crafting_changed(_position):
-	_refresh_queue_pane()
-	_sync_craftable_recipes()
-
-
-func _update_queue_pane():
-	if _queue_scene_nodes.size() == 0:
-		printerr("Queue is empty!")
-		return
-	var current_item = _current_station.craftings[0]
-	_queue_scene_nodes[0].update_progress(current_item.time)
-
-
-func _refresh_queue_pane():
-	_clear_queue()
-	var queue = _current_station.craftings
-	for queue_item in queue:
-		var recipe_index = queue_item.recipe_index
-		var recipe = _current_station.database.recipes[recipe_index]
-		var queue_scene_instance: QueueMenuItem = queue_scene.instantiate()
-		_queue_scene_nodes.append(queue_scene_instance)
-		queue_scene_instance.set_recipe(_current_station, recipe)
-		queue_scene_instance.update_progress(queue_item.time)
-		queue_slots.add_child(queue_scene_instance)
-		queue_scene_instance.item_selected.connect(_on_queue_item_selected)
