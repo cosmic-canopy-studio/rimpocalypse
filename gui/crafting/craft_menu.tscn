@@ -1,13 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5mthav4tctwg"]
+[gd_scene load_steps=8 format=3 uid="uid://c5mthav4tctwg"]
 
 [ext_resource type="Script" path="res://gui/crafting/craft_menu.gd" id="1_q0d1m"]
 [ext_resource type="PackedScene" uid="uid://cvauuyktt4sn5" path="res://gui/crafting/recipe_menu_item.tscn" id="2_pq33w"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_0nuvc"]
+[ext_resource type="PackedScene" uid="uid://d12q18tf7uo3b" path="res://gui/crafting/queue_menu_item.tscn" id="3_4b2a1"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_0t4c1"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_n336l"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_tq13h"]
 
-[node name="CraftMenu" type="Control" node_paths=PackedStringArray("menu_title", "recipe_slots", "cancel_button", "close_button", "craft_button")]
+[node name="CraftMenu" type="Control" node_paths=PackedStringArray("menu_title", "recipe_slots", "queue_slots", "cancel_button", "close_button", "craft_button")]
 custom_minimum_size = Vector2(600, 400)
 layout_mode = 3
 anchors_preset = 15
@@ -22,7 +23,9 @@ size_flags_vertical = 6
 script = ExtResource("1_q0d1m")
 menu_title = NodePath("MarginContainer/GridContainer/MenuTitle")
 recipe_scene = ExtResource("2_pq33w")
+queue_scene = ExtResource("3_4b2a1")
 recipe_slots = NodePath("MarginContainer/GridContainer/CraftSelectionArea/UseableArea/ScrollContainer/RecipeSlots")
+queue_slots = NodePath("MarginContainer/GridContainer/CraftQueueArea/UseableArea/ScrollContainer/QueueSlots")
 cancel_button = NodePath("MarginContainer/GridContainer/CraftQueueArea/CancelButton")
 close_button = NodePath("MarginContainer/GridContainer/CloseButton")
 craft_button = NodePath("MarginContainer/GridContainer/CraftSelectionArea/CraftButton")
@@ -146,13 +149,16 @@ follow_focus = true
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 2
 
-[node name="RecipeSlots" type="VBoxContainer" parent="MarginContainer/GridContainer/CraftQueueArea/UseableArea/ScrollContainer"]
+[node name="QueueSlots" type="VBoxContainer" parent="MarginContainer/GridContainer/CraftQueueArea/UseableArea/ScrollContainer"]
 custom_minimum_size = Vector2(250, 2.08165e-12)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 6
+
+[node name="CraftQueueItem" type="HBoxContainer" parent="MarginContainer/GridContainer/CraftQueueArea/UseableArea/ScrollContainer/QueueSlots"]
+layout_mode = 2
 
 [node name="StateChart" type="Node" parent="."]
 script = ExtResource("3_0nuvc")

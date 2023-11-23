@@ -1,0 +1,117 @@
+[gd_scene load_steps=7 format=3 uid="uid://d12q18tf7uo3b"]
+
+[ext_resource type="Script" path="res://gui/crafting/queue_menu_item.gd" id="1_shwrg"]
+[ext_resource type="Texture2D" uid="uid://cjn5dtt8u6wfi" path="res://assets/textures/hammer.tres" id="3_3byxg"]
+[ext_resource type="Texture2D" uid="uid://clevqxaga12y6" path="res://assets/textures/effort.tres" id="4_e7jno"]
+[ext_resource type="Material" uid="uid://o67lkgdfnofb" path="res://custom_objects/work_object/constructing.material" id="5_td5os"]
+[ext_resource type="StyleBox" uid="uid://d0aujtuh1a8ku" path="res://assets/styles/empty_style.tres" id="6_xla4w"]
+[ext_resource type="StyleBox" uid="uid://eegvi3yqo7be" path="res://assets/styles/red_outline.tres" id="7_tajpk"]
+
+[node name="QueueMenuItem" type="Control" node_paths=PackedStringArray("recipe_name", "icon", "effort_amount", "button", "progress_bar") groups=["craft_recipes"]]
+custom_minimum_size = Vector2(240, 120)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 215.0
+offset_bottom = 105.0
+size_flags_horizontal = 6
+size_flags_vertical = 0
+script = ExtResource("1_shwrg")
+recipe_name = NodePath("MarginContainer/UseableArea/VBoxContainer/ItemBox/Title/RecipeName")
+icon = NodePath("MarginContainer/UseableArea/VBoxContainer/ItemBox/Title/ItemIcon")
+effort_amount = NodePath("MarginContainer/UseableArea/VBoxContainer/ItemBox/Effort/EffortAmount")
+button = NodePath("MarginContainer/Button")
+progress_bar = NodePath("MarginContainer/UseableArea/VBoxContainer/ProgressBar")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"MenuItemPanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(215, 2.08165e-12)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UseableArea" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/UseableArea"]
+layout_mode = 2
+alignment = 1
+
+[node name="ItemBox" type="HBoxContainer" parent="MarginContainer/UseableArea/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Title" type="BoxContainer" parent="MarginContainer/UseableArea/VBoxContainer/ItemBox"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="ItemIcon" type="TextureRect" parent="MarginContainer/UseableArea/VBoxContainer/ItemBox/Title"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("3_3byxg")
+
+[node name="RecipeName" type="Label" parent="MarginContainer/UseableArea/VBoxContainer/ItemBox/Title"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Hammer"
+
+[node name="Effort" type="BoxContainer" parent="MarginContainer/UseableArea/VBoxContainer/ItemBox"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="EffortLabel" type="Label" parent="MarginContainer/UseableArea/VBoxContainer/ItemBox/Effort"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "   Effort: "
+
+[node name="EffortAmount" type="Label" parent="MarginContainer/UseableArea/VBoxContainer/ItemBox/Effort"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "10"
+horizontal_alignment = 2
+
+[node name="EffortIcon" type="TextureRect" parent="MarginContainer/UseableArea/VBoxContainer/ItemBox/Effort"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+texture = ExtResource("4_e7jno")
+expand_mode = 4
+stretch_mode = 4
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/UseableArea/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer"]
+material = ExtResource("5_td5os")
+layout_mode = 2
+theme_override_styles/normal = ExtResource("6_xla4w")
+theme_override_styles/hover = ExtResource("6_xla4w")
+theme_override_styles/disabled = ExtResource("7_tajpk")
+theme_override_styles/focus = ExtResource("6_xla4w")
+
+[connection signal="pressed" from="MarginContainer/Button" to="." method="_on_button_pressed"]

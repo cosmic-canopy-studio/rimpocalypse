@@ -1,17 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://cvauuyktt4sn5"]
+[gd_scene load_steps=8 format=3 uid="uid://cvauuyktt4sn5"]
 
 [ext_resource type="Script" path="res://gui/crafting/recipe_menu_item.gd" id="1_2a53h"]
 [ext_resource type="PackedScene" uid="uid://brhw23npm5fbn" path="res://gui/crafting/ingredient_list_item.tscn" id="2_6we1b"]
-[ext_resource type="Texture2D" uid="uid://b053652do2be1" path="res://assets/sheets/uipack_rpg_vector.svg" id="3_oax03"]
 [ext_resource type="Texture2D" uid="uid://cjn5dtt8u6wfi" path="res://assets/textures/hammer.tres" id="4_h084j"]
 [ext_resource type="Texture2D" uid="uid://clevqxaga12y6" path="res://assets/textures/effort.tres" id="5_hw6me"]
 [ext_resource type="Material" uid="uid://o67lkgdfnofb" path="res://custom_objects/work_object/constructing.material" id="5_rq5ci"]
-[ext_resource type="StyleBox" uid="uid://eegvi3yqo7be" path="res://gui/crafting/red_outline.tres" id="6_cinxu"]
-[ext_resource type="StyleBox" uid="uid://d0aujtuh1a8ku" path="res://gui/crafting/empty_style.tres" id="6_js5ua"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vh2s3"]
-atlas = ExtResource("3_oax03")
-region = Rect2(4, 394, 92, 92)
+[ext_resource type="StyleBox" uid="uid://eegvi3yqo7be" path="res://assets/styles/red_outline.tres" id="6_cinxu"]
+[ext_resource type="StyleBox" uid="uid://d0aujtuh1a8ku" path="res://assets/styles/empty_style.tres" id="6_js5ua"]
 
 [node name="RecipeMenuItem" type="Control" node_paths=PackedStringArray("recipe_name", "icon", "effort_amount", "ingredients_container", "tools_container", "button") groups=["craft_recipes"]]
 custom_minimum_size = Vector2(240, 120)
@@ -29,6 +24,15 @@ effort_amount = NodePath("MarginContainer/UseableArea/HBoxContainer/VBoxRecipe/E
 ingredients_container = NodePath("MarginContainer/UseableArea/HBoxContainer/VBoxIngredients/Ingredients")
 tools_container = NodePath("MarginContainer/UseableArea/HBoxContainer/VBoxRecipe/Tools")
 button = NodePath("MarginContainer/Button")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"MenuItemPanel"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(215, 2.08165e-12)
@@ -142,16 +146,5 @@ theme_override_styles/hover = ExtResource("6_js5ua")
 theme_override_styles/disabled = ExtResource("6_cinxu")
 theme_override_styles/focus = ExtResource("6_js5ua")
 disabled = true
-
-[node name="Background" type="NinePatchRect" parent="MarginContainer"]
-show_behind_parent = true
-layout_mode = 2
-texture = SubResource("AtlasTexture_vh2s3")
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
 
 [connection signal="pressed" from="MarginContainer/Button" to="." method="_on_button_pressed"]

@@ -38,7 +38,7 @@ enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg", "res://a
 
 [gui]
 
-theme/custom="res://assets/styles/primary_theme.tres"
+theme/custom="res://assets/styles/default_theme.tres"
 
 [input]
 

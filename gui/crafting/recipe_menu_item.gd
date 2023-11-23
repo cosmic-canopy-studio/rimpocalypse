@@ -4,7 +4,6 @@ extends Control
 signal recipe_selected(selected_recipe: RecipeMenuItem)
 
 @export var ingredient_list_item: PackedScene
-
 @export var recipe_name: Label
 @export var icon: TextureRect
 @export var effort_amount: Label
@@ -18,8 +17,8 @@ var _recipe: Recipe
 var _recipe_index: int
 var _tools: Array[Sprite2D]
 
-@onready var green_highlight: StyleBoxFlat = load("res://gui/crafting/green_outline.tres")
-@onready var blank_highlight: StyleBoxEmpty = load("res://gui/crafting/empty_style.tres")
+@onready var green_highlight: StyleBoxFlat = load("res://assets/styles/green_outline.tres")
+@onready var blank_highlight: StyleBoxEmpty = load("res://assets/styles/empty_style.tres")
 
 
 func set_recipe(craft_station: CraftStation, recipe: Recipe, recipe_index: int):
