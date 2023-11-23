@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://cdf77ghxoctfu"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://cdf77ghxoctfu"]
 
-[ext_resource type="StyleBox" uid="uid://ctijpukv1xd7i" path="res://assets/styles/menu_panel.tres" id="1_iw4tp"]
+[ext_resource type="StyleBox" uid="uid://ctijpukv1xd7i" path="res://assets/styles/menu_panel.tres" id="1_8bm5h"]
+[ext_resource type="StyleBox" uid="uid://4t73lkui10un" path="res://assets/styles/menu_item_panel.stylebox" id="1_rfiyl"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_rrv2k"]
 
@@ -74,7 +75,9 @@ expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
 [resource]
-Panel/styles/panel = ExtResource("1_iw4tp")
+MenuItemPanel/base_type = &"Panel"
+MenuItemPanel/styles/panel = ExtResource("1_rfiyl")
+Panel/styles/panel = ExtResource("1_8bm5h")
 VScrollBar/icons/decrement = SubResource("ImageTexture_rrv2k")
 VScrollBar/icons/decrement_highlight = SubResource("ImageTexture_rrv2k")
 VScrollBar/icons/decrement_pressed = SubResource("ImageTexture_rrv2k")
