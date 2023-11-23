@@ -293,6 +293,11 @@ text = "Build"
 layout_mode = 2
 text = "Craft"
 
+[node name="InventoryButton" type="Button" parent="CanvasLayer/GUI/PrimaryMenu/HBoxContainer"]
+layout_mode = 2
+text = "Inventory
+"
+
 [node name="BuildMenu" parent="CanvasLayer/GUI" node_paths=PackedStringArray("player", "grid_cursor") instance=ExtResource("18_71msn")]
 visible = false
 layout_mode = 1
@@ -340,6 +345,7 @@ initial_node_to_watch = NodePath("../../../GameWorld/Pawn")
 [connection signal="crafting_spot_completed" from="CanvasLayer/GUI" to="GameWorld" method="_on_gui_crafting_spot_completed"]
 [connection signal="pressed" from="CanvasLayer/GUI/PrimaryMenu/HBoxContainer/BuildButton" to="CanvasLayer/GUI" method="_on_build_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/PrimaryMenu/HBoxContainer/CraftButton" to="CanvasLayer/GUI" method="_on_craft_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/PrimaryMenu/HBoxContainer/InventoryButton" to="CanvasLayer/GUI" method="_on_inventory_button_pressed"]
 
 [editable path="GameWorld/Dropped Items/Wood"]
 [editable path="GameWorld/Dropped Items/Wood2"]

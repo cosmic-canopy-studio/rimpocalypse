@@ -3,7 +3,6 @@ extends CharacterBody2D
 
 signal clicked(node: Node2D)
 
-@export var selected: bool
 @export var inventory_database: InventoryDatabase
 @export var inventory_handler: InventoryHandler
 @export var inventory: Inventory
@@ -19,11 +18,6 @@ var activity: Node2D
 @onready var crafting_table: CraftStation = $Crafter/CraftStation
 @onready var axe: InventoryItem = inventory_database.get_item(5)
 @onready var hammer: InventoryItem = inventory_database.get_item(2)
-
-
-func _ready():
-	selected = false
-	$Panel.visible = false
 
 
 func set_activity(object: Node2D):
@@ -51,6 +45,7 @@ func set_destination(map_coords: Vector2):
 
 
 func choose_task():
+	## TODO: If needs can be fulfilled, do so.
 	pass
 	#var closest_food = _find_closest(food.keys(), get_global_position())
 	# closest_food.get_parent().remove_child(closest_food)
@@ -70,8 +65,6 @@ func _on_input_event(_viewport, event, _shape_idx):
 		and event.is_pressed() == false
 	):
 		clicked.emit(self)
-		selected = not selected
-		$Panel.visible = selected
 
 
 func _on_activity_completed():

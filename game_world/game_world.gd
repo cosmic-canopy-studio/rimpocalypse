@@ -36,8 +36,7 @@ func handle_input(event, object: Node2D):
 	if event is InputEventMouseButton and event.is_pressed():
 		object.find_child("Sprite2D").add_child(highlight.instantiate())
 
-		if player.selected:
-			player.set_activity(object)
+		player.set_activity(object)
 
 
 func _on_pawn_input_event(_viewport, event, _shape_idx):
@@ -87,9 +86,8 @@ func _on_constructable_input_event(event, constructable):
 
 
 func _on_grid_cursor_grid_clicked(_grid_position, map_position, _grid_center):
-	if player.selected:
-		player.set_activity(null)
-		player.set_destination(map_position)
+	player.set_activity(null)
+	player.set_destination(map_position)
 
 
 func _on_grid_cursor_item_placed(
