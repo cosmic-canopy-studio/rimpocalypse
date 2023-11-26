@@ -1,26 +1,26 @@
 [gd_scene load_steps=5 format=3 uid="uid://bwlhms587lkes"]
 
-[ext_resource type="Script" path="res://addons/inventory-system/core/dropped_item_2d.gd" id="1_eitow"]
-[ext_resource type="Resource" uid="uid://dxwtxmnwl11y2" path="res://data/items/stone.tres" id="2_exvqf"]
-[ext_resource type="Texture2D" uid="uid://r0up71so3psx" path="res://assets/textures/stone.tres" id="3_msm56"]
+[ext_resource type="Script" path="res://game_world/dropped_item.gd" id="1_iydgd"]
+[ext_resource type="Resource" uid="uid://jbmflr8ll1ux" path="res://data/items/wood.tres" id="2_02oxr"]
+[ext_resource type="Texture2D" uid="uid://beqys7c3wapio" path="res://assets/textures/wood.tres" id="3_lvvse"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fhcab"]
 size = Vector2(14, 14)
 
 [node name="DroppedItem" type="Node2D" groups=["dropped_items"]]
 position = Vector2(408, 504)
-scale = Vector2(2, 2)
-script = ExtResource("1_eitow")
-item = ExtResource("2_exvqf")
+script = ExtResource("1_iydgd")
+item = ExtResource("2_02oxr")
 metadata/_edit_group_ = true
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+unique_name_in_owner = true
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_fhcab")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("3_msm56")
+texture = ExtResource("3_lvvse")
 
 [connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

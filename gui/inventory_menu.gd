@@ -113,5 +113,10 @@ func _on_slot_secondary_selected(slot: ItemSlotButton):
 	var amount = slot.slot.amount
 	inventory.get_id_from_item(item)
 	inventory_handler.drop_from_inventory(slot.inventory_slot_index, amount)
+	_unset_currently_selected_slot()
 	item_dropped.emit(item, amount)
+	_refresh_slots()
+
+
+func _on_pawn_inventory_changed():
 	_refresh_slots()

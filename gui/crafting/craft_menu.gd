@@ -185,4 +185,7 @@ func _on_visible_state_entered():
 func _on_visible_state_processing(_delta):
 	if _current_station.is_crafting():
 		_update_queue_pane()
+
+
+func _on_pawn_inventory_changed():
 	_sync_craftable_recipes()

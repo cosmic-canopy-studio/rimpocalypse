@@ -1,7 +1,5 @@
 extends Control
 
-signal crafting_spot_completed
-
 @export var player: Pawn
 @export var craft_menu: CraftMenu
 @export var build_menu: Control

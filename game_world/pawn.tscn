@@ -246,6 +246,7 @@ texture_filter = 1
 texture = ExtResource("3_x86v2")
 
 [node name="ProgressBar" type="ProgressBar" parent="Sprite2D"]
+visible = false
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0

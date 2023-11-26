@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bn76rp7tymvj"]
+[gd_scene load_steps=29 format=3 uid="uid://bn76rp7tymvj"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_5xvki"]
 [ext_resource type="Script" path="res://game_world/game_world.gd" id="2_aakym"]
@@ -10,12 +10,11 @@
 [ext_resource type="Script" path="res://gui/gui.gd" id="6_otkw6"]
 [ext_resource type="PackedScene" uid="uid://do1swex6rljjl" path="res://custom_objects/constructable.tscn" id="6_qfxb7"]
 [ext_resource type="Script" path="res://movement/grid_cursor.gd" id="6_tg1du"]
-[ext_resource type="Resource" uid="uid://jbmflr8ll1ux" path="res://data/items/wood.tres" id="7_b8glk"]
 [ext_resource type="Texture2D" uid="uid://0hqwvvfovhsc" path="res://assets/sprite_sheets/roguelikeSheet_transparent.png" id="7_byjnf"]
-[ext_resource type="Texture2D" uid="uid://beqys7c3wapio" path="res://assets/textures/wood.tres" id="7_ru8l7"]
 [ext_resource type="StyleBox" uid="uid://dfex6i3dckuji" path="res://assets/styles/grid_cursor.tres" id="7_v1gyb"]
 [ext_resource type="PackedScene" uid="uid://bwlhms587lkes" path="res://game_world/dropped_item.tscn" id="9_wf127"]
 [ext_resource type="PackedScene" uid="uid://dh8n0jfn8ldae" path="res://custom_objects/craft_station_construct.tscn" id="10_p0acm"]
+[ext_resource type="Resource" uid="uid://dxwtxmnwl11y2" path="res://data/items/stone.tres" id="14_qftkp"]
 [ext_resource type="PackedScene" uid="uid://d2fq6y7pje6u6" path="res://gui/item_line_ui.tscn" id="16_1th23"]
 [ext_resource type="PackedScene" uid="uid://dm0nskiyh705e" path="res://gui/build_menu.tscn" id="18_71msn"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="20_kj8wh"]
@@ -132,8 +131,9 @@ script = ExtResource("2_aakym")
 highlight = ExtResource("3_cisff")
 player = NodePath("Pawn")
 inventory_database = ExtResource("3_2taum")
-craft_station_scene = ExtResource("10_p0acm")
 constructable_scene = ExtResource("6_qfxb7")
+craft_station_scene = ExtResource("10_p0acm")
+dropped_item_scene = ExtResource("9_wf127")
 tile_map = NodePath("TileMap")
 gui = NodePath("../CanvasLayer/GUI")
 
@@ -163,52 +163,37 @@ position = Vector2(152, 64)
 scale = Vector2(1, 1)
 script = ExtResource("4_ldh0n")
 
-[node name="Dropped Items" type="Node2D" parent="GameWorld"]
+[node name="DroppedItems" type="Node2D" parent="GameWorld"]
+unique_name_in_owner = true
 
-[node name="Wood" parent="GameWorld/Dropped Items" instance=ExtResource("9_wf127")]
+[node name="Wood" parent="GameWorld/DroppedItems" instance=ExtResource("9_wf127")]
 position = Vector2(120, 56)
-scale = Vector2(1, 1)
-item = ExtResource("7_b8glk")
 
-[node name="CollisionShape2D" parent="GameWorld/Dropped Items/Wood/Area2D" index="0"]
+[node name="CollisionShape2D" parent="GameWorld/DroppedItems/Wood/Area2D" index="0"]
 position = Vector2(0, 0)
 
-[node name="Sprite2D" parent="GameWorld/Dropped Items/Wood" index="1"]
-texture = ExtResource("7_ru8l7")
-
-[node name="Wood2" parent="GameWorld/Dropped Items" instance=ExtResource("9_wf127")]
+[node name="Wood2" parent="GameWorld/DroppedItems" instance=ExtResource("9_wf127")]
 position = Vector2(168, 72)
-scale = Vector2(1, 1)
-item = ExtResource("7_b8glk")
 
-[node name="CollisionShape2D" parent="GameWorld/Dropped Items/Wood2/Area2D" index="0"]
+[node name="CollisionShape2D" parent="GameWorld/DroppedItems/Wood2/Area2D" index="0"]
 position = Vector2(0, 0)
 
-[node name="Sprite2D" parent="GameWorld/Dropped Items/Wood2" index="1"]
-texture = ExtResource("7_ru8l7")
-
-[node name="Wood3" parent="GameWorld/Dropped Items" instance=ExtResource("9_wf127")]
+[node name="Wood3" parent="GameWorld/DroppedItems" instance=ExtResource("9_wf127")]
 position = Vector2(184, 56)
-scale = Vector2(1, 1)
-item = ExtResource("7_b8glk")
 
-[node name="CollisionShape2D" parent="GameWorld/Dropped Items/Wood3/Area2D" index="0"]
+[node name="CollisionShape2D" parent="GameWorld/DroppedItems/Wood3/Area2D" index="0"]
 position = Vector2(0, 0)
 
-[node name="Sprite2D" parent="GameWorld/Dropped Items/Wood3" index="1"]
-texture = ExtResource("7_ru8l7")
-
-[node name="Stone" parent="GameWorld/Dropped Items" instance=ExtResource("9_wf127")]
+[node name="Stone" parent="GameWorld/DroppedItems" instance=ExtResource("9_wf127")]
 position = Vector2(40, 88)
-scale = Vector2(1, 1)
+item = ExtResource("14_qftkp")
 
-[node name="Stone2" parent="GameWorld/Dropped Items" instance=ExtResource("9_wf127")]
+[node name="Stone2" parent="GameWorld/DroppedItems" instance=ExtResource("9_wf127")]
 position = Vector2(72, 104)
-scale = Vector2(1, 1)
+item = ExtResource("14_qftkp")
 
-[node name="Stone3" parent="GameWorld/Dropped Items" instance=ExtResource("9_wf127")]
+[node name="Stone3" parent="GameWorld/DroppedItems" instance=ExtResource("9_wf127")]
 position = Vector2(72, 72)
-scale = Vector2(1, 1)
 
 [node name="Pawn" parent="GameWorld" instance=ExtResource("2_ha15b")]
 position = Vector2(104, 104)
@@ -328,12 +313,13 @@ initial_node_to_watch = NodePath("../../../../GameWorld/Pawn")
 
 [connection signal="grid_clicked" from="GameWorld/TileMap/GridCursor" to="GameWorld" method="_on_grid_cursor_grid_clicked"]
 [connection signal="item_placed" from="GameWorld/TileMap/GridCursor" to="GameWorld" method="_on_grid_cursor_item_placed" flags=3]
-[connection signal="crafting_spot_completed" from="CanvasLayer/GUI" to="GameWorld" method="_on_gui_crafting_spot_completed"]
+[connection signal="inventory_changed" from="GameWorld/Pawn" to="CanvasLayer/GUI/MarginContainer/CraftMenu" method="_on_pawn_inventory_changed"]
+[connection signal="inventory_changed" from="GameWorld/Pawn" to="CanvasLayer/GUI/MarginContainer/InventoryMenu" method="_on_pawn_inventory_changed"]
 [connection signal="pressed" from="CanvasLayer/GUI/PrimaryMenu/HBoxContainer/BuildButton" to="CanvasLayer/GUI" method="_on_build_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/PrimaryMenu/HBoxContainer/CraftButton" to="CanvasLayer/GUI" method="_on_craft_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/PrimaryMenu/HBoxContainer/InventoryButton" to="CanvasLayer/GUI" method="_on_inventory_button_pressed"]
 [connection signal="item_dropped" from="CanvasLayer/GUI/MarginContainer/InventoryMenu" to="GameWorld" method="_on_inventory_menu_item_dropped"]
 
-[editable path="GameWorld/Dropped Items/Wood"]
-[editable path="GameWorld/Dropped Items/Wood2"]
-[editable path="GameWorld/Dropped Items/Wood3"]
+[editable path="GameWorld/DroppedItems/Wood"]
+[editable path="GameWorld/DroppedItems/Wood2"]
+[editable path="GameWorld/DroppedItems/Wood3"]

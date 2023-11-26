@@ -2,6 +2,7 @@ class_name Pawn
 extends CharacterBody2D
 
 signal clicked(node: Node2D)
+signal inventory_changed
 
 @export var inventory_database: InventoryDatabase
 @export var inventory_handler: InventoryHandler
@@ -119,7 +120,13 @@ func _on_acting_state_processing(delta):
 		else:
 			activity.do_work(delta * effort_multiplier)
 	elif activity is DroppedItem2D:
-		inventory_handler.pick_to_inventory(activity)
+		(
+			inventory_handler
+			. pick_to_inventory(
+				activity,
+			)
+		)
+		inventory_changed.emit()
 		activity = null
 		state_chart.send_event("activity_completed")
 	else:
