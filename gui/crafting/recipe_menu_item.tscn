@@ -8,89 +8,71 @@
 [ext_resource type="StyleBox" uid="uid://eegvi3yqo7be" path="res://assets/styles/red_outline.tres" id="6_cinxu"]
 [ext_resource type="StyleBox" uid="uid://d0aujtuh1a8ku" path="res://assets/styles/empty_style.tres" id="6_js5ua"]
 
-[node name="RecipeMenuItem" type="Control" node_paths=PackedStringArray("recipe_name", "icon", "effort_amount", "ingredients_container", "tools_container", "button") groups=["craft_recipes"]]
+[node name="RecipeMenuItem" type="PanelContainer" node_paths=PackedStringArray("recipe_name", "icon", "effort_amount", "ingredients_container", "tools_container", "button") groups=["craft_recipes"]]
 custom_minimum_size = Vector2(240, 120)
-layout_mode = 3
-anchors_preset = 0
 offset_right = 215.0
 offset_bottom = 105.0
 size_flags_horizontal = 6
 size_flags_vertical = 0
+mouse_filter = 2
+theme_type_variation = &"MenuItem"
 script = ExtResource("1_2a53h")
 ingredient_list_item = ExtResource("2_6we1b")
-recipe_name = NodePath("MarginContainer/UseableArea/HBoxContainer/VBoxRecipe/Title/RecipeName")
-icon = NodePath("MarginContainer/UseableArea/HBoxContainer/VBoxRecipe/Title/Icon")
-effort_amount = NodePath("MarginContainer/UseableArea/HBoxContainer/VBoxRecipe/Effort/EffortAmount")
-ingredients_container = NodePath("MarginContainer/UseableArea/HBoxContainer/VBoxIngredients/Ingredients")
-tools_container = NodePath("MarginContainer/UseableArea/HBoxContainer/VBoxRecipe/Tools")
-button = NodePath("MarginContainer/Button")
+recipe_name = NodePath("UseableArea/HBoxContainer/VBoxRecipe/Title/RecipeName")
+icon = NodePath("UseableArea/HBoxContainer/VBoxRecipe/Title/Icon")
+effort_amount = NodePath("UseableArea/HBoxContainer/VBoxRecipe/Effort/EffortAmount")
+ingredients_container = NodePath("UseableArea/HBoxContainer/VBoxIngredients/Ingredients")
+tools_container = NodePath("UseableArea/HBoxContainer/VBoxRecipe/Tools")
+button = NodePath("RecipeButton")
 
-[node name="Background" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_type_variation = &"MenuItemPanel"
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-custom_minimum_size = Vector2(215, 2.08165e-12)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="UseableArea" type="MarginContainer" parent="MarginContainer"]
+[node name="UseableArea" type="MarginContainer" parent="."]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/UseableArea"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UseableArea"]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="VBoxRecipe" type="VBoxContainer" parent="MarginContainer/UseableArea/HBoxContainer"]
+[node name="VBoxRecipe" type="VBoxContainer" parent="UseableArea/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 
-[node name="Title" type="BoxContainer" parent="MarginContainer/UseableArea/HBoxContainer/VBoxRecipe"]
+[node name="Title" type="BoxContainer" parent="UseableArea/HBoxContainer/VBoxRecipe"]
 layout_mode = 2
 size_flags_vertical = 0
 alignment = 1
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/UseableArea/HBoxContainer/VBoxRecipe/Title"]
+[node name="Icon" type="TextureRect" parent="UseableArea/HBoxContainer/VBoxRecipe/Title"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 texture = ExtResource("4_h084j")
 
-[node name="RecipeName" type="Label" parent="MarginContainer/UseableArea/HBoxContainer/VBoxRecipe/Title"]
+[node name="RecipeName" type="Label" parent="UseableArea/HBoxContainer/VBoxRecipe/Title"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Hammer"
 
-[node name="Effort" type="BoxContainer" parent="MarginContainer/UseableArea/HBoxContainer/VBoxRecipe"]
+[node name="Effort" type="BoxContainer" parent="UseableArea/HBoxContainer/VBoxRecipe"]
 layout_mode = 2
 size_flags_vertical = 0
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/UseableArea/HBoxContainer/VBoxRecipe/Effort"]
+[node name="Label" type="Label" parent="UseableArea/HBoxContainer/VBoxRecipe/Effort"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 14
 text = "   Effort: "
 
-[node name="EffortAmount" type="Label" parent="MarginContainer/UseableArea/HBoxContainer/VBoxRecipe/Effort"]
+[node name="EffortAmount" type="Label" parent="UseableArea/HBoxContainer/VBoxRecipe/Effort"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -98,7 +80,7 @@ theme_override_font_sizes/font_size = 14
 text = "10"
 horizontal_alignment = 2
 
-[node name="Icon" type="TextureRect" parent="MarginContainer/UseableArea/HBoxContainer/VBoxRecipe/Effort"]
+[node name="Icon" type="TextureRect" parent="UseableArea/HBoxContainer/VBoxRecipe/Effort"]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_horizontal = 2
@@ -107,24 +89,25 @@ texture = ExtResource("5_hw6me")
 expand_mode = 4
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="MarginContainer/UseableArea/HBoxContainer/VBoxRecipe"]
+[node name="Label" type="Label" parent="UseableArea/HBoxContainer/VBoxRecipe"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 14
 text = "   Tools Needed:"
 
-[node name="Tools" type="BoxContainer" parent="MarginContainer/UseableArea/HBoxContainer/VBoxRecipe"]
+[node name="Tools" type="BoxContainer" parent="UseableArea/HBoxContainer/VBoxRecipe"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="VBoxIngredients" type="VBoxContainer" parent="MarginContainer/UseableArea/HBoxContainer"]
+[node name="VBoxIngredients" type="VBoxContainer" parent="UseableArea/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="MarginContainer/UseableArea/HBoxContainer/VBoxIngredients"]
+[node name="Label" type="Label" parent="UseableArea/HBoxContainer/VBoxIngredients"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -132,13 +115,13 @@ theme_override_font_sizes/font_size = 14
 text = "Ingredients:"
 vertical_alignment = 2
 
-[node name="Ingredients" type="BoxContainer" parent="MarginContainer/UseableArea/HBoxContainer/VBoxIngredients"]
+[node name="Ingredients" type="BoxContainer" parent="UseableArea/HBoxContainer/VBoxIngredients"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
+size_flags_horizontal = 0
+size_flags_vertical = 2
 vertical = true
 
-[node name="Button" type="Button" parent="MarginContainer"]
+[node name="RecipeButton" type="Button" parent="."]
 material = ExtResource("5_rq5ci")
 layout_mode = 2
 theme_override_styles/normal = ExtResource("6_js5ua")
@@ -147,4 +130,4 @@ theme_override_styles/disabled = ExtResource("6_cinxu")
 theme_override_styles/focus = ExtResource("6_js5ua")
 disabled = true
 
-[connection signal="pressed" from="MarginContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="RecipeButton" to="." method="_on_button_pressed"]

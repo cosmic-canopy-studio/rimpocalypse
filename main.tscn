@@ -293,14 +293,18 @@ metadata/_edit_lock_ = true
 [node name="BuildMenu" parent="CanvasLayer/GUI/MarginContainer" node_paths=PackedStringArray("player", "grid_cursor") instance=ExtResource("18_71msn")]
 visible = false
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 player = NodePath("../../../../GameWorld/Pawn")
 grid_cursor = NodePath("../../../../GameWorld/TileMap/GridCursor")
 
 [node name="CraftMenu" parent="CanvasLayer/GUI/MarginContainer" instance=ExtResource("20_kqol4")]
 visible = false
 layout_mode = 2
+size_flags_horizontal = 0
 
 [node name="InventoryMenu" parent="CanvasLayer/GUI/MarginContainer" instance=ExtResource("20_x7qk3")]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4

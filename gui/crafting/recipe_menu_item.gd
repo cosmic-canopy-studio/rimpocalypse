@@ -1,5 +1,5 @@
 class_name RecipeMenuItem
-extends Control
+extends PanelContainer
 
 signal recipe_selected(selected_recipe: RecipeMenuItem)
 

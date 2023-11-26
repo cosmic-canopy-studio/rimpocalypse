@@ -9,13 +9,13 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_tq13h"]
 
 [node name="CraftMenu" type="Control" node_paths=PackedStringArray("menu_title", "recipe_slots", "queue_slots", "cancel_button", "close_button", "craft_button")]
-custom_minimum_size = Vector2(600, 400)
+custom_minimum_size = Vector2(650, 410)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -680.0
-offset_bottom = -370.0
+offset_bottom = -320.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6

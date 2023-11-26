@@ -1,5 +1,5 @@
 class_name QueueMenuItem
-extends Control
+extends PanelContainer
 
 signal item_selected(selected_recipe: QueueMenuItem)
 
