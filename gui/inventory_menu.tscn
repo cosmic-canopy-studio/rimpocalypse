@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=3 uid="uid://o1y7xn705las"]
+
+[ext_resource type="Script" path="res://gui/inventory_menu.gd" id="1_r47p4"]
+[ext_resource type="PackedScene" uid="uid://gsex3o6u08dl" path="res://gui/item_slot_button.tscn" id="2_l5uwg"]
+
+[node name="InventoryMenu" type="PanelContainer"]
+custom_minimum_size = Vector2(300, 300)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_r47p4")
+item_slot_button = ExtResource("2_l5uwg")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ItemSlotGrid" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+columns = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+alignment = 2
+
+[node name="ItemDetails" type="TextEdit" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(2.08165e-12, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_colors/font_readonly_color = Color(1, 1, 1, 1)
+text = "Description here"
+editable = false
+wrap_mode = 1
+
+[node name="CloseButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "Close"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]

@@ -59,12 +59,6 @@ func _on_produced(type_produced, amount_produced = 1):
 	print("Produced: ", amount_produced, " ", type_produced)
 	if type_produced == "wood":
 		player.inventory_handler.add_to_inventory(inventory, wood, amount_produced)
-	PlayerResources.resources[type_produced] += amount_produced
-
-
-func _on_crafting_spot_produced(type):
-	print("Item produced: ", type)
-	PlayerResources.bed += 1
 
 
 func _on_blocked(_reason: String):
@@ -108,3 +102,8 @@ func _on_grid_cursor_item_placed(
 	if item.properties.get("impassable") == true:
 		tile_map.set_cell(0, grid_position, 0, Vector2(6, 0), 0)
 	player.inventory.remove(item)
+
+
+func _on_inventory_menu_item_dropped(item, quantity):
+	# TODO: Spawn item in world
+	print("Player dropped ", quantity, " ", item.name)

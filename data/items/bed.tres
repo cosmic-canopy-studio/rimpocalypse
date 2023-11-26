@@ -12,6 +12,7 @@ name = "bed"
 icon = ExtResource("1_b4frf")
 weight = 0.0
 properties = {
+"description": "A place to sleep.",
 "impassable": false,
 "labor_cost": 5.0
 }

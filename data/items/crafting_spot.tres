@@ -12,6 +12,7 @@ name = "crafting_spot"
 icon = ExtResource("2_dqcli")
 weight = 0.0
 properties = {
+"description": "A place to make basic crafts.",
 "impassable": true,
 "labor_cost": 10.0
 }

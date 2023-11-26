@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://gsex3o6u08dl"]
+
+[ext_resource type="Texture2D" uid="uid://beqys7c3wapio" path="res://assets/textures/wood.tres" id="1_ns3lx"]
+[ext_resource type="Script" path="res://gui/item_slot_button.gd" id="2_ysxv8"]
+[ext_resource type="Resource" uid="uid://jbmflr8ll1ux" path="res://data/items/wood.tres" id="3_7vi32"]
+[ext_resource type="Script" path="res://addons/inventory-system/core/slot.gd" id="4_rh780"]
+
+[sub_resource type="Resource" id="Resource_4wr4g"]
+script = ExtResource("4_rh780")
+item = ExtResource("3_7vi32")
+amount = 5
+max_stack = 15
+
+[node name="InvetoryItemSlot" type="Button"]
+custom_minimum_size = Vector2(48, 48)
+toggle_mode = true
+text = "5"
+icon = ExtResource("1_ns3lx")
+icon_alignment = 1
+expand_icon = true
+script = ExtResource("2_ysxv8")
+slot = SubResource("Resource_4wr4g")

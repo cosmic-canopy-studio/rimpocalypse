@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bn76rp7tymvj"]
+[gd_scene load_steps=30 format=3 uid="uid://bn76rp7tymvj"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_5xvki"]
 [ext_resource type="Script" path="res://game_world/game_world.gd" id="2_aakym"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://dm0nskiyh705e" path="res://gui/build_menu.tscn" id="18_71msn"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="20_kj8wh"]
 [ext_resource type="PackedScene" uid="uid://c5mthav4tctwg" path="res://gui/crafting/craft_menu.tscn" id="20_kqol4"]
+[ext_resource type="PackedScene" uid="uid://o1y7xn705las" path="res://gui/inventory_menu.tscn" id="20_x7qk3"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jgglj"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -227,7 +228,7 @@ zoom = Vector2(3, 3)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="GUI" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("player", "craft_menu", "build_menu", "hud")]
+[node name="GUI" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("player", "craft_menu", "build_menu", "inventory_menu", "hud")]
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
@@ -238,28 +239,20 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("6_otkw6")
 player = NodePath("../../GameWorld/Pawn")
-craft_menu = NodePath("CraftMenu")
-build_menu = NodePath("BuildMenu")
-hud = NodePath("HUD")
+craft_menu = NodePath("MarginContainer/CraftMenu")
+build_menu = NodePath("MarginContainer/BuildMenu")
+inventory_menu = NodePath("MarginContainer/InventoryMenu")
+hud = NodePath("MarginContainer/HUD")
 hud_item_scene = ExtResource("16_1th23")
 metadata/_edit_lock_ = true
 
-[node name="HUD" type="VBoxContainer" parent="CanvasLayer/GUI"]
-layout_mode = 1
-offset_left = 5.0
-offset_top = 5.0
-offset_right = 158.0
-offset_bottom = 157.0
-mouse_filter = 2
-metadata/_edit_lock_ = true
-
 [node name="PrimaryMenu" type="Control" parent="CanvasLayer/GUI"]
+custom_minimum_size = Vector2(2.08165e-12, 50)
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -50.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
@@ -298,47 +291,40 @@ layout_mode = 2
 text = "Inventory
 "
 
-[node name="BuildMenu" parent="CanvasLayer/GUI" node_paths=PackedStringArray("player", "grid_cursor") instance=ExtResource("18_71msn")]
-visible = false
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GUI"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -100.0
-offset_top = -100.0
-offset_right = 100.0
-offset_bottom = 100.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-player = NodePath("../../../GameWorld/Pawn")
-grid_cursor = NodePath("../../../GameWorld/TileMap/GridCursor")
+mouse_filter = 2
 
-[node name="CraftMenu" parent="CanvasLayer/GUI" instance=ExtResource("20_kqol4")]
+[node name="HUD" type="VBoxContainer" parent="CanvasLayer/GUI/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="BuildMenu" parent="CanvasLayer/GUI/MarginContainer" node_paths=PackedStringArray("player", "grid_cursor") instance=ExtResource("18_71msn")]
 visible = false
 layout_mode = 2
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 712.0
-offset_top = 365.0
-offset_right = 712.0
-offset_bottom = 365.0
+player = NodePath("../../../../GameWorld/Pawn")
+grid_cursor = NodePath("../../../../GameWorld/TileMap/GridCursor")
 
-[node name="StateChartDebugger" parent="CanvasLayer/GUI" instance=ExtResource("20_kj8wh")]
+[node name="CraftMenu" parent="CanvasLayer/GUI/MarginContainer" instance=ExtResource("20_kqol4")]
 visible = false
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 800.0
-offset_right = 1281.0
-offset_bottom = 312.0
-grow_horizontal = 1
-grow_vertical = 1
+layout_mode = 2
+
+[node name="InventoryMenu" parent="CanvasLayer/GUI/MarginContainer" instance=ExtResource("20_x7qk3")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="StateChartDebugger" parent="CanvasLayer/GUI/MarginContainer" instance=ExtResource("20_kj8wh")]
+visible = false
+layout_mode = 2
 enabled = false
-initial_node_to_watch = NodePath("../../../GameWorld/Pawn")
+initial_node_to_watch = NodePath("../../../../GameWorld/Pawn")
 
 [connection signal="grid_clicked" from="GameWorld/TileMap/GridCursor" to="GameWorld" method="_on_grid_cursor_grid_clicked"]
 [connection signal="item_placed" from="GameWorld/TileMap/GridCursor" to="GameWorld" method="_on_grid_cursor_item_placed" flags=3]
@@ -346,6 +332,7 @@ initial_node_to_watch = NodePath("../../../GameWorld/Pawn")
 [connection signal="pressed" from="CanvasLayer/GUI/PrimaryMenu/HBoxContainer/BuildButton" to="CanvasLayer/GUI" method="_on_build_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/PrimaryMenu/HBoxContainer/CraftButton" to="CanvasLayer/GUI" method="_on_craft_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/PrimaryMenu/HBoxContainer/InventoryButton" to="CanvasLayer/GUI" method="_on_inventory_button_pressed"]
+[connection signal="item_dropped" from="CanvasLayer/GUI/MarginContainer/InventoryMenu" to="GameWorld" method="_on_inventory_menu_item_dropped"]
 
 [editable path="GameWorld/Dropped Items/Wood"]
 [editable path="GameWorld/Dropped Items/Wood2"]
