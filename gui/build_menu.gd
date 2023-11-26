@@ -27,6 +27,10 @@ func update():
 		$MarginContainer/VBoxContainer.add_child(menu_item)
 
 
+func toggle():
+	visible = not visible
+
+
 func _on_close_button_pressed():
 	visible = false
 

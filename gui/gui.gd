@@ -1,16 +1,16 @@
 extends Control
 
-signal crafting_spot_completed
-
 @export var player: Pawn
 @export var craft_menu: CraftMenu
 @export var build_menu: Control
+@export var inventory_menu: Control
 @export var hud: BoxContainer
 @export var hud_item_scene: PackedScene
 
 
 func _ready():
 	build_menu.player_inventory = player.inventory
+	inventory_menu.set_inventory_handler(player.inventory_handler)
 
 
 func _process(_delta):
@@ -34,21 +34,11 @@ func _clear_hud():
 
 
 func _on_build_button_pressed():
-	build_menu.visible = true
+	build_menu.visible = not build_menu.visible
 
 
 func _on_back_button_pressed():
-	build_menu.visible = false
-
-
-func _on_crafting_spot_button_pressed():
-	if PlayerResources.resources.wood >= 100:
-		print("100 wood deducted.")
-		PlayerResources.resources.wood -= 100
-		emit_signal("crafting_spot_completed")
-		print("Crafting Spot created.")
-	else:
-		print("Not enough wood, 100 wood required.")
+	build_menu.toggle()
 
 
 func _on_craft_button_pressed():
@@ -57,3 +47,7 @@ func _on_craft_button_pressed():
 
 func _on_crafting_menu_requested(craft_station, inventory):
 	craft_menu.open_craft_menu(craft_station, inventory)
+
+
+func _on_inventory_button_pressed():
+	inventory_menu.toggle_visibility()

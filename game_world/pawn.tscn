@@ -1,7 +1,6 @@
-[gd_scene load_steps=26 format=3 uid="uid://d33tct3q48djp"]
+[gd_scene load_steps=25 format=3 uid="uid://d33tct3q48djp"]
 
 [ext_resource type="Script" path="res://game_world/pawn.gd" id="1_jyp7f"]
-[ext_resource type="StyleBox" uid="uid://buj4au8liccux" path="res://assets/styles/selected.tres" id="2_laxfm"]
 [ext_resource type="Texture2D" uid="uid://do5fvxmbn4jwa" path="res://assets/textures/pawn.tres" id="3_x86v2"]
 [ext_resource type="Texture2D" uid="uid://420mtukdggmw" path="res://assets/textures/warn.tres" id="4_ilx84"]
 [ext_resource type="Texture2D" uid="uid://dbg7v86f2esdy" path="res://assets/textures/blocked.tres" id="5_jaovm"]
@@ -161,7 +160,7 @@ tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.1),
+"times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -173,7 +172,7 @@ tracks/1/path = NodePath(".:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1, 1.1),
+"times": PackedFloat32Array(0, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -198,7 +197,7 @@ tracks/3/loop_wrap = true
 tracks/3/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0),
 "points": PackedFloat32Array(-13, -0.25, 0, 0.4, 2.08165e-12, -14, -0.1, 2.08165e-12, 0.1, 2.08165e-12, -13, -0.5, 2.08165e-12, 0.25, 0),
-"times": PackedFloat32Array(0, 0.5, 1)
+"times": PackedFloat32Array(0, 0.1, 0.2)
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -238,22 +237,6 @@ crafter = NodePath("Crafter")
 craft_station = NodePath("Crafter/CraftStation")
 progress_bar = NodePath("Sprite2D/ProgressBar")
 
-[node name="Panel" type="Panel" parent="."]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -9.0
-offset_top = -9.0
-offset_right = 9.0
-offset_bottom = 9.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = ExtResource("2_laxfm")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_0b6fq")
 one_way_collision_margin = 0.0
@@ -263,6 +246,7 @@ texture_filter = 1
 texture = ExtResource("3_x86v2")
 
 [node name="ProgressBar" type="ProgressBar" parent="Sprite2D"]
+visible = false
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0

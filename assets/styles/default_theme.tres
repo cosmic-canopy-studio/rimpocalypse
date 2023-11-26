@@ -1,7 +1,10 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://cdf77ghxoctfu"]
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://cdf77ghxoctfu"]
 
 [ext_resource type="StyleBox" uid="uid://ctijpukv1xd7i" path="res://assets/styles/menu_panel.tres" id="1_8bm5h"]
 [ext_resource type="StyleBox" uid="uid://4t73lkui10un" path="res://assets/styles/menu_item_panel.stylebox" id="1_rfiyl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1h40u"]
+bg_color = Color(0.278431, 0.278431, 0.278431, 1)
 
 [sub_resource type="ImageTexture" id="ImageTexture_rrv2k"]
 
@@ -75,9 +78,18 @@ expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
 [resource]
+GridContainer/constants/h_separation = 10
+GridContainer/constants/v_separation = 10
+ItemSlot/base_type = &"PanelContainer"
+ItemSlot/styles/panel = SubResource("StyleBoxFlat_1h40u")
+MarginContainer/constants/margin_bottom = 15
+MarginContainer/constants/margin_left = 15
+MarginContainer/constants/margin_right = 15
+MarginContainer/constants/margin_top = 15
 MenuItemPanel/base_type = &"Panel"
 MenuItemPanel/styles/panel = ExtResource("1_rfiyl")
 Panel/styles/panel = ExtResource("1_8bm5h")
+PanelContainer/styles/panel = ExtResource("1_8bm5h")
 VScrollBar/icons/decrement = SubResource("ImageTexture_rrv2k")
 VScrollBar/icons/decrement_highlight = SubResource("ImageTexture_rrv2k")
 VScrollBar/icons/decrement_pressed = SubResource("ImageTexture_rrv2k")

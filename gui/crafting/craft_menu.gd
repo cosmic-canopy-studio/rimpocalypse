@@ -58,13 +58,10 @@ func _add_recipes(craft_station: CraftStation):
 
 
 func _close():
-	_current_station.crafting_added.disconnect(_on_crafting_changed)
-	_current_station.crafting_removed.disconnect(_on_crafting_changed)
-
 	state_chart.send_event("hide_window")
 
 
-func _clear_recipes():
+func _clear_recipes_pane():
 	_selected_recipe = null
 	for recipe_scene_node in _recipe_scene_nodes:
 		recipe_scene_node.recipe_selected.disconnect(_on_recipe_selected)
@@ -72,7 +69,7 @@ func _clear_recipes():
 	_recipe_scene_nodes.clear()
 
 
-func _clear_queue():
+func _clear_queue_pane():
 	_selected_queue_item = null
 	for queue_scene_node in _queue_scene_nodes:
 		queue_scene_node.item_selected.disconnect(_on_queue_item_selected)
@@ -89,7 +86,7 @@ func _open(craft_station: CraftStation):
 
 
 func _refresh_queue_pane():
-	_clear_queue()
+	_clear_queue_pane()
 	var queue = _current_station.craftings
 	for queue_item in queue:
 		var recipe_index = queue_item.recipe_index
@@ -125,6 +122,7 @@ func _on_cancel_button_pressed():
 
 
 func _on_close_button_pressed():
+	print("clicked!")
 	_close()
 
 
@@ -138,9 +136,16 @@ func _on_crafting_changed(_position):
 
 
 func _on_hidden_state_entered():
-	_clear_recipes()
-	_clear_queue()
-	_current_station = null
+	_clear_recipes_pane()
+	_clear_queue_pane()
+	if _current_station:
+		_current_station.crafting_added.disconnect(_on_crafting_changed)
+		_current_station.crafting_removed.disconnect(_on_crafting_changed)
+		_current_station = null
+	_selected_queue_item = null
+	_selected_recipe = null
+	craft_button.disabled = true
+	cancel_button.disabled = true
 	visible = false
 
 
@@ -148,6 +153,7 @@ func _on_queue_item_selected(queue_item: QueueMenuItem):
 	if cancel_button.disabled:
 		cancel_button.disabled = false
 
+	## if there is already a selected queue item
 	if _selected_queue_item:
 		_selected_queue_item.button.add_theme_stylebox_override("normal", empty_outline)
 		_selected_recipe.button.add_theme_stylebox_override("focus", empty_outline)
@@ -161,6 +167,7 @@ func _on_recipe_selected(selected_recipe: RecipeMenuItem):
 	if craft_button.disabled:
 		craft_button.disabled = false
 
+	# if there is already a selected recipe
 	if _selected_recipe:
 		_selected_recipe.button.add_theme_stylebox_override("normal", empty_outline)
 		_selected_recipe.button.add_theme_stylebox_override("focus", empty_outline)
@@ -178,4 +185,7 @@ func _on_visible_state_entered():
 func _on_visible_state_processing(_delta):
 	if _current_station.is_crafting():
 		_update_queue_pane()
+
+
+func _on_pawn_inventory_changed():
 	_sync_craftable_recipes()

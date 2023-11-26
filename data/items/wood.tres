@@ -11,5 +11,7 @@ max_stack = 100
 name = "wood"
 icon = ExtResource("1_4db7f")
 weight = 0.0
-properties = {}
+properties = {
+"description": "A piece of wood"
+}
 categories = Array[Resource("res://addons/inventory-system/core/item_category.gd")]([ExtResource("1_durcq")])
