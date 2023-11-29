@@ -1,0 +1,93 @@
+[gd_scene load_steps=12 format=3 uid="uid://whybpr6406d6"]
+
+[ext_resource type="Script" path="res://custom_objects/needs/need_handler.gd" id="1_1l6ie"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_246tc"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/parallel_state.gd" id="3_1n6j1"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="3_76jtb"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="4_6bfvo"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="5_8grcx"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/expression_guard.gd" id="6_im8rb"]
+
+[sub_resource type="Resource" id="Resource_kdowi"]
+script = ExtResource("6_im8rb")
+expression = "current < fulfilled_level"
+
+[sub_resource type="Resource" id="Resource_2eisj"]
+script = ExtResource("6_im8rb")
+expression = "current < deficient_level"
+
+[sub_resource type="Resource" id="Resource_7eeyv"]
+script = ExtResource("6_im8rb")
+expression = "current > fulfilled_level"
+
+[sub_resource type="Resource" id="Resource_er76u"]
+script = ExtResource("6_im8rb")
+expression = "current > deficient_level"
+
+[node name="NeedHandler" type="Node2D"]
+script = ExtResource("1_1l6ie")
+
+[node name="NeedsStateChart" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_246tc")
+
+[node name="Root" type="Node" parent="NeedsStateChart"]
+script = ExtResource("3_1n6j1")
+
+[node name="NeedFulfilment" type="Node" parent="NeedsStateChart/Root"]
+script = ExtResource("3_76jtb")
+initial_state = NodePath("Fulfilled")
+
+[node name="Fulfilled" type="Node" parent="NeedsStateChart/Root/NeedFulfilment"]
+script = ExtResource("4_6bfvo")
+
+[node name="BecomeUnfulfilled" type="Node" parent="NeedsStateChart/Root/NeedFulfilment/Fulfilled"]
+script = ExtResource("5_8grcx")
+to = NodePath("../../Unfulfilled")
+guard = SubResource("Resource_kdowi")
+
+[node name="Unfulfilled" type="Node" parent="NeedsStateChart/Root/NeedFulfilment"]
+script = ExtResource("4_6bfvo")
+
+[node name="BecomeDeficient" type="Node" parent="NeedsStateChart/Root/NeedFulfilment/Unfulfilled"]
+script = ExtResource("5_8grcx")
+to = NodePath("../../Deficient")
+guard = SubResource("Resource_2eisj")
+
+[node name="BecomeFulfilled" type="Node" parent="NeedsStateChart/Root/NeedFulfilment/Unfulfilled"]
+script = ExtResource("5_8grcx")
+to = NodePath("../../Fulfilled")
+guard = SubResource("Resource_7eeyv")
+
+[node name="Deficient" type="Node" parent="NeedsStateChart/Root/NeedFulfilment"]
+script = ExtResource("4_6bfvo")
+
+[node name="BecomeUnfulfilled" type="Node" parent="NeedsStateChart/Root/NeedFulfilment/Deficient"]
+script = ExtResource("5_8grcx")
+to = NodePath("../../Unfulfilled")
+guard = SubResource("Resource_er76u")
+
+[node name="NeedProcessing" type="Node" parent="NeedsStateChart/Root"]
+script = ExtResource("3_76jtb")
+initial_state = NodePath("Enabled")
+
+[node name="Enabled" type="Node" parent="NeedsStateChart/Root/NeedProcessing"]
+script = ExtResource("4_6bfvo")
+
+[node name="Disable" type="Node" parent="NeedsStateChart/Root/NeedProcessing/Enabled"]
+script = ExtResource("5_8grcx")
+to = NodePath("../../Disabled")
+event = &"disable_need"
+
+[node name="Disabled" type="Node" parent="NeedsStateChart/Root/NeedProcessing"]
+script = ExtResource("4_6bfvo")
+
+[node name="Enable" type="Node" parent="NeedsStateChart/Root/NeedProcessing/Disabled"]
+script = ExtResource("5_8grcx")
+to = NodePath("../../Enabled")
+event = &"enable_need"
+
+[connection signal="state_entered" from="NeedsStateChart/Root/NeedFulfilment/Fulfilled" to="." method="_on_fulfilled_state_entered"]
+[connection signal="state_entered" from="NeedsStateChart/Root/NeedFulfilment/Unfulfilled" to="." method="_on_unfulfilled_state_entered"]
+[connection signal="state_entered" from="NeedsStateChart/Root/NeedFulfilment/Deficient" to="." method="_on_deficient_state_entered"]
+[connection signal="state_processing" from="NeedsStateChart/Root/NeedProcessing/Enabled" to="." method="_on_enabled_state_processing"]

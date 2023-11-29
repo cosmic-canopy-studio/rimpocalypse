@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SimpleNeed" load_steps=2 format=3 uid="uid://dclq27uu2ehwi"]
+
+[ext_resource type="Script" path="res://custom_objects/needs/simple_need.gd" id="1_cjblq"]
+
+[resource]
+script = ExtResource("1_cjblq")
+name = "thirst"
+max = 100.0
+current = 100.0
+decay_rate = 0.5
+fulfilled_level = 0.8
+deficient_level = 0.2
