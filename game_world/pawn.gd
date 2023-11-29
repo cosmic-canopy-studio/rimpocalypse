@@ -10,6 +10,7 @@ signal inventory_changed
 @export var crafter: Crafter
 @export var craft_station: CraftStation
 @export var progress_bar: ProgressBar
+@export var needs: Array[NeedHandler]
 
 var speed = 100
 var activity: Node2D
