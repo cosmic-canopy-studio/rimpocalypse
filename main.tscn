@@ -199,6 +199,14 @@ position = Vector2(72, 72)
 position = Vector2(152, 120)
 item = ExtResource("14_g5rkv")
 
+[node name="Mushroom2" parent="GameWorld/DroppedItems" instance=ExtResource("9_wf127")]
+position = Vector2(168, 104)
+item = ExtResource("14_g5rkv")
+
+[node name="Mushroom3" parent="GameWorld/DroppedItems" instance=ExtResource("9_wf127")]
+position = Vector2(184, 104)
+item = ExtResource("14_g5rkv")
+
 [node name="Pawn" parent="GameWorld" instance=ExtResource("2_ha15b")]
 position = Vector2(104, 104)
 collision_layer = 2
@@ -317,6 +325,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="HUD" type="VBoxContainer" parent="CanvasLayer/GUI/MarginContainer"]
 layout_mode = 2
@@ -350,6 +359,7 @@ size_flags_vertical = 4
 [connection signal="pressed" from="CanvasLayer/GUI/PrimaryMenu/GUIButtons/CraftButton" to="CanvasLayer/GUI" method="_on_craft_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/GUI/PrimaryMenu/GUIButtons/InventoryButton" to="CanvasLayer/GUI" method="_on_inventory_button_pressed"]
 [connection signal="item_dropped" from="CanvasLayer/GUI/MarginContainer/InventoryMenu" to="GameWorld" method="_on_inventory_menu_item_dropped"]
+[connection signal="item_eaten" from="CanvasLayer/GUI/MarginContainer/InventoryMenu" to="GameWorld/Pawn" method="_on_item_eaten"]
 
 [editable path="GameWorld/DroppedItems/Wood"]
 [editable path="GameWorld/DroppedItems/Wood2"]

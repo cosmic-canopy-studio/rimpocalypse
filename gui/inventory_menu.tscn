@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://o1y7xn705las"]
+[gd_scene load_steps=4 format=3 uid="uid://o1y7xn705las"]
 
 [ext_resource type="Script" path="res://gui/inventory_menu.gd" id="1_r47p4"]
 [ext_resource type="PackedScene" uid="uid://gsex3o6u08dl" path="res://gui/item_slot_button.tscn" id="2_l5uwg"]
+[ext_resource type="Resource" uid="uid://chlfldoie2bru" path="res://data/categories/food.tres" id="3_q0ymv"]
 
 [node name="InventoryMenu" type="PanelContainer"]
 custom_minimum_size = Vector2(300, 300)
@@ -9,6 +10,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_r47p4")
 item_slot_button = ExtResource("2_l5uwg")
+food_category = ExtResource("3_q0ymv")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -29,6 +31,18 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 columns = 4
+
+[node name="HBoxActions" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="EatButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxActions"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Eat"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -52,4 +66,5 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 text = "Close"
 
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxActions/EatButton" to="." method="_on_eat_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]

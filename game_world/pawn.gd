@@ -46,20 +46,6 @@ func set_destination(map_coords: Vector2):
 	state_chart.send_event("destination_set")
 
 
-func choose_task():
-	## TODO: If needs can be fulfilled, do so.
-	pass
-	#var closest_food = _find_closest(food.keys(), get_global_position())
-	# closest_food.get_parent().remove_child(closest_food)
-	# carried_food = closest_food
-	## remove it from the food set
-	# food.erase(closest_food)
-	## it's collected, so remove it from the food group
-	# closest_food.remove_from_group("food")
-	## add it to our ant so it moves with us
-	# add_child(closest_food)
-
-
 func _on_input_event(_viewport, event, _shape_idx):
 	if (
 		event is InputEventMouseButton
@@ -76,7 +62,6 @@ func _on_activity_completed():
 
 func _on_idle_state_entered():
 	print("idle state entered")
-	choose_task()
 
 
 func _on_moving_state_physics_processing(_delta):
@@ -142,3 +127,11 @@ func _on_idle_state_processing(_delta):
 
 func _on_crafted(_recipe_index):
 	_on_activity_completed()
+
+
+func _on_item_eaten(item):
+	for need in needs:
+		if need.need.name == "hunger":
+			var fulfillment = item.properties.get("fulfillment")
+			need.increase(fulfillment)
+			break

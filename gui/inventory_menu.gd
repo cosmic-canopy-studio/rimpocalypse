@@ -1,8 +1,10 @@
 extends PanelContainer
 
 signal item_dropped(item: InventoryItem, quantity: int)
+signal item_eaten(item: InventoryItem)
 
 @export var item_slot_button: PackedScene
+@export var food_category: ItemCategory
 
 var inventory_handler: InventoryHandler
 var inventory: Inventory
@@ -11,6 +13,7 @@ var _current_slots: Array[ItemSlotButton] = []
 
 @onready var item_slot_grid = %ItemSlotGrid
 @onready var item_details = %ItemDetails
+@onready var eat_button = %EatButton
 
 
 func _ready():
@@ -77,6 +80,8 @@ func _set_currently_selected_slot(new_slot: ItemSlotButton):
 	if description:
 		item_details.text = description
 		item_details.visible = true
+	if new_slot.slot.item.contains_category(food_category):
+		eat_button.visible = true
 
 
 func _unset_currently_selected_slot():
@@ -85,6 +90,7 @@ func _unset_currently_selected_slot():
 		_currently_selected_slot = null
 	item_details.visible = false
 	item_details.text = ""
+	eat_button.visible = false
 
 
 func _on_close_button_pressed():
@@ -120,3 +126,13 @@ func _on_slot_secondary_selected(slot: ItemSlotButton):
 
 func _on_pawn_inventory_changed():
 	_refresh_slots()
+
+
+func _on_eat_button_pressed():
+	var slot = _currently_selected_slot.slot
+	item_eaten.emit(slot.item)
+	inventory.remove(slot.item)
+	_currently_selected_slot.text = str(slot.amount)
+	if slot.amount < 1:
+		_unset_currently_selected_slot()
+		_refresh_slots()

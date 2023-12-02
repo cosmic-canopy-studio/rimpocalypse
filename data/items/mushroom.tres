@@ -13,6 +13,6 @@ icon = ExtResource("1_puhmh")
 weight = 0.0
 properties = {
 "description": "A wild mushroom. Looks edible.",
-"satisfaction": 20.0
+"fulfillment": 20.0
 }
 categories = [ExtResource("1_hdrqw")]
