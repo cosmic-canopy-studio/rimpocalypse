@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemCategory" load_steps=3 format=3 uid="uid://chlfldoie2bru"]
+
+[ext_resource type="Texture2D" uid="uid://3jsc2pyknt8y" path="res://assets/textures/mushroom.atlastex" id="1_66vbm"]
+[ext_resource type="Script" path="res://addons/inventory-system/core/item_category.gd" id="1_b6c1y"]
+
+[resource]
+script = ExtResource("1_b6c1y")
+name = "food"
+color = Color(0.588235, 0.313726, 0.0705882, 1)
+icon = ExtResource("1_66vbm")

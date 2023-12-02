@@ -7,10 +7,17 @@ extends Control
 @export var hud: BoxContainer
 @export var hud_item_scene: PackedScene
 
+@onready var hunger_bar = %HungerBar
+
 
 func _ready():
 	build_menu.player_inventory = player.inventory
 	inventory_menu.set_inventory_handler(player.inventory_handler)
+	for need in player.needs:
+		need.need_changed.connect(_on_need_changed)
+		need.need_deficient.connect(_on_need_deficient)
+		need.need_fulfilled.connect(_on_need_fulfilled)
+		need.need_unfulfilled.connect(_on_need_unfulfilled)
 
 
 func _process(_delta):
@@ -51,3 +58,24 @@ func _on_crafting_menu_requested(craft_station, inventory):
 
 func _on_inventory_button_pressed():
 	inventory_menu.toggle_visibility()
+
+
+func _on_need_changed(need: SimpleNeed):
+	if need.name == "hunger":
+		hunger_bar.max_value = need.max_fulfillment
+		hunger_bar.value = need.current_fulfillment
+
+
+func _on_need_deficient(need: SimpleNeed):
+	if need.name == "hunger":
+		hunger_bar.theme_type_variation = "RedProgressBar"
+
+
+func _on_need_fulfilled(need: SimpleNeed):
+	if need.name == "hunger":
+		hunger_bar.theme_type_variation = "GreenProgressBar"
+
+
+func _on_need_unfulfilled(need: SimpleNeed):
+	if need.name == "hunger":
+		hunger_bar.theme_type_variation = ""

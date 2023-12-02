@@ -14,10 +14,10 @@
 [ext_resource type="StyleBox" uid="uid://dfex6i3dckuji" path="res://assets/styles/grid_cursor.tres" id="7_v1gyb"]
 [ext_resource type="PackedScene" uid="uid://bwlhms587lkes" path="res://game_world/dropped_item.tscn" id="9_wf127"]
 [ext_resource type="PackedScene" uid="uid://dh8n0jfn8ldae" path="res://custom_objects/craft_station_construct.tscn" id="10_p0acm"]
+[ext_resource type="Resource" uid="uid://blhh5jdjtort7" path="res://data/items/mushroom.tres" id="14_g5rkv"]
 [ext_resource type="Resource" uid="uid://dxwtxmnwl11y2" path="res://data/items/stone.tres" id="14_qftkp"]
 [ext_resource type="PackedScene" uid="uid://d2fq6y7pje6u6" path="res://gui/item_line_ui.tscn" id="16_1th23"]
 [ext_resource type="PackedScene" uid="uid://dm0nskiyh705e" path="res://gui/build_menu.tscn" id="18_71msn"]
-[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="20_kj8wh"]
 [ext_resource type="PackedScene" uid="uid://c5mthav4tctwg" path="res://gui/crafting/craft_menu.tscn" id="20_kqol4"]
 [ext_resource type="PackedScene" uid="uid://o1y7xn705las" path="res://gui/inventory_menu.tscn" id="20_x7qk3"]
 
@@ -25,11 +25,13 @@
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_22lj8"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cbwb7"]
 texture = ExtResource("7_byjnf")
@@ -195,6 +197,18 @@ item = ExtResource("14_qftkp")
 [node name="Stone3" parent="GameWorld/DroppedItems" instance=ExtResource("9_wf127")]
 position = Vector2(72, 72)
 
+[node name="Mushroom" parent="GameWorld/DroppedItems" instance=ExtResource("9_wf127")]
+position = Vector2(152, 120)
+item = ExtResource("14_g5rkv")
+
+[node name="Mushroom2" parent="GameWorld/DroppedItems" instance=ExtResource("9_wf127")]
+position = Vector2(168, 104)
+item = ExtResource("14_g5rkv")
+
+[node name="Mushroom3" parent="GameWorld/DroppedItems" instance=ExtResource("9_wf127")]
+position = Vector2(184, 104)
+item = ExtResource("14_g5rkv")
+
 [node name="Pawn" parent="GameWorld" instance=ExtResource("2_ha15b")]
 position = Vector2(104, 104)
 collision_layer = 2
@@ -251,7 +265,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_q0rcr")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GUI/PrimaryMenu"]
+[node name="GUIButtons" type="HBoxContainer" parent="CanvasLayer/GUI/PrimaryMenu"]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
@@ -263,18 +277,47 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="BuildButton" type="Button" parent="CanvasLayer/GUI/PrimaryMenu/HBoxContainer"]
+[node name="BuildButton" type="Button" parent="CanvasLayer/GUI/PrimaryMenu/GUIButtons"]
 layout_mode = 2
 text = "Build"
 
-[node name="CraftButton" type="Button" parent="CanvasLayer/GUI/PrimaryMenu/HBoxContainer"]
+[node name="CraftButton" type="Button" parent="CanvasLayer/GUI/PrimaryMenu/GUIButtons"]
 layout_mode = 2
 text = "Craft"
 
-[node name="InventoryButton" type="Button" parent="CanvasLayer/GUI/PrimaryMenu/HBoxContainer"]
+[node name="InventoryButton" type="Button" parent="CanvasLayer/GUI/PrimaryMenu/GUIButtons"]
 layout_mode = 2
 text = "Inventory
 "
+
+[node name="HungerNeed" type="HBoxContainer" parent="CanvasLayer/GUI/PrimaryMenu"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -15.5
+offset_right = -80.0
+offset_bottom = 15.5
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="HungerLabel" type="Label" parent="CanvasLayer/GUI/PrimaryMenu/HungerNeed"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Hunger
+"
+
+[node name="HungerBar" type="ProgressBar" parent="CanvasLayer/GUI/PrimaryMenu/HungerNeed"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 2.08165e-12)
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"GreenProgressBar"
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/GUI"]
 layout_mode = 1
@@ -284,6 +327,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="HUD" type="VBoxContainer" parent="CanvasLayer/GUI/MarginContainer"]
 layout_mode = 2
@@ -309,20 +353,15 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
-[node name="StateChartDebugger" parent="CanvasLayer/GUI/MarginContainer" instance=ExtResource("20_kj8wh")]
-visible = false
-layout_mode = 2
-enabled = false
-initial_node_to_watch = NodePath("../../../../GameWorld/Pawn")
-
 [connection signal="grid_clicked" from="GameWorld/TileMap/GridCursor" to="GameWorld" method="_on_grid_cursor_grid_clicked"]
 [connection signal="item_placed" from="GameWorld/TileMap/GridCursor" to="GameWorld" method="_on_grid_cursor_item_placed" flags=3]
 [connection signal="inventory_changed" from="GameWorld/Pawn" to="CanvasLayer/GUI/MarginContainer/CraftMenu" method="_on_pawn_inventory_changed"]
 [connection signal="inventory_changed" from="GameWorld/Pawn" to="CanvasLayer/GUI/MarginContainer/InventoryMenu" method="_on_pawn_inventory_changed"]
-[connection signal="pressed" from="CanvasLayer/GUI/PrimaryMenu/HBoxContainer/BuildButton" to="CanvasLayer/GUI" method="_on_build_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/GUI/PrimaryMenu/HBoxContainer/CraftButton" to="CanvasLayer/GUI" method="_on_craft_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/GUI/PrimaryMenu/HBoxContainer/InventoryButton" to="CanvasLayer/GUI" method="_on_inventory_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/PrimaryMenu/GUIButtons/BuildButton" to="CanvasLayer/GUI" method="_on_build_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/PrimaryMenu/GUIButtons/CraftButton" to="CanvasLayer/GUI" method="_on_craft_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GUI/PrimaryMenu/GUIButtons/InventoryButton" to="CanvasLayer/GUI" method="_on_inventory_button_pressed"]
 [connection signal="item_dropped" from="CanvasLayer/GUI/MarginContainer/InventoryMenu" to="GameWorld" method="_on_inventory_menu_item_dropped"]
+[connection signal="item_eaten" from="CanvasLayer/GUI/MarginContainer/InventoryMenu" to="GameWorld/Pawn" method="_on_item_eaten"]
 
 [editable path="GameWorld/DroppedItems/Wood"]
 [editable path="GameWorld/DroppedItems/Wood2"]

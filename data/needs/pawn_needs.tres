@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="NeedsCollection" load_steps=5 format=3 uid="uid://cym7pxgd6nkp8"]
+
+[ext_resource type="Resource" uid="uid://eiyie2vsxtff" path="res://data/needs/hunger.tres" id="1_ljcbw"]
+[ext_resource type="Script" path="res://custom_objects/needs/needs_collection.gd" id="1_uj3bk"]
+[ext_resource type="Resource" uid="uid://dclq27uu2ehwi" path="res://data/needs/thirst.tres" id="2_ewhie"]
+[ext_resource type="Resource" uid="uid://co7cxjojvdmf" path="res://data/needs/sleep.tres" id="3_stuqh"]
+
+[resource]
+script = ExtResource("1_uj3bk")
+needs = Array[Resource("res://custom_objects/needs/simple_need.gd")]([ExtResource("1_ljcbw"), ExtResource("2_ewhie"), ExtResource("3_stuqh")])
