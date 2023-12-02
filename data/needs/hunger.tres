@@ -5,8 +5,8 @@
 [resource]
 script = ExtResource("1_5p3km")
 name = "hunger"
-max = 100.0
-current = 100.0
-decay_rate = 5.0
+max_fulfillment = 100.0
+current_fulfillment = 100.0
+decay_rate = 1.0
 fulfilled_percent = 0.8
 deficient_percent = 0.2
