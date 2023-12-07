@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="AudioPlaylist" load_steps=14 format=3 uid="uid://b6r5vox5ocij3"]
+
+[ext_resource type="AudioStream" uid="uid://ciduat5lkwmjo" path="res://assets/music/main/DavidKBD - HexaPuppies Pack - 02 - Meet the HexaPuppies - 1.ogg" id="1_23xmr"]
+[ext_resource type="AudioStream" uid="uid://c5tpwwvw6si1b" path="res://assets/music/main/DavidKBD - HexaPuppies Pack - 02 - Meet the HexaPuppies - 2.ogg" id="2_3smeb"]
+[ext_resource type="AudioStream" uid="uid://4rt41i0ipwv6" path="res://assets/music/main/DavidKBD - HexaPuppies Pack - 02 - Meet the HexaPuppies - 3.ogg" id="3_w3jsg"]
+[ext_resource type="AudioStream" uid="uid://ctnup4bb0jax5" path="res://assets/music/main/DavidKBD - HexaPuppies Pack - 04 - Sunny Days - 1.ogg" id="4_wa5gg"]
+[ext_resource type="AudioStream" uid="uid://cfm450nso5045" path="res://assets/music/main/DavidKBD - HexaPuppies Pack - 04 - Sunny Days - 2.ogg" id="5_8cp7f"]
+[ext_resource type="AudioStream" uid="uid://dhgx2pvedpuc7" path="res://assets/music/main/DavidKBD - HexaPuppies Pack - 04 - Sunny Days - 3.ogg" id="6_jbptp"]
+[ext_resource type="AudioStream" uid="uid://bxrfd7cmqywr0" path="res://assets/music/main/DavidKBD - HexaPuppies Pack - 08 - Utopia - 1.ogg" id="7_vfp41"]
+[ext_resource type="AudioStream" uid="uid://bxpgcieed8oyk" path="res://assets/music/main/DavidKBD - HexaPuppies Pack - 08 - Utopia - 2.ogg" id="8_dumci"]
+[ext_resource type="AudioStream" uid="uid://dmfnsw48edyb1" path="res://assets/music/main/DavidKBD - HexaPuppies Pack - 08 - Utopia - 3.ogg" id="9_72b5j"]
+[ext_resource type="AudioStream" uid="uid://cvkiv4caal0gs" path="res://assets/music/main/DavidKBD - HexaPuppies Pack - 10 - New Horizons - 1.ogg" id="10_ykg3d"]
+[ext_resource type="AudioStream" uid="uid://bfln2jnagqnub" path="res://assets/music/main/DavidKBD - HexaPuppies Pack - 10 - New Horizons - 2.ogg" id="11_4s5tf"]
+[ext_resource type="AudioStream" uid="uid://b24v3irpd2xsf" path="res://assets/music/main/DavidKBD - HexaPuppies Pack - 10 - New Horizons - 3.ogg" id="12_npgjp"]
+[ext_resource type="Script" path="res://custom_objects/audio/audio_playlist.gd" id="13_ho3mg"]
+
+[resource]
+script = ExtResource("13_ho3mg")
+playlist = Array[AudioStream]([ExtResource("1_23xmr"), ExtResource("2_3smeb"), ExtResource("3_w3jsg"), ExtResource("4_wa5gg"), ExtResource("5_8cp7f"), ExtResource("6_jbptp"), ExtResource("7_vfp41"), ExtResource("8_dumci"), ExtResource("9_72b5j"), ExtResource("10_ykg3d"), ExtResource("11_4s5tf"), ExtResource("12_npgjp")])

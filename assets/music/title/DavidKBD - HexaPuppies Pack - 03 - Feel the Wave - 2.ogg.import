@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bcrhg0jb8l18u"
+path="res://.godot/imported/DavidKBD - HexaPuppies Pack - 03 - Feel the Wave - 2.ogg-296c50baeb3a786171f90df9ec3ddbcc.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/title/DavidKBD - HexaPuppies Pack - 03 - Feel the Wave - 2.ogg"
+dest_files=["res://.godot/imported/DavidKBD - HexaPuppies Pack - 03 - Feel the Wave - 2.ogg-296c50baeb3a786171f90df9ec3ddbcc.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

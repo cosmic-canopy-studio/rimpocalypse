@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://d33tct3q48djp"]
+[gd_scene load_steps=29 format=3 uid="uid://d33tct3q48djp"]
 
 [ext_resource type="Script" path="res://game_world/pawn.gd" id="1_jyp7f"]
 [ext_resource type="Texture2D" uid="uid://do5fvxmbn4jwa" path="res://assets/textures/pawn.tres" id="3_x86v2"]
@@ -18,6 +18,8 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="15_xfidq"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_is_active_guard.gd" id="17_pom0m"]
 [ext_resource type="Resource" uid="uid://eiyie2vsxtff" path="res://data/needs/hunger.tres" id="18_851p3"]
+[ext_resource type="AudioStream" uid="uid://cmqmkbgwns4r4" path="res://assets/sound_effects/chop.ogg" id="19_aig2j"]
+[ext_resource type="AudioStream" uid="uid://h6axhh4lscvu" path="res://assets/sound_effects/footstep05.ogg" id="20_fcogm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0b6fq"]
 size = Vector2(12, 14)
@@ -229,7 +231,7 @@ state = NodePath("../../../ActivityState/NoActivity")
 script = ExtResource("17_pom0m")
 state = NodePath("../../../ActivityState/HasActivity")
 
-[node name="Pawn" type="CharacterBody2D" node_paths=PackedStringArray("inventory_handler", "inventory", "crafter", "craft_station", "progress_bar", "needs")]
+[node name="Pawn" type="CharacterBody2D" node_paths=PackedStringArray("inventory_handler", "inventory", "crafter", "craft_station", "progress_bar", "needs", "action_sound", "walk_sound")]
 input_pickable = true
 script = ExtResource("1_jyp7f")
 inventory_database = ExtResource("8_clibg")
@@ -239,6 +241,9 @@ crafter = NodePath("Crafter")
 craft_station = NodePath("Crafter/CraftStation")
 progress_bar = NodePath("Sprite2D/ProgressBar")
 needs = [NodePath("Hunger")]
+action_sound = NodePath("ActionSound")
+action_sound_delay = 8
+walk_sound = NodePath("WalkSound")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_0b6fq")
@@ -397,6 +402,15 @@ event = &"activity_completed"
 
 [node name="Hunger" parent="." instance=ExtResource("7_y1koi")]
 need = ExtResource("18_851p3")
+
+[node name="ActionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_aig2j")
+volume_db = -5.0
+pitch_scale = 0.55
+
+[node name="WalkSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("20_fcogm")
+volume_db = -15.0
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="navigation_finished" from="NavigationAgent2D" to="StateChart" method="send_event" binds= [&"navigation_finished"]]

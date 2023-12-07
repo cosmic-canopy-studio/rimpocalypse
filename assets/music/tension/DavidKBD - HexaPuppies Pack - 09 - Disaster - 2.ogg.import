@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://d3qrgeo1aqjsu"
+path="res://.godot/imported/DavidKBD - HexaPuppies Pack - 09 - Disaster - 2.ogg-8274a2d9ca1b9e83c66343002c9374b7.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/tension/DavidKBD - HexaPuppies Pack - 09 - Disaster - 2.ogg"
+dest_files=["res://.godot/imported/DavidKBD - HexaPuppies Pack - 09 - Disaster - 2.ogg-8274a2d9ca1b9e83c66343002c9374b7.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
