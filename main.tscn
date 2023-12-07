@@ -356,9 +356,12 @@ size_flags_horizontal = 8
 size_flags_vertical = 4
 
 [node name="AudioPlaylistPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -20.0
 script = ExtResource("22_fcfhd")
 playlist = ExtResource("22_6ed4j")
 shuffle = true
+current_track_index = 2
+active = false
 
 [connection signal="grid_clicked" from="GameWorld/TileMap/GridCursor" to="GameWorld" method="_on_grid_cursor_grid_clicked"]
 [connection signal="item_placed" from="GameWorld/TileMap/GridCursor" to="GameWorld" method="_on_grid_cursor_item_placed" flags=3]

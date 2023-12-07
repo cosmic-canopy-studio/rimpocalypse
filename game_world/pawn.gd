@@ -11,9 +11,13 @@ signal inventory_changed
 @export var craft_station: CraftStation
 @export var progress_bar: ProgressBar
 @export var needs: Array[NeedHandler]
+@export var action_sound: AudioStreamPlayer2D
+@export var action_sound_delay := 1
+@export var walk_sound: AudioStreamPlayer2D
 
 var speed = 100
 var activity: Node2D
+var current_action_sound_delay := 0
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var state_chart: StateChart = $StateChart
@@ -65,6 +69,8 @@ func _on_idle_state_entered():
 
 
 func _on_moving_state_physics_processing(_delta):
+	if not walk_sound.playing:
+		walk_sound.play()
 	if navigation_agent.is_navigation_finished():
 		if not navigation_agent.is_target_reachable():
 			# TODO: Calculate distance, only send error if distance is
@@ -80,6 +86,12 @@ func _on_moving_state_physics_processing(_delta):
 
 func _on_acting_state_processing(delta):
 	var effort_multiplier = 1
+	if not action_sound.playing:
+		if current_action_sound_delay > 0:
+			current_action_sound_delay -= delta
+		else:
+			action_sound.play()
+			current_action_sound_delay = action_sound_delay
 
 	## TODO: Make crafting station assignment assignable as activity
 	if craft_station.is_crafting():
