@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dhrrpc4t0dal3"
+path="res://.godot/imported/DavidKBD - HexaPuppies Pack - 07 - The Great Machine - 2.ogg-f05c9eef6a30b0fdd088b3102feb1b3d.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/tension/DavidKBD - HexaPuppies Pack - 07 - The Great Machine - 2.ogg"
+dest_files=["res://.godot/imported/DavidKBD - HexaPuppies Pack - 07 - The Great Machine - 2.ogg-f05c9eef6a30b0fdd088b3102feb1b3d.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

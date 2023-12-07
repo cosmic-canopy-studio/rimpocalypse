@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://08k0syw4ber0"
+path="res://.godot/imported/DavidKBD - HexaPuppies Pack - 05 - Natural Life - 3.ogg-70feb6781627670a29025a163ae8a50a.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/tension/DavidKBD - HexaPuppies Pack - 05 - Natural Life - 3.ogg"
+dest_files=["res://.godot/imported/DavidKBD - HexaPuppies Pack - 05 - Natural Life - 3.ogg-70feb6781627670a29025a163ae8a50a.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

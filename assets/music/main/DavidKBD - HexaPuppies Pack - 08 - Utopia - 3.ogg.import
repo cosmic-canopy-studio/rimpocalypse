@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dmfnsw48edyb1"
+path="res://.godot/imported/DavidKBD - HexaPuppies Pack - 08 - Utopia - 3.ogg-a67180eb90087c4c3517678c2fd7ddcf.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/main/DavidKBD - HexaPuppies Pack - 08 - Utopia - 3.ogg"
+dest_files=["res://.godot/imported/DavidKBD - HexaPuppies Pack - 08 - Utopia - 3.ogg-a67180eb90087c4c3517678c2fd7ddcf.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

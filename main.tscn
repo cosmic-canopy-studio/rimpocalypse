@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bn76rp7tymvj"]
+[gd_scene load_steps=31 format=3 uid="uid://bn76rp7tymvj"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_5xvki"]
 [ext_resource type="Script" path="res://game_world/game_world.gd" id="2_aakym"]
@@ -20,6 +20,8 @@
 [ext_resource type="PackedScene" uid="uid://dm0nskiyh705e" path="res://gui/build_menu.tscn" id="18_71msn"]
 [ext_resource type="PackedScene" uid="uid://c5mthav4tctwg" path="res://gui/crafting/craft_menu.tscn" id="20_kqol4"]
 [ext_resource type="PackedScene" uid="uid://o1y7xn705las" path="res://gui/inventory_menu.tscn" id="20_x7qk3"]
+[ext_resource type="Resource" uid="uid://b6r5vox5ocij3" path="res://data/audio_playlists/main_music_playlist.tres" id="22_6ed4j"]
+[ext_resource type="Script" path="res://custom_objects/audio/audio_playlist_player.gd" id="22_fcfhd"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_jgglj"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -352,6 +354,11 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
+
+[node name="AudioPlaylistPlayer" type="AudioStreamPlayer" parent="."]
+script = ExtResource("22_fcfhd")
+playlist = ExtResource("22_6ed4j")
+shuffle = true
 
 [connection signal="grid_clicked" from="GameWorld/TileMap/GridCursor" to="GameWorld" method="_on_grid_cursor_grid_clicked"]
 [connection signal="item_placed" from="GameWorld/TileMap/GridCursor" to="GameWorld" method="_on_grid_cursor_item_placed" flags=3]
