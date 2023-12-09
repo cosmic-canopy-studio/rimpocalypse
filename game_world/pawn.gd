@@ -11,13 +11,13 @@ signal inventory_changed
 @export var craft_station: CraftStation
 @export var progress_bar: ProgressBar
 @export var needs: Array[NeedHandler]
-@export var action_sound: AudioStreamPlayer2D
-@export var action_sound_delay := 1
-@export var walk_sound: AudioStreamPlayer2D
+@export var animation_player: AnimationPlayer
+@export var animated_sprite: AnimatedSprite2D
 
 var speed = 100
 var activity: Node2D
 var current_action_sound_delay := 0
+var current_direction = Vector2.DOWN
 
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var state_chart: StateChart = $StateChart
@@ -64,13 +64,7 @@ func _on_activity_completed():
 	state_chart.send_event("activity_completed")
 
 
-func _on_idle_state_entered():
-	print("idle state entered")
-
-
 func _on_moving_state_physics_processing(_delta):
-	if not walk_sound.playing:
-		walk_sound.play()
 	if navigation_agent.is_navigation_finished():
 		if not navigation_agent.is_target_reachable():
 			# TODO: Calculate distance, only send error if distance is
@@ -80,18 +74,66 @@ func _on_moving_state_physics_processing(_delta):
 			return
 
 	var direction = to_local(navigation_agent.get_next_path_position()).normalized()
+	var cardinal_direction = _get_cardinal_direction(direction)
+	if current_direction != cardinal_direction:
+		current_direction = cardinal_direction
+		_play_directional_animation("walk")
+
 	velocity = speed * direction
 	move_and_slide()
 
 
+func _play_action_animation():
+	if activity is WorkObject:
+		animation_player.play("chop")
+	elif activity is Constructable:
+		animation_player.play("hammer")
+	elif activity is DroppedItem2D:
+		# TODO: Troubleshoot pickup not playing correctly
+		animation_player.play("pickup")
+
+
+func _play_directional_animation(animation: String):
+	var direction = _vec2_dir_to_string(current_direction)
+	animated_sprite.play(animation + "_" + direction)
+
+
+func _vec2_dir_to_string(vec2: Vector2) -> String:
+	if vec2 == Vector2.UP:
+		return "up"
+	if vec2 == Vector2.LEFT:
+		return "left"
+	if vec2 == Vector2.RIGHT:
+		return "right"
+	# Default to Vector2.DOWN
+	return "down"
+
+
+func _get_cardinal_direction(direction: Vector2):
+	var cardinal_directions = [
+		Vector2.UP,
+		Vector2.DOWN,
+		Vector2.LEFT,
+		Vector2.RIGHT,
+	]
+	var nearest_distance = 2
+	var nearest_direction: Vector2
+	for dir in cardinal_directions:
+		var distance = direction.distance_to(dir)
+		if direction.distance_to(dir) < nearest_distance:
+			nearest_distance = distance
+			nearest_direction = dir
+
+	return nearest_direction
+
+
+func _reset_animations():
+	animation_player.play("RESET")
+	_play_directional_animation("idle")
+
+
 func _on_acting_state_processing(delta):
 	var effort_multiplier = 1
-	if not action_sound.playing:
-		if current_action_sound_delay > 0:
-			current_action_sound_delay -= delta
-		else:
-			action_sound.play()
-			current_action_sound_delay = action_sound_delay
 
 	## TODO: Make crafting station assignment assignable as activity
 	if craft_station.is_crafting():
@@ -118,23 +160,13 @@ func _on_acting_state_processing(delta):
 		else:
 			activity.do_work(delta * effort_multiplier)
 	elif activity is DroppedItem2D:
-		(
-			inventory_handler
-			. pick_to_inventory(
-				activity,
-			)
-		)
+		inventory_handler.pick_to_inventory(activity)
 		inventory_changed.emit()
 		activity = null
 		state_chart.send_event("activity_completed")
 	else:
 		printerr("Unrecognized activity!")
 		state_chart.send_event("activity_invalid")
-
-
-func _on_idle_state_processing(_delta):
-	$AnimationPlayer.stop()
-	$AnimationPlayer.play("idle")
 
 
 func _on_crafted(_recipe_index):
@@ -147,3 +179,23 @@ func _on_item_eaten(item):
 			var fulfillment = item.properties.get("fulfillment")
 			need.increase(fulfillment)
 			break
+
+
+func _on_moving_state_entered():
+	_play_directional_animation("walk")
+	animation_player.play("walk")
+
+
+func _on_idle_state_entered():
+	_play_directional_animation("idle")
+	animation_player.play("idle")
+
+
+func _on_acting_state_entered():
+	_play_directional_animation("action")
+	_play_action_animation()
+
+
+func _on_state_exited():
+	animation_player.play("pickup")
+	_reset_animations()

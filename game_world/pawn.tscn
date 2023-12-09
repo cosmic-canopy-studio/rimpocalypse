@@ -1,7 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://d33tct3q48djp"]
+[gd_scene load_steps=50 format=3 uid="uid://d33tct3q48djp"]
 
 [ext_resource type="Script" path="res://game_world/pawn.gd" id="1_jyp7f"]
 [ext_resource type="Texture2D" uid="uid://do5fvxmbn4jwa" path="res://assets/textures/pawn.tres" id="3_x86v2"]
+[ext_resource type="Texture2D" uid="uid://brpcqqix3kl40" path="res://assets/sprite_sheets/rpg_urban_tilemap_packed.png" id="3_yimfr"]
 [ext_resource type="Texture2D" uid="uid://420mtukdggmw" path="res://assets/textures/warn.tres" id="4_ilx84"]
 [ext_resource type="Texture2D" uid="uid://dbg7v86f2esdy" path="res://assets/textures/blocked.tres" id="5_jaovm"]
 [ext_resource type="Texture2D" uid="uid://cjlojy46mrhux" path="res://assets/textures/ask.tres" id="6_xk662"]
@@ -20,9 +21,210 @@
 [ext_resource type="Resource" uid="uid://eiyie2vsxtff" path="res://data/needs/hunger.tres" id="18_851p3"]
 [ext_resource type="AudioStream" uid="uid://cmqmkbgwns4r4" path="res://assets/sound_effects/chop.ogg" id="19_aig2j"]
 [ext_resource type="AudioStream" uid="uid://h6axhh4lscvu" path="res://assets/sound_effects/footstep05.ogg" id="20_fcogm"]
+[ext_resource type="AudioStream" uid="uid://bgjqwg44hkffy" path="res://assets/sound_effects/impactMetal_heavy_001.ogg" id="22_14f4y"]
+[ext_resource type="AudioStream" uid="uid://dtw5j0q6b0fan" path="res://assets/sound_effects/cloth3.ogg" id="23_i8lai"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0b6fq"]
-size = Vector2(12, 14)
+size = Vector2(12, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4780"]
+atlas = ExtResource("3_yimfr")
+region = Rect2(384, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dc58i"]
+atlas = ExtResource("3_yimfr")
+region = Rect2(384, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b63g8"]
+atlas = ExtResource("3_yimfr")
+region = Rect2(368, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvxwe"]
+atlas = ExtResource("3_yimfr")
+region = Rect2(368, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xn3ld"]
+atlas = ExtResource("3_yimfr")
+region = Rect2(416, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5r6vg"]
+atlas = ExtResource("3_yimfr")
+region = Rect2(416, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wj0na"]
+atlas = ExtResource("3_yimfr")
+region = Rect2(400, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uem7q"]
+atlas = ExtResource("3_yimfr")
+region = Rect2(400, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17514"]
+atlas = ExtResource("3_yimfr")
+region = Rect2(384, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32gl1"]
+atlas = ExtResource("3_yimfr")
+region = Rect2(384, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_807g2"]
+atlas = ExtResource("3_yimfr")
+region = Rect2(368, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3oau"]
+atlas = ExtResource("3_yimfr")
+region = Rect2(416, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v80rl"]
+atlas = ExtResource("3_yimfr")
+region = Rect2(400, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oh78l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r4780")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dc58i")
+}],
+"loop": true,
+"name": &"action_down",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b63g8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvxwe")
+}],
+"loop": true,
+"name": &"action_left",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xn3ld")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5r6vg")
+}],
+"loop": true,
+"name": &"action_right",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wj0na")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uem7q")
+}],
+"loop": true,
+"name": &"action_up",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_17514")
+}],
+"loop": true,
+"name": &"idle_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvxwe")
+}],
+"loop": true,
+"name": &"idle_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5r6vg")
+}],
+"loop": true,
+"name": &"idle_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uem7q")
+}],
+"loop": true,
+"name": &"idle_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r4780")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dc58i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32gl1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dc58i")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_807g2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvxwe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b63g8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cvxwe")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3oau")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5r6vg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xn3ld")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5r6vg")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wj0na")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uem7q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v80rl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uem7q")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 7.0
+}]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3201l"]
 bg_color = Color(0.94902, 0, 0, 1)
@@ -156,71 +358,132 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_8ev67"]
 resource_name = "idle"
-length = 1.5
+length = 2.0
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:visible")
+tracks/0/path = NodePath(".:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:position:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(-13, -0.25, 0, 0.4, 2.08165e-12, -14, -0.1, 2.08165e-12, 0.1, 2.08165e-12, -13, -0.5, 2.08165e-12, 0.25, 0),
-"times": PackedFloat32Array(0, 0.1, 0.2)
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".:texture")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("6_xk662")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-13, -0.25, 0, 0.25, 0, -14, -0.25, 0, 0.25, 0, -13, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 2)
+}
+
+[sub_resource type="Animation" id="Animation_0djhk"]
+resource_name = "walk"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../WalkSound:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_23hpi"]
+resource_name = "chop"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../ChopSound:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_ap7a0"]
+resource_name = "hammer"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../HammerSound:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_qa8lc"]
+resource_name = "pickup"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../PickupSound:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_2t1ar"]
 _data = {
 "RESET": SubResource("Animation_o1g1h"),
 "blocked": SubResource("Animation_3u0n1"),
-"idle": SubResource("Animation_8ev67")
+"chop": SubResource("Animation_23hpi"),
+"hammer": SubResource("Animation_ap7a0"),
+"idle": SubResource("Animation_8ev67"),
+"pickup": SubResource("Animation_qa8lc"),
+"walk": SubResource("Animation_0djhk")
 }
 
 [sub_resource type="Resource" id="Resource_btvgj"]
@@ -231,7 +494,7 @@ state = NodePath("../../../ActivityState/NoActivity")
 script = ExtResource("17_pom0m")
 state = NodePath("../../../ActivityState/HasActivity")
 
-[node name="Pawn" type="CharacterBody2D" node_paths=PackedStringArray("inventory_handler", "inventory", "crafter", "craft_station", "progress_bar", "needs", "action_sound", "walk_sound")]
+[node name="Pawn" type="CharacterBody2D" node_paths=PackedStringArray("inventory_handler", "inventory", "crafter", "craft_station", "progress_bar", "needs", "animation_player", "animated_sprite")]
 input_pickable = true
 script = ExtResource("1_jyp7f")
 inventory_database = ExtResource("8_clibg")
@@ -239,30 +502,35 @@ inventory_handler = NodePath("InventoryHandler")
 inventory = NodePath("InventoryHandler/Inventory")
 crafter = NodePath("Crafter")
 craft_station = NodePath("Crafter/CraftStation")
-progress_bar = NodePath("Sprite2D/ProgressBar")
+progress_bar = NodePath("ProgressBar")
 needs = [NodePath("Hunger")]
-action_sound = NodePath("ActionSound")
-action_sound_delay = 8
-walk_sound = NodePath("WalkSound")
+animation_player = NodePath("AnimationPlayer")
+animated_sprite = NodePath("AnimatedSprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_0b6fq")
 one_way_collision_margin = 0.0
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_oh78l")
+animation = &"action_down"
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture_filter = 1
 texture = ExtResource("3_x86v2")
 
-[node name="ProgressBar" type="ProgressBar" parent="Sprite2D"]
+[node name="ProgressBar" type="ProgressBar" parent="."]
 visible = false
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -6.0
-offset_top = -11.0
-offset_right = -6.0
-offset_bottom = -7.0
+offset_top = 3.0
+offset_right = -2.0
+offset_bottom = 7.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 3
@@ -272,8 +540,6 @@ max_value = 10.0
 show_percentage = false
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 4.0
-target_desired_distance = 4.0
 path_postprocessing = 1
 avoidance_enabled = true
 neighbor_distance = 1000.0
@@ -403,18 +669,31 @@ event = &"activity_completed"
 [node name="Hunger" parent="." instance=ExtResource("7_y1koi")]
 need = ExtResource("18_851p3")
 
-[node name="ActionSound" type="AudioStreamPlayer2D" parent="."]
+[node name="ChopSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("19_aig2j")
 volume_db = -5.0
 pitch_scale = 0.55
 
 [node name="WalkSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("20_fcogm")
-volume_db = -15.0
+volume_db = -7.0
+
+[node name="HammerSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("22_14f4y")
+volume_db = -5.0
+
+[node name="PickupSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("23_i8lai")
+volume_db = 7.886
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="navigation_finished" from="NavigationAgent2D" to="StateChart" method="send_event" binds= [&"navigation_finished"]]
 [connection signal="on_crafted" from="Crafter/CraftStation" to="." method="_on_crafted"]
-[connection signal="state_processing" from="StateChart/Root/CurrentAction/Idle" to="." method="_on_idle_state_processing"]
+[connection signal="state_entered" from="StateChart/Root/CurrentAction/Idle" to="." method="_on_idle_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/CurrentAction/Idle" to="." method="_on_state_exited"]
+[connection signal="state_entered" from="StateChart/Root/CurrentAction/Moving" to="." method="_on_moving_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/CurrentAction/Moving" to="." method="_on_state_exited"]
 [connection signal="state_physics_processing" from="StateChart/Root/CurrentAction/Moving" to="." method="_on_moving_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/Root/CurrentAction/Acting" to="." method="_on_acting_state_entered"]
+[connection signal="state_exited" from="StateChart/Root/CurrentAction/Acting" to="." method="_on_state_exited"]
 [connection signal="state_processing" from="StateChart/Root/CurrentAction/Acting" to="." method="_on_acting_state_processing"]
