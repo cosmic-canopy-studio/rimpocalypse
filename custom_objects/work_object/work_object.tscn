@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ducnvncuqpo11"]
+[gd_scene load_steps=7 format=3 uid="uid://ducnvncuqpo11"]
 
 [ext_resource type="Script" path="res://custom_objects/work_object/work_object.gd" id="1_w3ywo"]
 [ext_resource type="Texture2D" uid="uid://bwdogrcdawbfa" path="res://assets/textures/tree.tres" id="2_lbpi2"]
@@ -8,7 +8,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ubpce"]
 size = Vector2(16, 32)
 
-[node name="WorkObject" type="Area2D" groups=["work_objects"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_latuj"]
+size = Vector2(8, 11.3333)
+
+[node name="WorkObject" type="Area2D" groups=["navigation", "work_objects"]]
 scale = Vector2(3, 3)
 collision_layer = 4
 collision_mask = 0
@@ -40,3 +43,12 @@ show_percentage = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ubpce")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 9.33333)
+shape = SubResource("RectangleShape2D_latuj")
+debug_color = Color(0.937255, 0.207843, 0.380392, 0.419608)
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

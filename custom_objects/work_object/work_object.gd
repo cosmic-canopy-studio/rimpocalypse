@@ -19,8 +19,6 @@ signal object_input_event(event: InputEvent, object: WorkObject)
 
 
 func _ready():
-	input_event.connect(_on_input_event)
-
 	if effort_to_construct > 0:
 		constructed = false
 		progress_bar.max_value = effort_to_construct
