@@ -120,7 +120,7 @@ _data = {
 }
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ywhtb"]
-vertices = PackedVector2Array(218, 202, 422, 246, 10, 246, 182, 202, 298, 106, 298, 54, 422, 10, 10, 10, 246, 54, 218, 134, 246, 106, 168, 90, 118, 134, 136, 90, 168, 61, 136, 61, 118, 202, 154, 202, 154, 170, 182, 170)
+vertices = PackedVector2Array(218, 202, 422, 246, 10, 246, 182, 202, 298, 106, 298, 54, 422, 10, 10, 10, 246, 54, 218, 134, 246, 106, 166, 89, 118, 134, 138, 89, 166, 58, 138, 58, 118, 202, 154, 202, 154, 170, 182, 170)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 1), PackedInt32Array(7, 6, 5, 8), PackedInt32Array(4, 1, 0, 9, 10), PackedInt32Array(11, 8, 10, 9, 12), PackedInt32Array(13, 11, 12), PackedInt32Array(8, 11, 14), PackedInt32Array(7, 8, 14, 15), PackedInt32Array(2, 7, 15, 13, 12), PackedInt32Array(2, 12, 16), PackedInt32Array(17, 18, 19, 3), PackedInt32Array(17, 3, 2), PackedInt32Array(2, 16, 17)])
 source_geometry_mode = 1
 source_geometry_group_name = &"navigation"
